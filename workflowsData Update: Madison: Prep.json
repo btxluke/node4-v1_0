@@ -5,7 +5,7 @@
       "main": [
         [
           {
-            "node": "MySQL",
+            "node": "Postgres1",
             "type": "main",
             "index": 0
           }
@@ -93,40 +93,7 @@
       "main": [
         [
           {
-            "node": "Calculate Net RRP",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "MySQL": {
-      "main": [
-        [
-          {
-            "node": "MySQL1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "MySQL1": {
-      "main": [
-        [
-          {
-            "node": "MySQL2",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "MySQL2": {
-      "main": [
-        [
-          {
-            "node": "SSH2",
+            "node": "IF",
             "type": "main",
             "index": 0
           }
@@ -198,6 +165,153 @@
           }
         ]
       ]
+    },
+    "Postgres1": {
+      "main": [
+        [
+          {
+            "node": "Postgres",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres": {
+      "main": [
+        [
+          {
+            "node": "SSH2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF": {
+      "main": [
+        [
+          {
+            "node": "SSH1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Calculate Net RRP",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SSH1": {
+      "main": [
+        [
+          {
+            "node": "SSH3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SSH3": {
+      "main": [
+        [
+          {
+            "node": "SSH4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SSH4": {
+      "main": [
+        [
+          {
+            "node": "Set",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF1": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "SSH1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set": {
+      "main": [
+        [
+          {
+            "node": "IF1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "IF2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Spreadsheet File": {
+      "main": [
+        [
+          {
+            "node": "Send Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Email": {
+      "main": [
+        [
+          {
+            "node": "Calculate Net RRP",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF2": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Spreadsheet File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2023-07-30T14:51:32.935Z",
@@ -212,7 +326,7 @@
       "typeVersion": 1,
       "position": [
         1440,
-        1360
+        1140
       ]
     },
     {
@@ -377,7 +491,7 @@
     },
     {
       "parameters": {
-        "command": "=mysqlimport --user='root' --password='L0chr!nPl@ce' \\\n--fields-terminated-by=',' --lines-terminated-by=0x0d0a \\\n--replace --low-priority --fields-enclosed-by='\"' \\\n --fields-escaped-by='#' --ignore-lines='1' --verbose --force --local \\\nodooData '/home/luke/feeds/Upload-Madison.csv'",
+        "command": "=psql -d odooData -c \"\\\\COPY odoodata.upload_madison FROM /home/luke/feeds/Upload-Madison.csv DELIMITER ',' CSV HEADER;\"",
         "cwd": "/home/luke/feeds/"
       },
       "id": "f8d71e01-e0d4-4fb9-b789-7ffb109500b4",
@@ -386,32 +500,12 @@
       "typeVersion": 1,
       "position": [
         2240,
-        1360
+        1140
       ],
       "credentials": {
         "sshPassword": {
-          "id": "12",
-          "name": "Node3"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "operation": "executeQuery",
-        "query": "=TRUNCATE `Upload-Madison`; "
-      },
-      "id": "1d028b1c-47e5-4524-84cd-ec79f4f0052a",
-      "name": "MySQL",
-      "type": "n8n-nodes-base.mySql",
-      "typeVersion": 1,
-      "position": [
-        1620,
-        1360
-      ],
-      "credentials": {
-        "mySql": {
-          "id": "2",
-          "name": "node3.biketrax.co.uk: odooData"
+          "id": "XjhjaSmzbkvtSZ0m",
+          "name": "Node3: postgres"
         }
       }
     },
@@ -426,52 +520,12 @@
       "typeVersion": 1,
       "position": [
         2060,
-        1360
+        1140
       ],
       "credentials": {
         "sshPassword": {
-          "id": "12",
-          "name": "Node3"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "operation": "executeQuery",
-        "query": "=DROP TABLE `Upload-Madison`;"
-      },
-      "id": "2e482831-2198-49ce-9379-793fc5d3ec99",
-      "name": "MySQL1",
-      "type": "n8n-nodes-base.mySql",
-      "typeVersion": 1,
-      "position": [
-        1760,
-        1360
-      ],
-      "credentials": {
-        "mySql": {
-          "id": "2",
-          "name": "node3.biketrax.co.uk: odooData"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "operation": "executeQuery",
-        "query": "=CREATE TABLE `Upload-Madison` AS\nSELECT *\nFROM `Template-Madison`;"
-      },
-      "id": "4fa3237f-81d5-4ad6-840c-3f34c9de1212",
-      "name": "MySQL2",
-      "type": "n8n-nodes-base.mySql",
-      "typeVersion": 1,
-      "position": [
-        1900,
-        1360
-      ],
-      "credentials": {
-        "mySql": {
-          "id": "2",
-          "name": "node3.biketrax.co.uk: odooData"
+          "id": "jW26ND48jT87UhK8",
+          "name": "Node3: Root"
         }
       }
     },
@@ -575,6 +629,251 @@
           "name": "node3.biketrax.co.uk: odooData"
         }
       }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "DROP TABLE IF EXISTS odoodata.upload_madison; ",
+        "options": {}
+      },
+      "id": "e7bf574e-77d9-4a37-aa5f-9a5b50f5269c",
+      "name": "Postgres1",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.2,
+      "position": [
+        1620,
+        1140
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "9Jz67Tm0faeykq6p",
+          "name": "odoodata"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "CREATE TABLE odoodata.upload_madison AS\n  SELECT *\nFROM odoodata.template_madison;",
+        "options": {}
+      },
+      "id": "c1287a85-3c98-4327-9c2b-3e573c6a0461",
+      "name": "Postgres",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.2,
+      "position": [
+        1900,
+        1140
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "9Jz67Tm0faeykq6p",
+          "name": "odoodata"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.stderr }}",
+              "operation": "isNotEmpty"
+            }
+          ]
+        }
+      },
+      "id": "0df657f4-7a1d-41b2-a705-0638d87ca8e6",
+      "name": "IF",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        2460,
+        1140
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "catchall@biketrax.co.uk",
+        "toEmail": "peter.thain@biketrax.co.uk",
+        "subject": "Madison Feed Error",
+        "text": "=Item(s) from the latest Madison data feed have failed to parse. This is usually because of a break in CSV specifications or incorrect placement of standard delimiters (,) / enclosing marks (\")  .\n\nHere is an example code with faulty data, and the error it caused:\n\nProduct Code: {{ $('Code').first().json.failed_code }}\n\n{{ $('Code').first().json.stderr }}\n\nA full list of errors is attached as a TXT file. If you could correct the errors, then then the item(s) can be added to our database on the next run.\n\nMany thanks,\n\nBiketraxBot (Product Information Database)",
+        "options": {
+          "attachments": "data",
+          "ccEmail": "luke@biketrax.co.uk"
+        }
+      },
+      "id": "f185ad85-2a27-4d1d-9ee4-bf1fd6c17bfb",
+      "name": "Send Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [
+        4380,
+        1220
+      ],
+      "executeOnce": true,
+      "credentials": {
+        "smtp": {
+          "id": "enV6OrvNpARXtf1c",
+          "name": "btxBot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "command": "=grep -n {{ \"\\\"\"+$json.stderr.split(\"\\\"\")[2]+\"\\\"\" }}  /home/luke/feeds/Upload-Madison{{ $runIndex == 0 ? \"\" : $runIndex }}.csv | cut -f1 -d:"
+      },
+      "id": "cab1ad18-e932-4a47-8c5d-be8411eea7cb",
+      "name": "SSH1",
+      "type": "n8n-nodes-base.ssh",
+      "typeVersion": 1,
+      "position": [
+        2660,
+        1020
+      ],
+      "credentials": {
+        "sshPassword": {
+          "id": "jW26ND48jT87UhK8",
+          "name": "Node3: Root"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "command": "={{\"sed '\"+$json.stdout+\"d'\"}} /home/luke/feeds/Upload-Madison{{ $runIndex == 0 ? \"\" : $runIndex }}.csv > /home/luke/feeds/Upload-Madison{{ $runIndex+1 }}.csv"
+      },
+      "id": "4291d0e4-8b9d-4b6d-91aa-4b8972e53626",
+      "name": "SSH3",
+      "type": "n8n-nodes-base.ssh",
+      "typeVersion": 1,
+      "position": [
+        2920,
+        1220
+      ],
+      "credentials": {
+        "sshPassword": {
+          "id": "jW26ND48jT87UhK8",
+          "name": "Node3: Root"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "command": "=psql -d odooData -c \"\\\\COPY odoodata.upload_madison FROM /home/luke/feeds/Upload-Madison{{ $runIndex+1 }}.csv DELIMITER ',' CSV HEADER;\"",
+        "cwd": "/home/luke/feeds/"
+      },
+      "id": "e0d74983-4553-4265-9f70-34ce063d8c91",
+      "name": "SSH4",
+      "type": "n8n-nodes-base.ssh",
+      "typeVersion": 1,
+      "position": [
+        3120,
+        1220
+      ],
+      "credentials": {
+        "sshPassword": {
+          "id": "XjhjaSmzbkvtSZ0m",
+          "name": "Node3: postgres"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.stderr }}",
+              "operation": "isEmpty"
+            }
+          ]
+        }
+      },
+      "id": "78a11e26-1846-46f8-95b9-3c933c3791d1",
+      "name": "IF1",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        3500,
+        1220
+      ]
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "failed_code",
+              "value": "={{$json.stderr.split(\"\\\"\")[2]}}"
+            },
+            {
+              "name": "stderr",
+              "value": "={{ $json.stderr }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "0b92e19e-2a69-40a9-b609-128a23ff47e4",
+      "name": "Set",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [
+        3320,
+        1220
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "let results = [],\n  i = 0;\n\ndo {\n  try {\n    results = results.concat($(\"Set\").all(0, i));\n  } catch (error) {    \n    return results;\n  }\n  i++;\n} while (true);\n"
+      },
+      "id": "63a39695-d1ce-4904-b796-5e32c45411ca",
+      "name": "Code",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3700,
+        1220
+      ],
+      "executeOnce": false
+    },
+    {
+      "parameters": {
+        "operation": "toFile",
+        "options": {
+          "fileName": "parsing_errors.xls",
+          "headerRow": true
+        }
+      },
+      "id": "ca51df53-1c0a-4bb3-aaf4-76a45449cf32",
+      "name": "Spreadsheet File",
+      "type": "n8n-nodes-base.spreadsheetFile",
+      "typeVersion": 1,
+      "position": [
+        4200,
+        1220
+      ],
+      "executeOnce": false
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.failed_code }}",
+              "operation": "isEmpty"
+            }
+          ]
+        }
+      },
+      "id": "cc719719-6bba-4f16-8baf-57c49e26def8",
+      "name": "IF2",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        3920,
+        1220
+      ]
     }
   ],
   "pinData": {},
@@ -597,6 +896,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-07-30T14:55:36.000Z",
-  "versionId": "13f8f615-13df-4a7f-a0c7-8dcd7ca30533"
+  "updatedAt": "2023-07-30T19:20:27.000Z",
+  "versionId": "37f4a0a6-e9a7-4e10-aca6-b778c1d84da1"
 }
