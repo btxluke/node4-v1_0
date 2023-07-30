@@ -1,0 +1,1241 @@
+{
+  "active": false,
+  "connections": {
+    "Execute Workflow Trigger": {
+      "main": [
+        [
+          {
+            "node": "Globals",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Transit Tables": {
+      "main": [
+        [
+          {
+            "node": "Postgres5",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Postgres7",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Odoo",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Split In Batches",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Odoo1": {
+      "main": [
+        [
+          {
+            "node": "Merge3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Odoo": {
+      "main": [
+        [
+          {
+            "node": "Merge2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Odoo3": {
+      "main": [
+        [
+          {
+            "node": "IF2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge2": {
+      "main": [
+        [
+          {
+            "node": "No Operation, do nothing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Odoo5": {
+      "main": [
+        [
+          {
+            "node": "Odoo6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Odoo6": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Odoo7": {
+      "main": [
+        [
+          {
+            "node": "IF2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Odoo7",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge3": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Odoo3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Data Lookback",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "No Operation, do nothing": {
+      "main": [
+        [
+          {
+            "node": "Postgres9",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "No Updates": {
+      "main": [
+        [
+          {
+            "node": "No Operation, do nothing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF": {
+      "main": [
+        [
+          {
+            "node": "IF1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "no barcode",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split In Batches": {
+      "main": [
+        [
+          {
+            "node": "Odoo1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge3",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "IF2": {
+      "main": [
+        [
+          {
+            "node": "Merge2",
+            "type": "main",
+            "index": 1
+          }
+        ],
+        [
+          {
+            "node": "Split In Batches",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Data Lookback": {
+      "main": [
+        [
+          {
+            "node": "Odoo5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres": {
+      "main": [
+        [
+          {
+            "node": "Postgres1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres1": {
+      "main": [
+        [
+          {
+            "node": "Postgres2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres2": {
+      "main": [
+        [
+          {
+            "node": "Postgres3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres3": {
+      "main": [
+        [
+          {
+            "node": "Postgres4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres4": {
+      "main": [
+        [
+          {
+            "node": "Update Transit Tables",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres5": {
+      "main": [
+        [
+          {
+            "node": "Postgres6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres7": {
+      "main": [
+        [
+          {
+            "node": "IF3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres8": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Postgres9": {
+      "main": [
+        [
+          {
+            "node": "Postgres10",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres10": {
+      "main": [
+        [
+          {
+            "node": "End",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Globals": {
+      "main": [
+        [
+          {
+            "node": "Postgres",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "End": {
+      "main": [
+        [
+          {
+            "node": "Code11",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code11": {
+      "main": [
+        [
+          {
+            "node": "Remove delisted items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF1": {
+      "main": [
+        [
+          {
+            "node": "Postgres8",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Updates",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF3": {
+      "main": [
+        [
+          {
+            "node": "No Updates",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "IF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-07-30T11:06:58.454Z",
+  "id": "ickMvwWPWp74exVK",
+  "name": "Data Update: GENERIC: Make Transit Tables",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "97ee3d89-764a-4614-9905-c57ecfa2bf67",
+      "name": "Execute Workflow Trigger",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        -2180,
+        1280
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "3f14241a-4c8e-45b4-b4c0-f7d7d212228a",
+      "name": "Update Transit Tables",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        -980,
+        1760
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "mergeByFields": {
+          "values": [
+            {
+              "field1": "barcode",
+              "field2": "barcode"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "53efb739-e7e8-4fd2-8b6d-f2007968f2ea",
+      "name": "Merge",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2,
+      "position": [
+        60,
+        1980
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "product.product",
+        "operation": "update",
+        "customResourceId": "={{ $json.odoo_id }}",
+        "fieldsToCreateOrUpdate": {
+          "fields": [
+            {
+              "fieldName": "standard_price",
+              "fieldValue": "={{Number($json.standard_price) }}"
+            },
+            {
+              "fieldName": "list_price",
+              "fieldValue": "={{Number($json.list_price)}}"
+            },
+            {
+              "fieldName": "allow_out_of_stock_order",
+              "fieldValue": "={{ $json.StockCount > 0}}"
+            },
+            {
+              "fieldName": "default_code",
+              "fieldValue": "={{ $json.default_code }}"
+            },
+            {
+              "fieldName": "out_of_stock_message",
+              "fieldValue": "=On Order - expected availability in {{ $json[\"StockCount\"] == 1 ? $('Execute Workflow Trigger').first().json.Globals.LeadTimeAddition : $json.LeadTime > 0 ? $json.LeadTime + $('Execute Workflow Trigger').first().json.Globals.LeadTimeAddition  : 365 + $('Execute Workflow Trigger').first().json.Globals.LeadTimeAddition }} Days."
+            }
+          ]
+        }
+      },
+      "id": "39006833-7aee-4cf7-9982-8e3df4458c55",
+      "name": "Odoo",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        380,
+        1520
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "gB9N0vnXxcponrLQ",
+          "name": "Odoo account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "product.supplierinfo",
+        "operation": "getAll",
+        "returnAll": true,
+        "options": {
+          "fieldsList": [
+            "id"
+          ]
+        },
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "product_tmpl_id",
+              "value": "={{ $json.tmpl_id }}"
+            },
+            {
+              "fieldName": "partner_id",
+              "value": "={{ [$('Execute Workflow Trigger').first().json.Globals.PartnerId] }}"
+            }
+          ]
+        }
+      },
+      "id": "6471fc72-9262-4de8-951d-dd72ce36c626",
+      "name": "Odoo1",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        380,
+        1880
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "odooApi": {
+          "id": "gB9N0vnXxcponrLQ",
+          "name": "Odoo account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "product.supplierinfo",
+        "operation": "update",
+        "customResourceId": "={{ $json.id }}",
+        "fieldsToCreateOrUpdate": {
+          "fields": [
+            {
+              "fieldName": "price",
+              "fieldValue": "={{ $json.standard_price }}"
+            },
+            {
+              "fieldName": "delay",
+              "fieldValue": "={{ $json[\"StockCount\"] == 1 ? $('Execute Workflow Trigger').first().json.Globals.LeadTimeAddition : $json.LeadTime > 0 ? $json.LeadTime + $('Execute Workflow Trigger').first().json.Globals.LeadTimeAddition  : 365 + $('Execute Workflow Trigger').first().json.Globals.LeadTimeAddition }}"
+            }
+          ]
+        }
+      },
+      "id": "07da4ef6-9e8d-4b68-adc5-908a0a65f53b",
+      "name": "Odoo3",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        1460,
+        1740
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "gB9N0vnXxcponrLQ",
+          "name": "Odoo account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "chooseBranch",
+        "output": "empty"
+      },
+      "id": "ffc29710-6924-4802-b0fe-8df22538d746",
+      "name": "Merge2",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2,
+      "position": [
+        1940,
+        1520
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "2db6b806-ddc8-476b-9e25-169ab1c1d537",
+      "name": "No Updates",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        380,
+        1260
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "product.supplierinfo",
+        "fieldsToCreateOrUpdate": {
+          "fields": [
+            {
+              "fieldName": "price",
+              "fieldValue": "={{ $json.standard_price }}"
+            },
+            {
+              "fieldName": "delay",
+              "fieldValue": "={{ $json[\"stockcount\"] == 1 ? $('Globals').first().json.globals.LeadTimeAddition : $json.leadtime > 0 ? $json.leadtime + $('Globals').first().json.globals.LeadTimeAddition  : 365 + $('Globals').first().json.globals.LeadTimeAddition }}"
+            },
+            {
+              "fieldName": "partner_id",
+              "fieldValue": "={{$('Globals').first().json.globals.PartnerId}}"
+            },
+            {
+              "fieldName": "display_name",
+              "fieldValue": "={{[$('Execute Workflow Trigger').first().json.name]}}"
+            },
+            {
+              "fieldName": "company_id",
+              "fieldValue": "={{1}}"
+            },
+            {
+              "fieldName": "currency_id",
+              "fieldValue": "={{142}}"
+            },
+            {
+              "fieldName": "product_tmpl_id",
+              "fieldValue": "={{ $json.tmpl_id }}"
+            }
+          ]
+        }
+      },
+      "id": "c9eab1bd-9f6e-48d7-a5ac-00255d2559b3",
+      "name": "Odoo5",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        920,
+        1980
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "gB9N0vnXxcponrLQ",
+          "name": "Odoo account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "product.template",
+        "operation": "get",
+        "customResourceId": "={{ $node[\"Data Lookback\"].json.tmpl_id }}",
+        "options": {
+          "fieldsList": [
+            "product_tag_ids"
+          ]
+        }
+      },
+      "id": "89f2c8a3-bde7-4807-a0bc-f2fe9f68767c",
+      "name": "Odoo6",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        1100,
+        1980
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "gB9N0vnXxcponrLQ",
+          "name": "Odoo account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "product.template",
+        "operation": "update",
+        "customResourceId": "={{ $('Data Lookback').json.tmpl_id }}",
+        "fieldsToCreateOrUpdate": {
+          "fields": [
+            {
+              "fieldName": "product_tag_ids",
+              "fieldValue": "={{ $json.product_tag_ids }}"
+            }
+          ]
+        }
+      },
+      "id": "14cf2734-11f4-4a74-9a74-ea625c0c8e1f",
+      "name": "Odoo7",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        1460,
+        1980
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "gB9N0vnXxcponrLQ",
+          "name": "Odoo account"
+        }
+      },
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "jsCode": "// Loop over input items and add a new field\n// called 'myNewField' to the JSON of each one\nfor (const item of $input.all()) {\n  item.json.product_tag_ids.push($('Globals').first().json.globals.ProductTagId);\n}\n\nreturn $input.all();"
+      },
+      "id": "09434b91-9e87-4274-bd2e-30c443101b8f",
+      "name": "Code",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        1260,
+        1980
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combinationMode": "mergeByPosition",
+        "options": {
+          "clashHandling": {
+            "values": {
+              "resolveClash": "preferInput2"
+            }
+          }
+        }
+      },
+      "id": "8d01fe8c-1674-460d-b5bd-7442c7b1044e",
+      "name": "Merge3",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2,
+      "position": [
+        520,
+        2020
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "expression",
+        "output": "={{ $json.id ? 0 : 1}}"
+      },
+      "id": "a89d8ff2-f4de-49e2-91c6-ab6db44d0da5",
+      "name": "Switch",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 1,
+      "position": [
+        580,
+        1840
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "eec9a287-5499-4817-b709-29489e41755d",
+      "name": "No Operation, do nothing",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        1160,
+        1260
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.barcode }}",
+              "operation": "isNotEmpty"
+            }
+          ]
+        }
+      },
+      "id": "48fd1e44-9581-4a77-9493-d33c58d74b38",
+      "name": "IF",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        -660,
+        1980
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "7c9e5460-ba44-48bb-aba4-aaad12d58fdf",
+      "name": "no barcode",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        -760,
+        2200
+      ]
+    },
+    {
+      "parameters": {
+        "batchSize": 1,
+        "options": {}
+      },
+      "id": "48f8f228-a881-49a6-9eac-5408f7a3d693",
+      "name": "Split In Batches",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 1,
+      "position": [
+        240,
+        1980
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $('Split In Batches').context.noItemsLeft }}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "id": "f847606a-08f9-46a7-962e-3f6c962a7de7",
+      "name": "IF2",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        1740,
+        2020
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "0d6e8ff5-7897-4e8a-b465-8ffe09a035cf",
+      "name": "Data Lookback",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        760,
+        1980
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "TRUNCATE {{\"feed_\" + $json.name.toLowerCase()}};",
+        "options": {}
+      },
+      "id": "37c793ff-6be0-4157-91f9-23079c7d6b0e",
+      "name": "Postgres",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.2,
+      "position": [
+        -1600,
+        1280
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "9Jz67Tm0faeykq6p",
+          "name": "odoodata"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "DELETE FROM {{\"upload_\"+ $(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}} WHERE \"ean\" = NULL OR \"ean\" = '';",
+        "options": {}
+      },
+      "id": "219c669e-e502-46f6-9cab-ff03514f9ec6",
+      "name": "Postgres1",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.2,
+      "position": [
+        -1320,
+        1280
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "9Jz67Tm0faeykq6p",
+          "name": "odoodata"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO {{\"feed_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}} \n(\"productcode\",\n\"ean\",\n\"productname\",\n\"yourprice\",\n\"rrp\",\n\"vat\",\n\"stockcount\",\n\"shortdescription\",\n\"longdescription\",\n\"imageurl\",\n\"alternativeimage1url\",\n\"alternativeimage2url\",\n\"alternativeimage3url\",\n\"size\",\n\"colour\",\n\"brand\",\n\"weight\",\n\"packqty\",\n\"leadtime\",\n\"variantgrouping\",\n\"subcategory\",\n\"keywords\",\n\"technicalspec\",\n\"technicalspeclabel\"\n)\nSELECT \n{{\"upload_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.\"productcode\",\n{{\"upload_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.\"ean\",\n{{\"upload_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.\"productname\",\n{{\"upload_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.\"yourprice\",\n{{\"upload_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.\"rrp\",\n{{\"upload_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.\"vat\",\n{{\"upload_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.\"stockcount\",\n{{\"upload_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.\"shortdescription\",\n{{\"upload_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.\"longdescription\",\n{{\"upload_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.\"imageurl\",\n{{\"upload_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.\"alternativeimage1url\",\n{{\"upload_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.\"alternativeimage2url\",\n{{\"upload_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.\"alternativeimage3url\",\n{{\"upload_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.\"size\",\n{{\"upload_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.\"colour\",\n{{\"upload_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.\"brand\",\n{{\"upload_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.\"weight\",\n{{\"upload_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.\"packqty\",\n{{\"upload_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.\"leadtime\",\n{{\"upload_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.\"variantgrouping\",\n{{\"upload_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.\"subcategory\",\n{{\"upload_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.\"keywords\",\n{{\"upload_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.\"technicalspec\",\n{{\"upload_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.\"technicalspeclabel\"\nFROM {{\"upload_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}} WHERE \"ean\" IS NOT NULL ON CONFLICT DO NOTHING;",
+        "options": {
+          "queryReplacement": ""
+        }
+      },
+      "id": "06e59ce8-d66b-43d4-8341-c7549c20add6",
+      "name": "Postgres2",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.2,
+      "position": [
+        -1160,
+        1280
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "9Jz67Tm0faeykq6p",
+          "name": "odoodata"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "TRUNCATE {{\"prices_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}};",
+        "options": {}
+      },
+      "id": "94112656-c62e-45ec-8ddf-f378a0785b88",
+      "name": "Postgres3",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.2,
+      "position": [
+        -1000,
+        1280
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "9Jz67Tm0faeykq6p",
+          "name": "odoodata"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO {{\"prices_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}} (\nbarcode,list_price,standard_price,leadtime,stockcount)\nSELECT \n{{\"feed_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.ean AS barcode,\n{{\"feed_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.rrp AS list_price,\n{{\"feed_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.yourprice AS standard_price,\n{{\"feed_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.leadtime,\n{{\"feed_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.stockcount\nFROM {{\"feed_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}\nON CONFLICT DO NOTHING;",
+        "options": {}
+      },
+      "id": "2def6f25-a2f3-4f25-b434-65fd117f2b9d",
+      "name": "Postgres4",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.2,
+      "position": [
+        -1320,
+        1500
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "9Jz67Tm0faeykq6p",
+          "name": "odoodata"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "TRUNCATE {{\"transit_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}};",
+        "options": {}
+      },
+      "id": "ab4e0a2c-503b-459b-9bd5-5ca542debba6",
+      "name": "Postgres5",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.2,
+      "position": [
+        -800,
+        1560
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "8WhTUhxcTPP1zlNv",
+          "name": "btxPIM"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO datatransit.{{\"transit_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}} (productcode,\nean,\nvariantgrouping,\nproductname,\nyourprice,\nrrp,\nvat,\nstockcount,\nshortdescription,\nlongdescription,\nimageurl,\nalternativeimage1url,\nalternativeimage2url,\nalternativeimage3url,\n\"size\",\ncolour,\nbrand,\npackqty,\nleadtime,\nsubcategory,\ntechnicalspec,\ntechnicalspeclabel\n)\nSELECT \n{{\"feed_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.productcode,\n{{\"feed_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.ean,\n{{\"feed_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.variantgrouping,\n{{\"feed_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.productname,\n{{\"feed_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.yourprice,\n{{\"feed_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.rrp,\n{{\"feed_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.vat,\n{{\"feed_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.stockcount,\n{{\"feed_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.shortdescription,\n{{\"feed_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.longdescription,\n{{\"feed_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.imageurl,\n{{\"feed_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.alternativeimage1url,\n{{\"feed_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.alternativeimage2url,\n{{\"feed_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.alternativeimage3url,\n{{\"feed_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.\"size\",\n{{\"feed_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.colour,\n{{\"feed_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.brand,\n{{\"feed_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.packqty,\n{{\"feed_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.leadtime,\n{{\"feed_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.subcategory,\n{{\"feed_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.technicalspec,\n{{\"feed_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.technicalspeclabel\nFROM odoodata.{{\"feed_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}\nLEFT JOIN datatransit.{{\"index_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}} b ON {{\"odoodata.feed_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.ean = b.barcode\nWHERE {{\"feed_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.ean NOT IN (SELECT barcode FROM odoodata.map_productstock) ON CONFLICT (productcode) DO NOTHING;\n",
+        "options": {}
+      },
+      "id": "773280fc-7f2a-41ed-a6ec-0498b10ad76e",
+      "name": "Postgres6",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.2,
+      "position": [
+        -640,
+        1560
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "8WhTUhxcTPP1zlNv",
+          "name": "btxPIM"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT \n\ta.barcode,\n    a.list_price,\n\ta.standard_price,\n    a.leadtime,\n    a.stockcount\nFROM odoodata.{{ \"prices_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase() }} a\nLEFT JOIN datatransit.{{ \"prices_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase() }} b ON a.barcode = b.barcode\nWHERE a.list_price != b.list_price\nOR a.standard_price != b.standard_price\nOR a.leadtime != b.leadtime\nOR a.stockcount != b.stockcount;",
+        "options": {}
+      },
+      "id": "e887978e-a01e-4bbb-89fa-83f027552a9f",
+      "name": "Postgres7",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.2,
+      "position": [
+        -1180,
+        1980
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "8WhTUhxcTPP1zlNv",
+          "name": "btxPIM"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT id AS odoo_id, barcode, default_code, product_tmpl_id AS tmpl_id  FROM {{\"index_\"+$('Execute Workflow Trigger').first().json.name.toLowerCase() }} WHERE barcode = {{\"\\'\"+$json.barcode+\"\\'\"}}",
+        "options": {}
+      },
+      "id": "6a46705a-4978-4f99-aa9b-b2a05256d4a1",
+      "name": "Postgres8",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.2,
+      "position": [
+        -200,
+        2220
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "8WhTUhxcTPP1zlNv",
+          "name": "btxPIM"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "TRUNCATE {{\"datatransit.prices_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}};",
+        "options": {}
+      },
+      "id": "707093d5-78f1-4336-98ad-0c4a144aa9ab",
+      "name": "Postgres9",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.2,
+      "position": [
+        1340,
+        1260
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "8WhTUhxcTPP1zlNv",
+          "name": "btxPIM"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO {{\"datatransit.prices_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}} (\nbarcode,list_price,standard_price,LeadTime,StockCount)\nSELECT \nb.barcode,\nb.list_price,\nb.standard_price,\nb.leadtime,\nb.stockcount\nFROM odoodata.{{\"prices_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}} b;",
+        "options": {}
+      },
+      "id": "0f942397-8b97-4838-839d-2dfcbcd2843c",
+      "name": "Postgres10",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.2,
+      "position": [
+        1520,
+        1260
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "8WhTUhxcTPP1zlNv",
+          "name": "btxPIM"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "name",
+              "value": "={{ $json.name }}"
+            },
+            {
+              "name": "globals",
+              "value": "={{JSON.parse($json.globals)[0]}}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "16d87f29-0aee-4e99-a53d-4c2fbaad32f6",
+      "name": "Globals",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [
+        -1960,
+        1280
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "17ad3ca0-3562-41c2-a526-5ee7c9b9e80b",
+      "name": "End",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        1660,
+        1260
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "return $('Globals').first()"
+      },
+      "id": "f46f7797-b744-4f55-b92c-cc1b7e6252e4",
+      "name": "Code11",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        1840,
+        1260
+      ],
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "workflowId": "PvBNWOGEX6Tul1IC"
+      },
+      "id": "2ef7b42b-05dd-4568-a05f-ebaebf12fa23",
+      "name": "Remove delisted items",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [
+        2000,
+        1260
+      ],
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $('Postgres7').all().length > 1}}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "id": "bdbaab97-ba9b-486f-8e10-e868ed009281",
+      "name": "IF1",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        -440,
+        1960
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.success }}",
+              "operation": "isNotEmpty"
+            }
+          ]
+        }
+      },
+      "id": "a43abbff-600c-4ff6-a8b5-5d889f141957",
+      "name": "IF3",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        -960,
+        1980
+      ]
+    }
+  ],
+  "pinData": {
+    "Execute Workflow Trigger": [
+      {
+        "json": {
+          "name": "Silverfish",
+          "globals": "[{\"SupplierName\": \"Silverfish\",\"PartnerId\": 61,\"ProductTagId\": 10,\"LeadTimeAddition\":5,\"Webhook\":\"https://node4.biketrax.co.uk/webhook/d6637f7a-97f9-4f2d-96bd-a493b0112995\"}]"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "id": "NgXcDDqIPq9W8PqT",
+      "createdAt": "2023-07-30T10:50:20.897Z",
+      "updatedAt": "2023-07-30T10:50:20.897Z",
+      "name": "Postgresql"
+    },
+    {
+      "id": "Y12jbTYujawQaa36",
+      "createdAt": "2023-07-30T11:07:08.592Z",
+      "updatedAt": "2023-07-30T11:07:08.592Z",
+      "name": "Odoo"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2023-07-30T11:32:07.000Z",
+  "versionId": "da183fe9-17d9-4bbc-835e-f8982e7ca556"
+}
