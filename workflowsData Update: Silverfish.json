@@ -321,7 +321,35 @@
     },
     "Data Update: GENERIC: Make Transit Tables": {
       "main": [
-        []
+        [
+          {
+            "node": "Code1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insert Supplier Specific Code Here": {
+      "main": [
+        [
+          {
+            "node": "Code11",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code11": {
+      "main": [
+        [
+          {
+            "node": "Data Sync: Generic",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     }
   },
@@ -781,8 +809,8 @@
       "type": "n8n-nodes-base.noOp",
       "typeVersion": 1,
       "position": [
-        3140,
-        720
+        3100,
+        1080
       ]
     },
     {
@@ -813,6 +841,32 @@
       ],
       "alwaysOutputData": true,
       "executeOnce": true
+    },
+    {
+      "parameters": {
+        "jsCode": "return $('Globals').first()"
+      },
+      "id": "b0b46ec1-fb09-4655-9841-7e82307ee013",
+      "name": "Code11",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        3260,
+        720
+      ]
+    },
+    {
+      "parameters": {
+        "workflowId": "zmVAs0qEktZ3CXjA"
+      },
+      "id": "8b93df12-3c89-4eff-936f-068e33aeb25b",
+      "name": "Data Sync: Generic",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [
+        3420,
+        720
+      ]
     }
   ],
   "pinData": {},
@@ -835,6 +889,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2023-07-30T14:19:18.000Z",
-  "versionId": "b61211f3-9723-4bae-aecd-9cfe19387cf8"
+  "updatedAt": "2023-07-30T16:06:46.000Z",
+  "versionId": "a37bc249-4f93-49f6-81b6-db5cc6a8cfad"
 }
