@@ -1,0 +1,607 @@
+{
+  "active": false,
+  "connections": {
+    "Execute Workflow Trigger": {
+      "main": [
+        [
+          {
+            "node": "MySQL1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add Vat": {
+      "main": [
+        [
+          {
+            "node": "Calculate Net RRP",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculate Net RRP": {
+      "main": [
+        [
+          {
+            "node": "Add YourPrice",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add Lead Time": {
+      "main": [
+        [
+          {
+            "node": "Conform Stock Count",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Conform Stock Count": {
+      "main": [
+        [
+          {
+            "node": "Calculate Net RRP1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculate Net RRP1": {
+      "main": [
+        [
+          {
+            "node": "Rename Columns",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Rename Columns": {
+      "main": [
+        [
+          {
+            "node": "Add Columns",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add YourPrice": {
+      "main": [
+        [
+          {
+            "node": "Synchronise CSP / Stock",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Synchronise CSP / Stock": {
+      "main": [
+        [
+          {
+            "node": "Fill non CSP Prices",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Synchronise CSP / Stock1": {
+      "main": [
+        [
+          {
+            "node": "Add Lead Time",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fill non CSP Prices": {
+      "main": [
+        [
+          {
+            "node": "Synchronise CSP / Stock1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SSH2": {
+      "main": [
+        [
+          {
+            "node": "SSH",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MySQL1": {
+      "main": [
+        [
+          {
+            "node": "MySQL2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MySQL2": {
+      "main": [
+        [
+          {
+            "node": "SSH2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MySQL": {
+      "main": [
+        [
+          {
+            "node": "SSH3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SSH3": {
+      "main": [
+        [
+          {
+            "node": "SSH1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SSH": {
+      "main": [
+        [
+          {
+            "node": "MySQL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SSH1": {
+      "main": [
+        [
+          {
+            "node": "Add Vat",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-07-30T14:30:47.432Z",
+  "id": "dQiyh1NM2Ka78Xdw",
+  "name": "Data Update: Zyro: Prep",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "195a504a-8e85-4904-b397-98439cb00ab2",
+      "name": "Execute Workflow Trigger",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        1140,
+        380
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=ALTER TABLE `Upload-Zyro` ADD Vat INT(2) AS (IF(VatCode=\"N\",20,0)) AFTER VatCode"
+      },
+      "id": "64bf05c2-5e30-4070-b18c-7a58e8c452be",
+      "name": "Add Vat",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        1400,
+        580
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE `Upload-Zyro` SET SRP = SRP / (1+(Vat/100));"
+      },
+      "id": "1431b5fb-96c2-4627-810e-72dabde70ca1",
+      "name": "Calculate Net RRP",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        1600,
+        580
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "ALTER TABLE `Upload-Zyro` \nRENAME COLUMN `SKU` TO `ProductCode`,\nRENAME COLUMN `Name` TO `ProductName`,\nRENAME COLUMN `UPC` TO `Ean`,\nRENAME COLUMN `SRP` TO `Rrp`,\nRENAME COLUMN `BoxQuantity` TO `PackQty`,\nRENAME COLUMN `StyleCode` TO `VariantGrouping`,\nRENAME COLUMN `BriefDescription` TO `ShortDescription`,\nRENAME COLUMN `ProductCategory` TO `SubCategory`;"
+      },
+      "id": "505d96da-cc90-44b6-8bbb-557cfac97780",
+      "name": "Rename Columns",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        1400,
+        1000
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "ALTER TABLE `Upload-Zyro` ADD LeadTime INT(3) AS (DATEDIFF(STR_TO_DATE(StockDueIn, '%e/%m/%Y'),CURDATE()));"
+      },
+      "id": "87de2d0f-56df-478d-a0f0-7e2759d6c3df",
+      "name": "Add Lead Time",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        1400,
+        800
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=ALTER TABLE `Upload-Zyro` ADD StockCount INT(1) AS (IF(StockIndicator=\"IS\",1,0));"
+      },
+      "id": "7bcb5122-0847-4314-9fad-29224ae43fdf",
+      "name": "Conform Stock Count",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        1600,
+        800
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE `Upload-Zyro` SET Name = CAP_FIRST(Name),BriefDescription = CAP_FIRST(BriefDescription)"
+      },
+      "id": "1fce4b6c-fa60-471e-be2e-bdfffb2e8d4f",
+      "name": "Calculate Net RRP1",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        1760,
+        800
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "ALTER TABLE `Upload-Zyro` \nADD `AlternativeImage1Url` VARCHAR(80) NULL DEFAULT NULL AFTER `StockCount`, \nADD `AlternativeImage2Url` VARCHAR(80) NULL DEFAULT NULL AFTER `AlternativeImage1Url`, \nADD `AlternativeImage3Url` VARCHAR(80) NULL DEFAULT NULL AFTER `AlternativeImage2Url`,\nADD `Weight` VARCHAR(20) NOT NULL AFTER `AlternativeImage3Url`,\nADD `Keywords` VARCHAR(1000) NULL DEFAULT NULL AFTER `Weight`,\nADD `TechnicalSpec` LONGTEXT DEFAULT NULL,\nADD `TechnicalSpecLabel` LONGTEXT DEFAULT NULL;"
+      },
+      "id": "202aa000-8723-4111-9c70-5cf5e0d91d4b",
+      "name": "Add Columns",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        1600,
+        1000
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=ALTER TABLE `Upload-Zyro` ADD YourPrice DECIMAL(7,2) NULL"
+      },
+      "id": "9c79e3a1-cbfe-400f-9309-3c92f0b76e4b",
+      "name": "Add YourPrice",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        1780,
+        580
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE `Upload-Zyro` AS a\nINNER JOIN `Csp-Zyro` AS b ON a.SKU = b.ProductCode\nSET \na.YourPrice = b.Price1"
+      },
+      "id": "d8e67033-6751-49ca-9ab7-962b030ba1b7",
+      "name": "Synchronise CSP / Stock",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        1960,
+        580
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE `Upload-Zyro` AS a\nINNER JOIN `Stock-Zyro` AS c ON a.SKU = c.SKU\nSET\na.StockIndicator = c.StockIndicator,\na.StockDueIn = c.StockDueIn;"
+      },
+      "id": "e3e789c7-682a-4ea9-94c3-c18abbeb794d",
+      "name": "Synchronise CSP / Stock1",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        2300,
+        580
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE `Upload-Zyro` \nSET \nYourPrice = OrangePrice\nWHERE YourPrice IS NULL"
+      },
+      "id": "6a08537d-4250-4af9-a8b7-8833179c45eb",
+      "name": "Fill non CSP Prices",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        2140,
+        580
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "command": "=mysqlimport --user='root' --password='L0chr!nPl@ce' \\\n--fields-terminated-by=',' --lines-terminated-by=0x0d0a \\\n--replace --low-priority --fields-enclosed-by='\"' \\\n --fields-escaped-by='#' --ignore-lines='1' --verbose --force --local \\\nodooData '/home/luke/feeds/Upload-Zyro.csv'",
+        "cwd": "/home/luke/feeds/"
+      },
+      "id": "0c1125f3-4e1b-45d0-90a0-5b7c5a6ae413",
+      "name": "SSH",
+      "type": "n8n-nodes-base.ssh",
+      "typeVersion": 1,
+      "position": [
+        1940,
+        380
+      ],
+      "credentials": {
+        "sshPassword": {
+          "id": "12",
+          "name": "Node3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "command": "=LANG=C sed -i 's/[\\d128-\\d255]//g' /home/luke/feeds/Upload-Zyro.csv",
+        "cwd": "/home/luke/feeds/"
+      },
+      "id": "1d98f905-7c6f-43b7-8cf4-41e86942c84a",
+      "name": "SSH2",
+      "type": "n8n-nodes-base.ssh",
+      "typeVersion": 1,
+      "position": [
+        1780,
+        380
+      ],
+      "credentials": {
+        "sshPassword": {
+          "id": "12",
+          "name": "Node3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=DROP TABLE `Upload-Zyro`;"
+      },
+      "id": "7d9c625b-929d-406e-b5bc-e2c8e48de70e",
+      "name": "MySQL1",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        1400,
+        380
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=CREATE TABLE `Upload-Zyro` AS\nSELECT *\nFROM `Template-Zyro`;"
+      },
+      "id": "e8db10c3-72f3-4b85-bf77-dc12e273778f",
+      "name": "MySQL2",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        1620,
+        380
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=TRUNCATE `Csp-Zyro`; "
+      },
+      "id": "6e1f83c3-51a8-4997-880c-9f88e9cbb97f",
+      "name": "MySQL",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        2300,
+        380
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "command": "=mysqlimport --user='root' --password='L0chr!nPl@ce' \\\n--fields-terminated-by=',' --lines-terminated-by=0x0d0a \\\n--replace --low-priority --fields-enclosed-by='\"' \\\n --fields-escaped-by='#' --ignore-lines='1' --verbose --force --local \\\nodooData '/home/luke/feeds/Csp-Zyro.csv'",
+        "cwd": "/home/luke/feeds/"
+      },
+      "id": "614b805d-1c70-4b5c-8ff8-edf1eae77699",
+      "name": "SSH1",
+      "type": "n8n-nodes-base.ssh",
+      "typeVersion": 1,
+      "position": [
+        2640,
+        380
+      ],
+      "credentials": {
+        "sshPassword": {
+          "id": "12",
+          "name": "Node3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "command": "=LANG=C sed -i 's/[\\d128-\\d255]//g' /home/luke/feeds/Csp-Zyro.csv",
+        "cwd": "/home/luke/feeds/"
+      },
+      "id": "7f1222e9-8527-4d09-ada2-2f0715e97cd7",
+      "name": "SSH3",
+      "type": "n8n-nodes-base.ssh",
+      "typeVersion": 1,
+      "position": [
+        2480,
+        380
+      ],
+      "credentials": {
+        "sshPassword": {
+          "id": "12",
+          "name": "Node3"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "id": "2r6icDToQEe5rXCb",
+      "createdAt": "2023-07-30T14:25:20.444Z",
+      "updatedAt": "2023-07-30T14:25:20.444Z",
+      "name": "Zyro"
+    },
+    {
+      "id": "Q6hSRhURJvwaJyXs",
+      "createdAt": "2023-07-30T10:52:22.581Z",
+      "updatedAt": "2023-07-30T10:52:22.581Z",
+      "name": "SSH"
+    },
+    {
+      "id": "siOv68LvUdVRWklZ",
+      "createdAt": "2023-07-30T14:17:43.423Z",
+      "updatedAt": "2023-07-30T14:17:43.423Z",
+      "name": "MySQL - to Update"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2023-07-30T14:31:40.000Z",
+  "versionId": "5403c257-bd54-4744-bde1-89fe152d4dfb"
+}
