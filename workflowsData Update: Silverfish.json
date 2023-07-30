@@ -1,5 +1,5 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
     "When Called By Another Workflow": {
       "main": [
@@ -263,18 +263,7 @@
       "main": [
         [
           {
-            "node": "Transit Table Write",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Transit Table Write": {
-      "main": [
-        [
-          {
-            "node": "Code1",
+            "node": "Data Update: GENERIC: Make Transit Tables",
             "type": "main",
             "index": 0
           }
@@ -328,6 +317,11 @@
             "index": 0
           }
         ]
+      ]
+    },
+    "Data Update: GENERIC: Make Transit Tables": {
+      "main": [
+        []
       ]
     }
   },
@@ -718,21 +712,6 @@
     },
     {
       "parameters": {
-        "workflowId": "84"
-      },
-      "id": "3bbb81f1-affa-41c3-9e2d-90718cd77014",
-      "name": "Transit Table Write",
-      "type": "n8n-nodes-base.executeWorkflow",
-      "typeVersion": 1,
-      "position": [
-        2340,
-        1200
-      ],
-      "alwaysOutputData": true,
-      "executeOnce": true
-    },
-    {
-      "parameters": {
         "path": "d6637f7a-97f9-4f2d-96bd-a493b0112995",
         "responseMode": "lastNode",
         "options": {}
@@ -745,8 +724,7 @@
         1220,
         960
       ],
-      "webhookId": "d6637f7a-97f9-4f2d-96bd-a493b0112995",
-      "disabled": true
+      "webhookId": "d6637f7a-97f9-4f2d-96bd-a493b0112995"
     },
     {
       "parameters": {
@@ -820,6 +798,21 @@
         960
       ],
       "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "workflowId": "ickMvwWPWp74exVK"
+      },
+      "id": "3bbb81f1-affa-41c3-9e2d-90718cd77014",
+      "name": "Data Update: GENERIC: Make Transit Tables",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [
+        2340,
+        1200
+      ],
+      "alwaysOutputData": true,
+      "executeOnce": true
     }
   ],
   "pinData": {},
@@ -841,7 +834,7 @@
       "name": "Silverfish"
     }
   ],
-  "triggerCount": 0,
-  "updatedAt": "2023-07-30T10:56:27.000Z",
-  "versionId": "3c3b0c80-d15d-44da-85f3-46f78144f2a8"
+  "triggerCount": 1,
+  "updatedAt": "2023-07-30T14:19:18.000Z",
+  "versionId": "b61211f3-9723-4bae-aecd-9cfe19387cf8"
 }
