@@ -1,0 +1,486 @@
+{
+  "active": false,
+  "connections": {
+    "Execute Workflow Trigger": {
+      "main": [
+        [
+          {
+            "node": "MySQL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculate Net RRP": {
+      "main": [
+        [
+          {
+            "node": "MySQL1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Rename Columns": {
+      "main": [
+        [
+          {
+            "node": "Add Columns",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Retrieve Column Headers": {
+      "main": [
+        [
+          {
+            "node": "IF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MySQL": {
+      "main": [
+        [
+          {
+            "node": "Retrieve Column Headers",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Null Empty Fields": {
+      "main": [
+        [
+          {
+            "node": "Calculate Net RRP",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF": {
+      "main": [
+        [
+          {
+            "node": "Null Empty Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MySQL1": {
+      "main": [
+        [
+          {
+            "node": "Rename Columns",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MySQL2": {
+      "main": [
+        [
+          {
+            "node": "Set",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set": {
+      "main": [
+        [
+          {
+            "node": "Set1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add Columns": {
+      "main": [
+        [
+          {
+            "node": "MySQL2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set1": {
+      "main": [
+        [
+          {
+            "node": "MySQL3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-07-30T14:38:12.109Z",
+  "id": "06DNb6RJk9hrHyvY",
+  "name": "Data Update: Extra: Prep",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "327d0ffe-f536-44fc-9e98-99a8c6c2de40",
+      "name": "Execute Workflow Trigger",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        740,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE `Upload-Extra` SET `Unit MSRP` = (`Unit MSRP` / (1+(`Vat`/100)))"
+      },
+      "id": "6f73a06a-9cdf-4ea3-b94a-f0b3287b0374",
+      "name": "Calculate Net RRP",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        960,
+        700
+      ],
+      "executeOnce": true,
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "ALTER TABLE `Upload-Extra`\nCHANGE `Vendor SKU` `ProductCode` VARCHAR(60),\nCHANGE `UPC/EAN` `Ean` VARCHAR(22),\nCHANGE `Product Name` `ProductName` VARCHAR(235),\nCHANGE `Unit Cost` `YourPrice` DECIMAL(10,2),\nCHANGE `Unit MSRP` `Rrp` DECIMAL(10.2),\nCHANGE `Long Description` `LongDescription` VARCHAR(16725),\nCHANGE `Image 1` `ImageUrl` VARCHAR(200),\nCHANGE `Image 2` `AlternativeImage1Url` VARCHAR(200),\nCHANGE `Image 3` `AlternativeImage2Url` VARCHAR(200),\nCHANGE `Image 4` `AlternativeImage3Url` VARCHAR(200),\nCHANGE `Size 1` `Size` varchar(30),\nCHANGE `Style Number` `VariantGrouping` VARCHAR(60),\nCHANGE `Category` `SubCategory` VARCHAR(80);"
+      },
+      "id": "fe887ec8-fd97-456a-bcda-561def89d6b6",
+      "name": "Rename Columns",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        960,
+        920
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "ALTER TABLE `Upload-Extra` ADD `StockCount` INT(5) NULL DEFAULT NULL AFTER `Vat`,ADD `ShortDescription` VARCHAR(222) NULL DEFAULT NULL AFTER `StockCount`, ADD `PackQty` VARCHAR(27) NULL DEFAULT NULL AFTER `Weight`,ADD `LeadTime` INT(3) NULL DEFAULT NULL AFTER `PackQty`,ADD `Keywords` VARCHAR(1000) NULL DEFAULT NULL AFTER `SubCategory`;"
+      },
+      "id": "dace8b71-7013-4174-b3c8-4b1dd3cd8583",
+      "name": "Add Columns",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        1160,
+        920
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "Upload-Extra",
+        "height": 621.8273076505266,
+        "width": 1482.683486238532
+      },
+      "id": "69da3107-72bc-4e57-8d70-368d389b7a1d",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        460,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE `Upload-Saddleback` SET `Lead Time` = NULL WHERE `Stock Count` = \" \";"
+      },
+      "id": "b6000d7c-ea3d-498c-bf54-3b7ec70ca819",
+      "name": "Clear Strings in Numerics4",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        160,
+        1060
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SHOW COLUMNS FROM `Upload-Extra`"
+      },
+      "id": "1ac16499-94d1-484f-9d8f-b0151940a8bf",
+      "name": "Retrieve Column Headers",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        1260,
+        500
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "DELETE FROM `Upload-Extra` WHERE `Unit Cost` = 0.00 OR `Unit MSRP` = 0.00;"
+      },
+      "id": "ce75d176-f0c7-45cd-9bf2-822ee39ea526",
+      "name": "MySQL",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        960,
+        500
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=UPDATE `Upload-Extra` SET `{{$json.Field}}` = NULL WHERE `{{ $json.Field }}` = \"\";"
+      },
+      "id": "da7671af-9e08-4780-86bc-71afb1b7f8c8",
+      "name": "Null Empty Fields",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        1720,
+        500
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      },
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.Type }}",
+              "operation": "contains",
+              "value2": "varchar"
+            }
+          ]
+        }
+      },
+      "id": "4799eb4d-1330-481d-ac89-65bbeada8445",
+      "name": "IF",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        1480,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE `Upload-Extra` SET `Size 1` = `Size 2` WHERE `Size 2` IS NOT NULL"
+      },
+      "id": "31baa273-c15b-4867-8cd4-0255d0358953",
+      "name": "MySQL1",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        1260,
+        700
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "Incorporate Stock Data",
+        "width": 1482.0882669537136
+      },
+      "id": "fc4731d1-e317-459b-8317-6fa15dbbcafc",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        460,
+        1120
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT * FROM `Stock-Extra`"
+      },
+      "id": "310ad1d4-8f9b-41ce-86e5-4e5e9f1925c4",
+      "name": "MySQL2",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        960,
+        1140
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "ProductCode",
+              "value": "={{ $json[\"Stock Code\"] }}"
+            }
+          ],
+          "number": [
+            {
+              "name": "StockCount",
+              "value": "={{ $json[\"In Stock\"] == \"Y\" ? 1 : 0 }}"
+            },
+            {
+              "name": "LeadTime",
+              "value": "={{ $json[\"Due Date\"] != null ? DateTime.fromFormat($json[\"Due Date\"], \"dd/MM/yyyy\").diff($today, 'days').toObject().days : null}}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "1bf6aea7-1706-4d69-b346-c572125f588b",
+      "name": "Set",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        1160,
+        1140
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "table": {
+          "__rl": true,
+          "value": "`Upload-Extra`",
+          "mode": "name"
+        },
+        "updateKey": "ProductCode",
+        "columns": "LeadTime,StockCount"
+      },
+      "id": "a4e39aea-3f26-4dad-aed0-f940db488710",
+      "name": "MySQL3",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        1480,
+        1140
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "values": {
+          "number": [
+            {
+              "name": "LeadTime",
+              "value": "={{ $json.LeadTime < 0 || $json.StockCount == 1 ? 0 : $json.LeadTime}}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "712f389e-36b5-4076-9282-bcfe5c7521a1",
+      "name": "Set1",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        1320,
+        1140
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "id": "VhX4CBspNLLNNlX7",
+      "createdAt": "2023-07-30T14:37:13.551Z",
+      "updatedAt": "2023-07-30T14:37:13.551Z",
+      "name": "Extra"
+    },
+    {
+      "id": "siOv68LvUdVRWklZ",
+      "createdAt": "2023-07-30T14:17:43.423Z",
+      "updatedAt": "2023-07-30T14:17:43.423Z",
+      "name": "MySQL - to Update"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2023-07-30T14:38:28.000Z",
+  "versionId": "084ae165-8dd1-4ec0-bda4-3a766ba5c4fa"
+}
