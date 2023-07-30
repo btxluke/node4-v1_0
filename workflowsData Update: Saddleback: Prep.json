@@ -1,0 +1,530 @@
+{
+  "active": false,
+  "connections": {
+    "Execute Workflow Trigger": {
+      "main": [
+        [
+          {
+            "node": "MySQL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculate Net RRP": {
+      "main": [
+        [
+          {
+            "node": "MySQL2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Rename Columns": {
+      "main": [
+        [
+          {
+            "node": "Add Columns",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Clear Strings in Numerics": {
+      "main": [
+        [
+          {
+            "node": "Clear Strings in Numerics1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Clear Strings in Numerics1": {
+      "main": [
+        [
+          {
+            "node": "Clear Strings in Numerics2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Clear Strings in Numerics2": {
+      "main": [
+        [
+          {
+            "node": "Clear Strings in Numerics3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Clear Strings in Numerics3": {
+      "main": [
+        [
+          {
+            "node": "Clear Strings in Numerics4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Clear Strings in Numerics4": {
+      "main": [
+        [
+          {
+            "node": "Calculate Net RRP",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MySQL": {
+      "main": [
+        [
+          {
+            "node": "MySQL1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MySQL1": {
+      "main": [
+        [
+          {
+            "node": "SSH2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SSH1": {
+      "main": [
+        [
+          {
+            "node": "Clear Strings in Numerics",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add Stock Count": {
+      "main": [
+        [
+          {
+            "node": "Zero Blank Lead Times",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Zero Blank Lead Times": {
+      "main": [
+        [
+          {
+            "node": "Rename Columns",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MySQL2": {
+      "main": [
+        [
+          {
+            "node": "Add Stock Count",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SSH2": {
+      "main": [
+        [
+          {
+            "node": "SSH1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-07-30T15:32:53.498Z",
+  "id": "i3RAu8LS53ieEAiR",
+  "name": "Data Update: Saddleback: Prep",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "394dd09e-f1b7-4f8d-b487-72ccf1e69169",
+      "name": "Execute Workflow Trigger",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        680,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE `Upload-Saddleback` SET RRP = RRP / (1+(Tax/100));"
+      },
+      "id": "78eb4b4a-4e47-483e-a57e-633dad6e3f58",
+      "name": "Calculate Net RRP",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        840,
+        860
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "ALTER TABLE `Upload-Saddleback` \nCHANGE `SKU` `ProductCode` VARCHAR(60),\nCHANGE `Barcode` `Ean` VARCHAR(22),\nCHANGE `Product Name` `ProductName` VARCHAR(235),\nCHANGE `Unit Cost` `YourPrice` DECIMAL(10,2),\nCHANGE `RRP` `Rrp` DECIMAL(10.2),\nCHANGE `Tax` `Vat` INT(2),\nCHANGE `Stock Count` `StockCount` INT(1),\nCHANGE `Description` `LongDescription` LONGTEXT,\nCHANGE `Image` `ImageUrl` VARCHAR(200),\nCHANGE `Lead Time` `LeadTime` INT(3),\nCHANGE `Parent Code` `VariantGrouping` VARCHAR(60),\nCHANGE `Category` `SubCategory` VARCHAR(80);"
+      },
+      "id": "ba6b3b9c-6b42-496e-9b4c-36df2d206349",
+      "name": "Rename Columns",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        840,
+        1060
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "ALTER TABLE `Upload-Saddleback`\nADD `ShortDescription` VARCHAR(222) NULL DEFAULT NULL AFTER `Vat`, \nADD `AlternativeImage1Url` VARCHAR(80) NULL DEFAULT NULL AFTER `ImageUrl`, \nADD `AlternativeImage2Url` VARCHAR(80) NULL DEFAULT NULL AFTER `AlternativeImage1Url`, \nADD `AlternativeImage3Url` VARCHAR(80) NULL DEFAULT NULL AFTER `AlternativeImage2Url`,\nADD `PackQty` VARCHAR(27) NOT NULL AFTER `Weight`,\nADD `Keywords` VARCHAR(1000) NULL DEFAULT NULL AFTER `SubCategory`,\nADD `TechnicalSpec` LONGTEXT NULL DEFAULT NULL AFTER `Keywords`,\nADD `TechnicalSpecLabel` LONGTEXT NULL DEFAULT NULL AFTER `Keywords`;"
+      },
+      "id": "f4e590d2-ef38-424f-9a56-f84d4d48bd0e",
+      "name": "Add Columns",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        1060
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE `Upload-Saddleback` SET RRP = NULL WHERE RRP = \"\";"
+      },
+      "id": "200bfe79-5028-4e0c-90c7-e972c416a4f5",
+      "name": "Clear Strings in Numerics",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        840,
+        640
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE `Upload-Saddleback` SET Tax = NULL WHERE Tax = \"\";"
+      },
+      "id": "2c97d0d4-5910-406e-a915-15c7abe13e48",
+      "name": "Clear Strings in Numerics1",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        640
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE `Upload-Saddleback` SET `Stock Count` = NULL WHERE `Stock Count` = \"\";"
+      },
+      "id": "dfba4e48-acf1-4f90-b45a-c86b016d3e2b",
+      "name": "Clear Strings in Numerics2",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        1280,
+        640
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE `Upload-Saddleback` SET `Stock Count` = 50 WHERE `Stock Count` = \"50+\";"
+      },
+      "id": "b7c6d1f5-f49f-4632-8707-f66a885b107c",
+      "name": "Clear Strings in Numerics3",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        1500,
+        640
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "height": 448.0275229357794,
+        "width": 1440.6422018348626
+      },
+      "id": "b072023e-03ff-4c8c-890d-8ab5e23e539a",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        340,
+        600
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE `Upload-Saddleback` SET `Lead Time` = NULL WHERE `Stock Count` = \" \";"
+      },
+      "id": "b7414316-85e5-4410-a4d4-632ef8beb4e7",
+      "name": "Clear Strings in Numerics4",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        1660,
+        640
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "DROP TABLE `Upload-Saddleback`"
+      },
+      "id": "8e0e5258-ac03-4857-82ce-0b4b9e866253",
+      "name": "MySQL",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        840,
+        460
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "CREATE TABLE `Upload-Saddleback` AS SELECT * FROM `Template-Saddleback`;"
+      },
+      "id": "770dbf2a-9a5c-4cbc-827f-e73004ee57e1",
+      "name": "MySQL1",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        460
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "command": "mysqlimport --user='root' --password='L0chr!nPl@ce' \\\n--fields-terminated-by=',' --lines-terminated-by='\\n' \\\n--replace --low-priority --fields-enclosed-by='\"' \\\n --fields-escaped-by='#' --ignore-lines='1' --verbose --force --local \\\nodooData '/home/luke/feeds/Upload-Saddleback.csv'",
+        "cwd": "/home/luke/feeds/"
+      },
+      "id": "12fd2fc4-51dc-44f2-8c32-5e5756627331",
+      "name": "SSH1",
+      "type": "n8n-nodes-base.ssh",
+      "typeVersion": 1,
+      "position": [
+        1500,
+        460
+      ],
+      "credentials": {
+        "sshPassword": {
+          "id": "12",
+          "name": "Node3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=UPDATE `Upload-Saddleback` \nINNER JOIN `Stock-Saddleback` ON `Upload-Saddleback`.`SKU` = `Stock-Saddleback`.`Vendor SKU`\nSET `Upload-Saddleback`.`Stock Count` = (IF(`Stock-Saddleback`.`Stock Count` > 1, 1, 0)) "
+      },
+      "id": "5640b0e0-06a8-427d-857f-4ff273cc7cc3",
+      "name": "Add Stock Count",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        1280,
+        860
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE `Upload-Saddleback` SET `Lead Time` = 0 WHERE `Lead Time` = '';",
+        "options": {}
+      },
+      "id": "2292222a-b035-4e13-9a2b-fd185c098500",
+      "name": "Zero Blank Lead Times",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 2.1,
+      "position": [
+        1500,
+        860
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "DELETE a FROM `Stock-Saddleback` a \nLEFT JOIN `Upload-Saddleback` b ON b.`SKU` = a.`Vendor SKU`\nWHERE b.`SKU` IS NULL;",
+        "options": {}
+      },
+      "id": "30bf3e08-5ffa-4469-a851-06609182c7c0",
+      "name": "MySQL2",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 2.1,
+      "position": [
+        1040,
+        860
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "command": "=LANG=C sed -i 's/[\\d128-\\d255]//g' /home/luke/feeds/Upload-Silverfish.csv",
+        "cwd": "/home/luke/feeds/"
+      },
+      "id": "8a93160a-6fa0-4ea8-9ac0-47759981dedd",
+      "name": "SSH2",
+      "type": "n8n-nodes-base.ssh",
+      "typeVersion": 1,
+      "position": [
+        1280,
+        460
+      ],
+      "credentials": {
+        "sshPassword": {
+          "id": "12",
+          "name": "Node3"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "id": "OVyLWZFauyPIs92i",
+      "createdAt": "2023-07-30T15:31:17.492Z",
+      "updatedAt": "2023-07-30T15:31:17.492Z",
+      "name": "Saddleback"
+    },
+    {
+      "id": "Q6hSRhURJvwaJyXs",
+      "createdAt": "2023-07-30T10:52:22.581Z",
+      "updatedAt": "2023-07-30T10:52:22.581Z",
+      "name": "SSH"
+    },
+    {
+      "id": "siOv68LvUdVRWklZ",
+      "createdAt": "2023-07-30T14:17:43.423Z",
+      "updatedAt": "2023-07-30T14:17:43.423Z",
+      "name": "MySQL - to Update"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2023-07-30T15:33:23.000Z",
+  "versionId": "14db2ec3-7aba-4b37-bc6d-106463121b29"
+}
