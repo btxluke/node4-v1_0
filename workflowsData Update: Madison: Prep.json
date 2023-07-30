@@ -1,0 +1,602 @@
+{
+  "active": false,
+  "connections": {
+    "Execute Workflow Trigger": {
+      "main": [
+        [
+          {
+            "node": "MySQL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculate Net RRP": {
+      "main": [
+        [
+          {
+            "node": "Add Columns",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add Columns": {
+      "main": [
+        [
+          {
+            "node": "Add Stock Count",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add Stock Count": {
+      "main": [
+        [
+          {
+            "node": "Expand Transmissions SubCat",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Rename URLs": {
+      "main": [
+        [
+          {
+            "node": "Rename URLs1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Rename URLs1": {
+      "main": [
+        [
+          {
+            "node": "Rename URLs2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Rename URLs2": {
+      "main": [
+        [
+          {
+            "node": "Rename URLs3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Rename URLs3": {
+      "main": [
+        [
+          {
+            "node": "Rename Columns",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SSH": {
+      "main": [
+        [
+          {
+            "node": "Calculate Net RRP",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MySQL": {
+      "main": [
+        [
+          {
+            "node": "MySQL1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MySQL1": {
+      "main": [
+        [
+          {
+            "node": "MySQL2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MySQL2": {
+      "main": [
+        [
+          {
+            "node": "SSH2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SSH2": {
+      "main": [
+        [
+          {
+            "node": "SSH",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Expand Transmissions SubCat": {
+      "main": [
+        [
+          {
+            "node": "Expand Finishing Kit SubCat",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Expand Finishing Kit SubCat": {
+      "main": [
+        [
+          {
+            "node": "Expand Tyres & Tubes SubCat",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Expand Tyres & Tubes SubCat": {
+      "main": [
+        [
+          {
+            "node": "Expand Clothing/Accessories SubCat1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Expand Clothing/Accessories SubCat1": {
+      "main": [
+        [
+          {
+            "node": "Remove POS Category",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Remove POS Category": {
+      "main": [
+        [
+          {
+            "node": "Rename URLs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-07-30T14:51:32.935Z",
+  "id": "Zu2Wr3TPnxgRis0T",
+  "name": "Data Update: Madison: Prep",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "1f9a711c-821b-4427-b2ba-af01eb3f6161",
+      "name": "Execute Workflow Trigger",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        1440,
+        1360
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE `Upload-Madison` SET `RRP` = `RRP` / (1+(`Vat Rate`/100));"
+      },
+      "id": "a5d72c51-eefc-48d8-9870-52ebac6a7cea",
+      "name": "Calculate Net RRP",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        1920,
+        1580
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "ALTER TABLE `Upload-Madison` CHANGE `Product Code` `ProductCode` VARCHAR(40),CHANGE `Description (80 Chars)` `ProductName` VARCHAR(100),CHANGE `Short Description (40 Chars)` `ShortDescription` VARCHAR(40),CHANGE `Long Web Text` `LongDescription` LONGTEXT,CHANGE `Barcode` `Ean` VARCHAR(29),CHANGE `Vat Rate` `Vat` INT(2),CHANGE `Unit of Measure` `PackQty` VARCHAR(11),CHANGE `RRP` `Rrp` DECIMAL(7,2),CHANGE `Lead Time` `LeadTime` INT(3),CHANGE `Image Name` `ImageUrl` VARCHAR(100),CHANGE `Alternative Image 1` `AlternativeImage1Url` VARCHAR(100),CHANGE `Alternative Image 2` `AlternativeImage2Url` VARCHAR(100),CHANGE `Alternative Image 3` `AlternativeImage3Url` VARCHAR(100),CHANGE `Supplier Code` `SupplierCode` VARCHAR(30),CHANGE `Brand Colour` `Colour` VARCHAR(100),CHANGE `Variant Grouping` `VariantGrouping` VARCHAR(30),CHANGE `Outer Quantity` `OuterQuantity` INT(3),CHANGE `Your Price` `YourPrice` DECIMAL(7,2),CHANGE `Sub Category` `SubCategory` VARCHAR(100),CHANGE `Product Extra Info (eg Crank Length / Lens Colour)` `TechnicalSpec` LONGTEXT,CHANGE `Product Extra Information Label` `TechnicalSpecLabel` LONGTEXT;"
+      },
+      "id": "07280ad0-a614-407d-97e7-1dd2284ff00d",
+      "name": "Rename Columns",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        2100,
+        2180
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "ALTER TABLE `Upload-Madison` ADD `StockCount` INT(1) NULL DEFAULT NULL;"
+      },
+      "id": "c5e81b52-ba42-4db6-bb99-6e332b691a37",
+      "name": "Add Columns",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        2100,
+        1580
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=UPDATE `Upload-Madison` \nINNER JOIN `Stock-Madison` ON `Upload-Madison`.`Product Code` = `Stock-Madison`.`Product Code`\nSET `StockCount` = (IF(`Stock-Madison`.`In Stock` = \"Y\", 1, 0)) "
+      },
+      "id": "a9add8f4-3df0-4035-8005-ec3b5db06529",
+      "name": "Add Stock Count",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        2260,
+        1580
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=UPDATE `Upload-Madison` SET `Image Name` = IF(`Image Name` != \"\", CONCAT(\"https://www.madisonb2b.co.uk/netalogue/zoom/\",`Image Name`,\".jpg\"), NULL);"
+      },
+      "id": "3bd560e6-cc52-4f11-ba0a-63a9c0fc3fa4",
+      "name": "Rename URLs",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        2100,
+        1960
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=UPDATE `Upload-Madison` SET `Alternative Image 1` = IF(`Alternative Image 1` != \"\", CONCAT(\"https://www.madisonb2b.co.uk/netalogue/zoom/\",`Alternative Image 1`,\".jpg\"), NULL);"
+      },
+      "id": "cb8ee2fc-9b68-4a37-ab49-1583c2225b82",
+      "name": "Rename URLs1",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        2260,
+        1960
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=UPDATE `Upload-Madison` SET `Alternative Image 2` = IF(`Alternative Image 2` != \"\", CONCAT(\"https://www.madisonb2b.co.uk/netalogue/zoom/\",`Alternative Image 2`,\".jpg\"), NULL);"
+      },
+      "id": "9cd66f78-9595-4861-84fb-652a869a98d8",
+      "name": "Rename URLs2",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        2400,
+        1960
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=UPDATE `Upload-Madison` SET `Alternative Image 3` = IF(`Alternative Image 3` != \"\", CONCAT(\"https://www.madisonb2b.co.uk/netalogue/zoom/\",`Alternative Image 3`,\".jpg\"), NULL);"
+      },
+      "id": "2760ad9d-21a0-404c-85c7-7ceb5c5cdca1",
+      "name": "Rename URLs3",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        2540,
+        1960
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "command": "=mysqlimport --user='root' --password='L0chr!nPl@ce' \\\n--fields-terminated-by=',' --lines-terminated-by=0x0d0a \\\n--replace --low-priority --fields-enclosed-by='\"' \\\n --fields-escaped-by='#' --ignore-lines='1' --verbose --force --local \\\nodooData '/home/luke/feeds/Upload-Madison.csv'",
+        "cwd": "/home/luke/feeds/"
+      },
+      "id": "f8d71e01-e0d4-4fb9-b789-7ffb109500b4",
+      "name": "SSH",
+      "type": "n8n-nodes-base.ssh",
+      "typeVersion": 1,
+      "position": [
+        2240,
+        1360
+      ],
+      "credentials": {
+        "sshPassword": {
+          "id": "12",
+          "name": "Node3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=TRUNCATE `Upload-Madison`; "
+      },
+      "id": "1d028b1c-47e5-4524-84cd-ec79f4f0052a",
+      "name": "MySQL",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        1620,
+        1360
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "command": "=LANG=C sed -i 's/[\\d128-\\d255]//g' /home/luke/feeds/Upload-Madison.csv",
+        "cwd": "/home/luke/feeds/"
+      },
+      "id": "748d795b-65ee-4496-964d-abd8a8757b8a",
+      "name": "SSH2",
+      "type": "n8n-nodes-base.ssh",
+      "typeVersion": 1,
+      "position": [
+        2060,
+        1360
+      ],
+      "credentials": {
+        "sshPassword": {
+          "id": "12",
+          "name": "Node3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=DROP TABLE `Upload-Madison`;"
+      },
+      "id": "2e482831-2198-49ce-9379-793fc5d3ec99",
+      "name": "MySQL1",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        1760,
+        1360
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=CREATE TABLE `Upload-Madison` AS\nSELECT *\nFROM `Template-Madison`;"
+      },
+      "id": "4fa3237f-81d5-4ad6-840c-3f34c9de1212",
+      "name": "MySQL2",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        1900,
+        1360
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE `Upload-Madison` SET `Sub Category` = `Sub Sub Category` WHERE `Sub Category` = \"Transmissions\";"
+      },
+      "id": "9813600f-0ce1-4bf1-b572-80da324d1874",
+      "name": "Expand Transmissions SubCat",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        2100,
+        1780
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE `Upload-Madison` SET `Sub Category` = `Sub Sub Category` WHERE `Sub Category` = \"Finishing Kit\";"
+      },
+      "id": "942202f2-2b4e-4669-8cfa-45279977a682",
+      "name": "Expand Finishing Kit SubCat",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        2280,
+        1780
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE `Upload-Madison` SET `Sub Category` = `Sub Sub Category` WHERE `Sub Category` = \"Tyres & Tubes\";"
+      },
+      "id": "fec86610-48ed-495e-a39e-79e9fb718f95",
+      "name": "Expand Tyres & Tubes SubCat",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        2460,
+        1780
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE `Upload-Madison` SET `Sub Category` = `Sub Sub Category` WHERE `Sub Category` = \"Accessories\" AND Category = \"Clothing\";"
+      },
+      "id": "3331d0fb-0d43-468a-8ef3-c36d888b8308",
+      "name": "Expand Clothing/Accessories SubCat1",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        2640,
+        1780
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "DELETE FROM `Upload-Madison` WHERE `Category` = \"POS\";"
+      },
+      "id": "fb1f75ad-f88d-4f2e-8c0d-f4646565a28d",
+      "name": "Remove POS Category",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        2840,
+        1780
+      ],
+      "executeOnce": true,
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "id": "KilfDEeZiGHrZNoM",
+      "createdAt": "2023-07-30T14:49:29.931Z",
+      "updatedAt": "2023-07-30T14:49:29.931Z",
+      "name": "Madison"
+    },
+    {
+      "id": "siOv68LvUdVRWklZ",
+      "createdAt": "2023-07-30T14:17:43.423Z",
+      "updatedAt": "2023-07-30T14:17:43.423Z",
+      "name": "MySQL - to Update"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2023-07-30T14:55:36.000Z",
+  "versionId": "13f8f615-13df-4a7f-a0c7-8dcd7ca30533"
+}
