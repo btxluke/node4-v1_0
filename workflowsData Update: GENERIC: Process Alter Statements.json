@@ -1,0 +1,308 @@
+{
+  "active": false,
+  "connections": {
+    "Postgres7": {
+      "main": [
+        [
+          {
+            "node": "Split In Batches",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set1": {
+      "main": [
+        [
+          {
+            "node": "Item Lists",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split In Batches": {
+      "main": [
+        [
+          {
+            "node": "Postgres7",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Postgreify all column names",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Workflow Trigger": {
+      "main": [
+        [
+          {
+            "node": "Set1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres3": {
+      "main": [
+        [
+          {
+            "node": "IF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgreify all column names": {
+      "main": [
+        [
+          {
+            "node": "Postgres3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF": {
+      "main": [
+        [
+          {
+            "node": "No Operation, do nothing",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Postgres4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Item Lists": {
+      "main": [
+        [
+          {
+            "node": "Split In Batches",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-07-30T10:49:58.538Z",
+  "id": "2mliuDMlTssD3kUq",
+  "name": "Data Update: GENERIC: Process Alter Statements",
+  "nodes": [
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "{{\"ALTER TABLE upload_\" + $json.supplier.toLowerCase() + \" \" + $json.alterStatements +\";\" }}",
+        "options": {
+          "queryBatching": "single"
+        }
+      },
+      "id": "3e3c7de9-e6e4-47f2-8d9a-fc4f562246d7",
+      "name": "Postgres7",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.2,
+      "position": [
+        1280,
+        460
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "9Jz67Tm0faeykq6p",
+          "name": "odoodata"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "alterStatements",
+              "value": "={{ $json.alterStatements.split(', ') }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "debba99b-7ff5-48d8-bd03-3ec623dd0747",
+      "name": "Set1",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [
+        660,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "batchSize": 1,
+        "options": {}
+      },
+      "id": "150d8fcc-e17c-4849-a1d2-1733668e2368",
+      "name": "Split In Batches",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 2,
+      "position": [
+        1060,
+        460
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "007add10-bf4e-4eb6-932e-07c1638215e7",
+      "name": "Execute Workflow Trigger",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        440,
+        460
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "d893652b-acd9-496f-a7c5-b7d881f23b0a",
+      "name": "Postgreify all column names",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        660,
+        700
+      ],
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT column_name, data_type\nFROM information_schema.columns\nWHERE table_schema = 'odoodata' AND table_name = {{\"'upload_\"+ $(\"Execute Workflow Trigger\").first().json.supplier.toLowerCase()+\"'\"}};",
+        "options": {}
+      },
+      "id": "3dffc4b3-1b8c-4258-aeb2-5c340c1c8900",
+      "name": "Postgres3",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.2,
+      "position": [
+        840,
+        700
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "9Jz67Tm0faeykq6p",
+          "name": "odoodata"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "ALTER TABLE {{\"upload_\"+ $(\"Execute Workflow Trigger\").first().json.supplier.toLowerCase()}}\nRENAME COLUMN {{ \"\\\"\"+$json.column_name+\"\\\"\"  }} TO {{ $json.column_name.toLowerCase().replace(/\\s/g,'') }};",
+        "options": {
+          "queryBatching": "single"
+        }
+      },
+      "id": "e09f9e5f-b76e-4e92-9cc6-8a4be6e1d0a2",
+      "name": "Postgres4",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.2,
+      "position": [
+        1060,
+        920
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "9Jz67Tm0faeykq6p",
+          "name": "odoodata"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.column_name }}",
+              "value2": "={{ $json.column_name.toLowerCase().replace(/\\s/g,'') }}"
+            }
+          ]
+        }
+      },
+      "id": "419569d6-e5f3-47ab-9ac3-0568487cd815",
+      "name": "IF",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        1060,
+        700
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "0bfb7b6e-0684-4259-b28a-766ef82a1d44",
+      "name": "No Operation, do nothing",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        1280,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "alterStatements",
+        "include": "allOtherFields",
+        "options": {}
+      },
+      "id": "c44aee15-9c74-44e3-bf7c-a818b50d0b35",
+      "name": "Item Lists",
+      "type": "n8n-nodes-base.itemLists",
+      "typeVersion": 2.2,
+      "position": [
+        840,
+        460
+      ]
+    }
+  ],
+  "pinData": {
+    "Execute Workflow Trigger": [
+      {
+        "json": {
+          "alterStatements": "RENAME COLUMN \"Vendor SKU\" TO \"ProductCode\", ALTER COLUMN \"ProductCode\" TYPE CHAR(40), RENAME COLUMN \"Product Name\" TO \"ProductName\", ALTER COLUMN \"ProductName\" TYPE CHAR(235), RENAME COLUMN \"UPC/EAN\" TO \"Ean\", ALTER COLUMN \"Ean\" TYPE CHAR(22), RENAME COLUMN \"Unit MSRP\" TO \"Rrp\", ALTER COLUMN \"Rrp\" TYPE DECIMAL(7,2) USING \"Rrp\"::NUMERIC, RENAME COLUMN \"Pack Qty\" TO \"PackQty\", ALTER COLUMN \"PackQty\" TYPE CHAR(27), RENAME COLUMN \"Variant Grouping\" TO \"VariantGrouping\", ALTER COLUMN \"VariantGrouping\" TYPE CHAR(30), RENAME COLUMN \"Short Description\" TO \"ShortDescription\", ALTER COLUMN \"ShortDescription\" TYPE CHAR(222), RENAME COLUMN \"Long Description\" TO \"LongDescription\", ALTER COLUMN \"LongDescription\" TYPE TEXT, RENAME COLUMN \"Unit Cost\" TO \"YourPrice\", ALTER COLUMN \"YourPrice\" TYPE DECIMAL(7,2) USING \"YourPrice\"::NUMERIC, RENAME COLUMN \"Lead Time\" TO \"LeadTime\", ALTER COLUMN \"LeadTime\" TYPE SMALLINT USING \"LeadTime\"::NUMERIC, RENAME COLUMN \"Sub Category\" TO \"SubCategory\", ALTER COLUMN \"SubCategory\" TYPE CHAR(30), RENAME COLUMN \"image\" TO \"ImageUrl\", ALTER COLUMN \"ImageUrl\" TYPE CHAR(102), RENAME COLUMN \"Alternative Image 1\" TO \"AlternativeImage1Url\", ALTER COLUMN \"AlternativeImage1Url\" TYPE CHAR(102), RENAME COLUMN \"Alternative Image 2\" TO \"AlternativeImage2Url\", ALTER COLUMN \"AlternativeImage2Url\" TYPE CHAR(102), RENAME COLUMN \"Alternative Image 3\" TO \"AlternativeImage3Url\", ALTER COLUMN \"AlternativeImage3Url\" TYPE CHAR(102), RENAME COLUMN \"Stock Count\" TO \"StockCount\", ALTER COLUMN \"StockCount\" TYPE SMALLINT USING \"StockCount\"::NUMERIC, RENAME COLUMN \"Technical Spec\" TO \"TechnicalSpec\", ALTER COLUMN \"TechnicalSpec\" TYPE TEXT, ADD COLUMN \"TechnicalSpecLabel\" TEXT DEFAULT NULL",
+          "supplier": "Silverfish"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "id": "NgXcDDqIPq9W8PqT",
+      "createdAt": "2023-07-30T10:50:20.897Z",
+      "updatedAt": "2023-07-30T10:50:20.897Z",
+      "name": "Postgresql"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2023-07-30T10:58:51.000Z",
+  "versionId": "7f7dfdb0-f146-4cbf-8f8d-e4d196b8c41d"
+}
