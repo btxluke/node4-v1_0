@@ -1,0 +1,509 @@
+{
+  "active": false,
+  "connections": {
+    "Execute Workflow Trigger": {
+      "main": [
+        [
+          {
+            "node": "MySQL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculate Net RRP": {
+      "main": [
+        [
+          {
+            "node": "Add Columns",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add Columns": {
+      "main": [
+        [
+          {
+            "node": "Add Stock Count",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add Stock Count": {
+      "main": [
+        [
+          {
+            "node": "Consolidate Columns",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Rename URLs": {
+      "main": [
+        [
+          {
+            "node": "Rename URLs1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Rename URLs1": {
+      "main": [
+        [
+          {
+            "node": "Rename URLs2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Rename URLs2": {
+      "main": [
+        [
+          {
+            "node": "Rename URLs3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Rename URLs3": {
+      "main": [
+        [
+          {
+            "node": "Rename Columns",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Consolidate Columns": {
+      "main": [
+        [
+          {
+            "node": "Drop Category",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Drop Category": {
+      "main": [
+        [
+          {
+            "node": "Rename URLs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SSH": {
+      "main": [
+        [
+          {
+            "node": "Calculate Net RRP",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MySQL": {
+      "main": [
+        [
+          {
+            "node": "MySQL1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MySQL1": {
+      "main": [
+        [
+          {
+            "node": "MySQL2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MySQL2": {
+      "main": [
+        [
+          {
+            "node": "SSH2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SSH2": {
+      "main": [
+        [
+          {
+            "node": "SSH",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-07-30T15:20:24.001Z",
+  "id": "ZXSdQjxNxUSMxQUr",
+  "name": "Data Update: Sportline: Prep",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "4c88e75c-2582-45d1-ae97-13264aa7e368",
+      "name": "Execute Workflow Trigger",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        760,
+        440
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE `Upload-Sportline` SET `RRP` = `RRP` / (1+(`Vat Rate`/100));"
+      },
+      "id": "d27abbee-b404-410a-8ee5-922e1c29d901",
+      "name": "Calculate Net RRP",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        1780,
+        440
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "ALTER TABLE `Upload-Sportline` \nCHANGE `Product Code` `ProductCode` VARCHAR(40),\nCHANGE `Description (80 Chars)` `ProductName` VARCHAR(80),\nCHANGE `Short Description (40 Chars)` `ShortDescription` VARCHAR(40),\nCHANGE `Long Web Text` `LongDescription` LONGTEXT,\nCHANGE `Barcode` `Ean` VARCHAR(29),\nCHANGE `Vat Rate` `Vat` INT(2),\nCHANGE `Unit of Measure` `PackQty` VARCHAR(10),\nCHANGE `RRP` `Rrp` DECIMAL(7,2),\nCHANGE `Lead Time` `LeadTime` INT(3),\nCHANGE `Image Name` `ImageUrl` VARCHAR(100),\nCHANGE `Alternative Image 1` `AlternativeImage1Url` VARCHAR(100),\nCHANGE `Alternative Image 2` `AlternativeImage2Url` VARCHAR(100),\nCHANGE `Alternative Image 3` `AlternativeImage3Url` VARCHAR(100),\nCHANGE `Supplier Code` `SupplierCode` VARCHAR(30),\nCHANGE `Brand Colour` `Colour` VARCHAR(100),\nCHANGE `Variant Grouping` `VariantGrouping` VARCHAR(30),\nCHANGE `Outer Quantity` `OuterQuantity` INT(3),\nCHANGE `Your Price` `YourPrice` DECIMAL(7,2),\nCHANGE `Sub Category` `SubCategory` VARCHAR(100),\nCHANGE `Specification HTML` `TechnicalSpec` LONGTEXT,\nADD `TechnicalSpecLabel` LONGTEXT NULL DEFAULT NULL;\n"
+      },
+      "id": "b0267aa4-9a40-48fb-9304-3b5d063860e9",
+      "name": "Rename Columns",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        1420,
+        1080
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "ALTER TABLE `Upload-Sportline` \nADD `StockCount` INT(1) NULL DEFAULT NULL;"
+      },
+      "id": "a330752a-cc3e-4910-90da-fb589ebca3d3",
+      "name": "Add Columns",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        1420,
+        660
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=UPDATE `Upload-Sportline` \nINNER JOIN `Stock-Sportline` ON `Upload-Sportline`.`Product Code` = `Stock-Sportline`.`Product Code`\nSET `StockCount` = (IF(`Stock-Sportline`.`In Stock` = \"Y\", 1, 0)) "
+      },
+      "id": "f1f1e989-13c4-417f-bf80-956b6eda320d",
+      "name": "Add Stock Count",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        1580,
+        660
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=UPDATE `Upload-Sportline` SET `Image Name` = IF(`Image Name` != \"\", CONCAT(\"https://www.sportlineb2b.co.uk/netalogue/zoom/\",`Image Name`,\".jpg\"), NULL);"
+      },
+      "id": "446bcd75-7e3f-449a-be21-e1fafcb90fbc",
+      "name": "Rename URLs",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        1420,
+        860
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=UPDATE `Upload-Sportline` SET `Alternative Image 1` = IF(`Alternative Image 1` != \"\", CONCAT(\"https://www.sportlineb2b.co.uk/netalogue/zoom/\",`Alternative Image 1`,\".jpg\"), NULL);"
+      },
+      "id": "bd84f26e-f201-4f90-a684-4d628a63215b",
+      "name": "Rename URLs1",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        1580,
+        860
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=UPDATE `Upload-Sportline` SET `Alternative Image 2` = IF(`Alternative Image 2` != \"\", CONCAT(\"https://www.sportlineb2b.co.uk/netalogue/zoom/\",`Alternative Image 2`,\".jpg\"), NULL);"
+      },
+      "id": "b4d841fc-7f48-45df-bec8-0abe346c3e3d",
+      "name": "Rename URLs2",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        1720,
+        860
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=UPDATE `Upload-Sportline` SET `Alternative Image 3` = IF(`Alternative Image 3` != \"\", CONCAT(\"https://www.sportlineb2b.co.uk/netalogue/zoom/\",`Alternative Image 3`,\".jpg\"), NULL);"
+      },
+      "id": "bcd05ff6-9a90-4d64-afaa-a40692158698",
+      "name": "Rename URLs3",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        1860,
+        860
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=UPDATE `Upload-Sportline` \nSET `Sub Category` = CONCAT_WS(' / ',`Category`,`Sub Category`);"
+      },
+      "id": "e5a56fc0-f413-4cb7-8f27-0b2aae1f02d4",
+      "name": "Consolidate Columns",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        1780,
+        660
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=ALTER TABLE `Upload-Sportline` \nDROP `Category`;"
+      },
+      "id": "908107a8-26e2-4a1d-9260-dd617086cde3",
+      "name": "Drop Category",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        1940,
+        660
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "command": "=mysqlimport --user='root' --password='L0chr!nPl@ce' \\\n--fields-terminated-by=',' --lines-terminated-by=0x0d0a \\\n--replace --low-priority --fields-enclosed-by='\"' \\\n --fields-escaped-by='#' --ignore-lines='1' --verbose --force --local \\\nodooData '/home/luke/feeds/Upload-Sportline.csv'",
+        "cwd": "/home/luke/feeds/"
+      },
+      "id": "40e56a61-2f95-455c-943d-6d13e0686739",
+      "name": "SSH",
+      "type": "n8n-nodes-base.ssh",
+      "typeVersion": 1,
+      "position": [
+        1560,
+        440
+      ],
+      "credentials": {
+        "sshPassword": {
+          "id": "12",
+          "name": "Node3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=TRUNCATE `Upload-Sportline`; "
+      },
+      "id": "855e6900-5a8f-4c96-9ad2-603e84a4f3f0",
+      "name": "MySQL",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        940,
+        440
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "command": "=LANG=C sed -i 's/[\\d128-\\d255]//g' /home/luke/feeds/Upload-Sportline.csv",
+        "cwd": "/home/luke/feeds/"
+      },
+      "id": "7f0a6bd4-5f07-4d80-a9f8-111183613370",
+      "name": "SSH2",
+      "type": "n8n-nodes-base.ssh",
+      "typeVersion": 1,
+      "position": [
+        1380,
+        440
+      ],
+      "credentials": {
+        "sshPassword": {
+          "id": "12",
+          "name": "Node3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=DROP TABLE `Upload-Sportline`;"
+      },
+      "id": "61104bee-0ce7-42d7-b18f-8e1dd284a08a",
+      "name": "MySQL1",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        1080,
+        440
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=CREATE TABLE `Upload-Sportline` AS\nSELECT *\nFROM `Template-Sportline`;"
+      },
+      "id": "210770cb-0ec7-40db-a2d9-4bcf4e7fe694",
+      "name": "MySQL2",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        1220,
+        440
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "id": "2Yt8Y2VPdLrmp1kO",
+      "createdAt": "2023-07-30T15:19:56.218Z",
+      "updatedAt": "2023-07-30T15:19:56.218Z",
+      "name": "Sportline"
+    },
+    {
+      "id": "siOv68LvUdVRWklZ",
+      "createdAt": "2023-07-30T14:17:43.423Z",
+      "updatedAt": "2023-07-30T14:17:43.423Z",
+      "name": "MySQL - to Update"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2023-07-30T15:20:32.000Z",
+  "versionId": "d280c0bc-e9a1-4418-adbd-65fa79310202"
+}
