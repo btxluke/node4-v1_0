@@ -1,0 +1,885 @@
+{
+  "active": false,
+  "connections": {
+    "When Called By Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Merge2",
+            "type": "main",
+            "index": 1
+          },
+          {
+            "node": "Postgres",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Category Sync": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Size Sync": {
+      "main": [
+        [
+          {
+            "node": "Code2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Brand Sync": {
+      "main": [
+        [
+          {
+            "node": "Code4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Brand Write": {
+      "main": [
+        [
+          {
+            "node": "Code5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Colour Sync": {
+      "main": [
+        [
+          {
+            "node": "Code6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Template Creation": {
+      "main": [
+        [
+          {
+            "node": "Code8",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Variant Write": {
+      "main": [
+        [
+          {
+            "node": "Code3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Template Creation1": {
+      "main": [
+        [
+          {
+            "node": "Code18",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge2": {
+      "main": [
+        [
+          {
+            "node": "Data Update: Zyro: Prep",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Globals": {
+      "main": [
+        [
+          {
+            "node": "Merge2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Product Import": {
+      "main": [
+        [
+          {
+            "node": "Category Sync",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Colour Write": {
+      "main": [
+        [
+          {
+            "node": "Code7",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Attribute Write": {
+      "main": [
+        [
+          {
+            "node": "Template Creation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Size Sync",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code1": {
+      "main": [
+        [
+          {
+            "node": "Product Import",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code2": {
+      "main": [
+        [
+          {
+            "node": "Variant Write",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code3": {
+      "main": [
+        [
+          {
+            "node": "Brand Sync",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code4": {
+      "main": [
+        [
+          {
+            "node": "Brand Write",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code5": {
+      "main": [
+        [
+          {
+            "node": "Colour Sync",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code6": {
+      "main": [
+        [
+          {
+            "node": "Colour Write",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code7": {
+      "main": [
+        [
+          {
+            "node": "Attribute Write",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code8": {
+      "main": [
+        [
+          {
+            "node": "Template Creation1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code9": {
+      "main": [
+        [
+          {
+            "node": "Data Update: GENERIC: Make Transit Tables",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code18": {
+      "main": [
+        [
+          {
+            "node": "Index Write",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Merge2",
+            "type": "main",
+            "index": 1
+          },
+          {
+            "node": "Postgres",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres": {
+      "main": [
+        [
+          {
+            "node": "Globals",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Data Update: Zyro: Prep": {
+      "main": [
+        [
+          {
+            "node": "Code9",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-07-30T14:25:09.309Z",
+  "id": "PpXdaAKALPvWUMvh",
+  "name": "Data Update: Zyro",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "ad0e1f33-cae2-4555-a7bd-0c1a1ef74203",
+      "name": "When Called By Another Workflow",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        960,
+        820
+      ]
+    },
+    {
+      "parameters": {
+        "workflowId": "77"
+      },
+      "id": "10c10feb-1cd6-417c-92a4-9c6eab3b5b3a",
+      "name": "Category Sync",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [
+        3020,
+        580
+      ],
+      "executeOnce": true,
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "workflowId": "62"
+      },
+      "id": "0a7e2cc6-a2a7-4f11-b860-a3beeb901cd5",
+      "name": "Size Sync",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [
+        3140,
+        780
+      ],
+      "executeOnce": true,
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "workflowId": "64"
+      },
+      "id": "50345e51-6913-4650-a5cf-4d890aa4d4d6",
+      "name": "Brand Sync",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [
+        3480,
+        780
+      ],
+      "executeOnce": true,
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "workflowId": "65"
+      },
+      "id": "5a35d895-f55c-4477-a2ae-a6cd950125eb",
+      "name": "Brand Write",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [
+        3660,
+        580
+      ]
+    },
+    {
+      "parameters": {
+        "workflowId": "66"
+      },
+      "id": "a79f296f-7400-4526-9d55-c9064ce17819",
+      "name": "Colour Sync",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [
+        3800,
+        780
+      ],
+      "alwaysOutputData": true,
+      "executeOnce": true
+    },
+    {
+      "parameters": {},
+      "id": "75e78ebd-ad3f-42e6-be4c-ff161398cf58",
+      "name": "Template Creation",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        4320,
+        680
+      ]
+    },
+    {
+      "parameters": {
+        "workflowId": "69"
+      },
+      "id": "671c985c-58af-4b8f-aa45-cb9b9f18cb0d",
+      "name": "Template Creation1",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [
+        4600,
+        680
+      ],
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "workflowId": "63"
+      },
+      "id": "2d8c84ce-fdec-4c47-b273-20783a2d225c",
+      "name": "Variant Write",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [
+        3340,
+        580
+      ],
+      "alwaysOutputData": true,
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "product.tag",
+        "operation": "getAll",
+        "returnAll": true,
+        "options": {
+          "fieldsList": [
+            "id",
+            "name"
+          ]
+        },
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "name",
+              "value": "Zyro"
+            }
+          ]
+        }
+      },
+      "id": "eaad586e-21d2-4e11-8f47-2687459561a7",
+      "name": "Odoo3",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        960,
+        1580
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "5",
+          "name": "Odoo: BTX"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "chooseBranch",
+        "output": "input2"
+      },
+      "id": "7a10c047-9b28-4eed-a127-9ec33a1cfeaa",
+      "name": "Merge2",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2,
+      "position": [
+        1480,
+        880
+      ]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "Globals",
+              "value": "={{  JSON.parse($json[\"Globals\"])[0]  }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "c4a4ef35-8fb9-4eee-bff6-bbb781ddb7c6",
+      "name": "Globals",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        1480,
+        680
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Progress\n",
+        "height": 1459.622641509435,
+        "width": 1561.207547169811
+      },
+      "id": "6a9267d9-88e6-46c5-91b3-20ddc6716120",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        820,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "content": "##Progress: Create",
+        "height": 320.17725067385476,
+        "width": 705.3541778975705
+      },
+      "id": "375139b4-8be6-4eaa-8b7c-92e53bd9c89c",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2460,
+        566.4211320754716
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "eca3f7bd-7fec-4c8d-90cf-d46d619fb176",
+      "name": "Product Import",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        2860,
+        660
+      ]
+    },
+    {
+      "parameters": {
+        "workflowId": "67"
+      },
+      "id": "b47d34db-e125-443e-ac9d-f53619c45ba4",
+      "name": "Colour Write",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [
+        3980,
+        580
+      ]
+    },
+    {
+      "parameters": {
+        "workflowId": "68"
+      },
+      "id": "33461277-6f5c-46cc-9acc-464cf3ba0100",
+      "name": "Attribute Write",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [
+        4120,
+        780
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "return $('Globals').first()"
+      },
+      "id": "b1fa8e16-7778-4463-8646-aeb990ec0ad6",
+      "name": "Code",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        3020,
+        780
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "return $('Globals').first()"
+      },
+      "id": "68f3cf9d-c02d-465d-8332-8e2d3330af8b",
+      "name": "Code1",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        2720,
+        660
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "return $('Globals').first()"
+      },
+      "id": "dd7a0b29-0b0f-41f6-9113-0389a75ebc21",
+      "name": "Code2",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        3200,
+        580
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "return $('Globals').first()"
+      },
+      "id": "e90df5ad-41c9-4b65-9d7a-c59b2c9cd1cd",
+      "name": "Code3",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        3340,
+        780
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "return $('Globals').first()"
+      },
+      "id": "86300e86-b687-498f-be6d-a2acac6c1d44",
+      "name": "Code4",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        3520,
+        580
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "return $('Globals').first()"
+      },
+      "id": "4fc7876e-9c91-447f-aa07-31d48922fde7",
+      "name": "Code5",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        3660,
+        780
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "return $('Globals').first()"
+      },
+      "id": "0beee711-177c-46be-b87e-7bff81dc8dc8",
+      "name": "Code6",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        3840,
+        580
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "return $('Globals').first()"
+      },
+      "id": "c8f24780-0059-4ff6-8134-4011f1bc91cd",
+      "name": "Code7",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        3980,
+        780
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "return $('Globals').first()"
+      },
+      "id": "22ab9aa8-98a9-4fc5-9c59-4fdf0fe050d3",
+      "name": "Code8",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        4460,
+        680
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "res.partner",
+        "operation": "getAll",
+        "returnAll": true,
+        "options": {
+          "fieldsList": [
+            "id",
+            "name"
+          ]
+        },
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "name",
+              "operator": "like",
+              "value": "Zyro"
+            }
+          ]
+        }
+      },
+      "id": "0924a596-2570-41ca-bd68-3a3ad7a41574",
+      "name": "Odoo4",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        1260,
+        1580
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "5",
+          "name": "Odoo: BTX"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "return $('Globals').first()"
+      },
+      "id": "c7cb55ce-7fce-4393-8e9f-802ba91cccfc",
+      "name": "Code9",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        1700,
+        1120
+      ]
+    },
+    {
+      "parameters": {
+        "workflowId": "110"
+      },
+      "id": "455e1fba-a824-49cd-9246-7ca7423204a2",
+      "name": "Index Write",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [
+        4600,
+        940
+      ],
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "jsCode": "return $('Globals').first()"
+      },
+      "id": "f4c5eb1e-60db-43b1-842b-08bbb893f0c5",
+      "name": "Code18",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        4460,
+        940
+      ]
+    },
+    {
+      "parameters": {
+        "path": "7770801b-b434-4e65-b171-59dad557aa29",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "749e1239-7e0c-4451-bbf5-7799f97a17a5",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        960,
+        660
+      ],
+      "webhookId": "7770801b-b434-4e65-b171-59dad557aa29"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT * FROM odoodata.map_supplierinfo WHERE Name = 'Zyro';",
+        "options": {}
+      },
+      "id": "2ffa44ce-ac3f-4e23-b48d-249969b7e90f",
+      "name": "Postgres",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.2,
+      "position": [
+        1240,
+        500
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "9Jz67Tm0faeykq6p",
+          "name": "odoodata"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "workflowId": "ickMvwWPWp74exVK"
+      },
+      "id": "654ec50e-db02-4807-98af-dd232f5ec78a",
+      "name": "Data Update: GENERIC: Make Transit Tables",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [
+        1880,
+        1120
+      ],
+      "alwaysOutputData": true,
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "workflowId": "dQiyh1NM2Ka78Xdw"
+      },
+      "id": "10787bdc-bbb7-4bea-bb33-6b0bc895ff02",
+      "name": "Data Update: Zyro: Prep",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [
+        1700,
+        880
+      ]
+    }
+  ],
+  "pinData": {
+    "Code9": [
+      {
+        "json": {
+          "Name": "Zyro",
+          "Globals": {
+            "SupplierName": "ZyroFisher",
+            "PartnerId": 69,
+            "ProductTagId": 13,
+            "LeadTimeAddition": 3
+          }
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "id": "2r6icDToQEe5rXCb",
+      "createdAt": "2023-07-30T14:25:20.444Z",
+      "updatedAt": "2023-07-30T14:25:20.444Z",
+      "name": "Zyro"
+    },
+    {
+      "id": "NgXcDDqIPq9W8PqT",
+      "createdAt": "2023-07-30T10:50:20.897Z",
+      "updatedAt": "2023-07-30T10:50:20.897Z",
+      "name": "Postgresql"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2023-07-30T14:35:58.000Z",
+  "versionId": "f8dbf1e9-a535-4a17-957a-a8683d346880"
+}
