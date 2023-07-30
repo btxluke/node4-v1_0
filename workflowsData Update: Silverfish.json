@@ -109,7 +109,7 @@
       "main": [
         [
           {
-            "node": "Zyro Prep",
+            "node": "Data Update: Silverfish: Prep",
             "type": "main",
             "index": 0
           }
@@ -175,7 +175,7 @@
       "main": [
         [
           {
-            "node": "Product Import",
+            "node": "Insert Supplier Specific Code Here",
             "type": "main",
             "index": 0
           }
@@ -319,7 +319,7 @@
         ]
       ]
     },
-    "Zyro Prep": {
+    "Data Update: Silverfish: Prep": {
       "main": [
         [
           {
@@ -538,7 +538,7 @@
       "parameters": {
         "content": "## Progress\n",
         "height": 1459.622641509435,
-        "width": 3185.7035040431238
+        "width": 2348.4204851751992
       },
       "id": "02045f26-ba4f-4a1d-9c82-efbb1183dc6a",
       "name": "Sticky Note",
@@ -778,7 +778,7 @@
     {
       "parameters": {
         "operation": "executeQuery",
-        "query": "SELECT * FROM map_supplierinfo WHERE Name = 'Silverfish';",
+        "query": "SELECT * FROM odoodata.map_supplierinfo WHERE Name = 'Silverfish';",
         "options": {}
       },
       "id": "e81ba70e-42de-4366-bf23-d0ee7ebbb156",
@@ -791,17 +791,28 @@
       ],
       "credentials": {
         "postgres": {
-          "id": "OsfmK0EXRnyGVM32",
-          "name": "odooData"
+          "id": "9Jz67Tm0faeykq6p",
+          "name": "odoodata"
         }
       }
     },
     {
+      "parameters": {},
+      "id": "0f95c915-172c-4dfd-99c9-2421d4263ef7",
+      "name": "Insert Supplier Specific Code Here",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        3140,
+        720
+      ]
+    },
+    {
       "parameters": {
-        "workflowId": "105"
+        "workflowId": "eDhSzuVhnolE3rwa"
       },
       "id": "5f6c554b-bded-40d2-8ace-ff1f6ab44f11",
-      "name": "Zyro Prep",
+      "name": "Data Update: Silverfish: Prep",
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1,
       "position": [
@@ -818,6 +829,12 @@
   "staticData": null,
   "tags": [
     {
+      "id": "NgXcDDqIPq9W8PqT",
+      "createdAt": "2023-07-30T10:50:20.897Z",
+      "updatedAt": "2023-07-30T10:50:20.897Z",
+      "name": "Postgresql"
+    },
+    {
       "id": "vrc5VNjb4SOa3VHN",
       "createdAt": "2023-07-30T10:12:27.575Z",
       "updatedAt": "2023-07-30T10:12:27.575Z",
@@ -825,6 +842,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-07-30T10:19:22.000Z",
-  "versionId": "6e8b84d2-5617-4d0f-9349-c824551645ee"
+  "updatedAt": "2023-07-30T10:56:27.000Z",
+  "versionId": "3c3b0c80-d15d-44da-85f3-46f78144f2a8"
 }
