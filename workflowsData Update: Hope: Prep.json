@@ -1,0 +1,368 @@
+{
+  "active": false,
+  "connections": {
+    "Execute Workflow Trigger": {
+      "main": [
+        [
+          {
+            "node": "MySQL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Rename Columns": {
+      "main": [
+        [
+          {
+            "node": "Add Columns",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MySQL": {
+      "main": [
+        [
+          {
+            "node": "MySQL1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MySQL1": {
+      "main": [
+        [
+          {
+            "node": "SSH1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SSH1": {
+      "main": [
+        [
+          {
+            "node": "Ex VAT RRP",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ex VAT RRP": {
+      "main": [
+        [
+          {
+            "node": "MySQL2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MySQL2": {
+      "main": [
+        [
+          {
+            "node": "Clear blank images",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Clear blank images": {
+      "main": [
+        [
+          {
+            "node": "Normalise Weight",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalise Weight": {
+      "main": [
+        [
+          {
+            "node": "Remove Variant Grouping",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Remove Variant Grouping": {
+      "main": [
+        [
+          {
+            "node": "Rename Columns",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-07-30T14:17:19.538Z",
+  "id": "6iPyycDFptfOWuvl",
+  "name": "Data Update: Hope: Prep",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "3a54080f-a789-46c4-bba5-c622b0869963",
+      "name": "Execute Workflow Trigger",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        -100,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "ALTER TABLE `Upload-Hope` \nCHANGE `Code` `ProductCode` VARCHAR(60),\nCHANGE `Barcode` `Ean` VARCHAR(22),\nCHANGE `Name` `ProductName` VARCHAR(235),\nCHANGE `Price` `Rrp` DECIMAL(10.2),\nCHANGE `Cost` `YourPrice` DECIMAL(10.2),\nCHANGE `Weight(g)` `Weight` VARCHAR(20),\nCHANGE `Description` `LongDescription` LONGTEXT,\nCHANGE `Image1` `ImageUrl` VARCHAR(200),\nCHANGE `Image2` `AlternativeImage1Url` VARCHAR(200),\nCHANGE `Image3` `AlternativeImage2Url` VARCHAR(200),\nCHANGE `Image4` `AlternativeImage3Url` VARCHAR(200),\nCHANGE `StyleCode` `VariantGrouping` VARCHAR(60);\n"
+      },
+      "id": "4d633791-4217-4f56-97f7-078fb2415916",
+      "name": "Rename Columns",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        840,
+        940
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "ALTER TABLE `Upload-Hope`\nADD `Vat` INT(2) NOT NULL DEFAULT '20' AFTER `Rrp`,\nADD `StockCount` INT(5) NOT NULL DEFAULT '0' AFTER `Vat`,\nADD `MoreInfoFile` VARCHAR(60) NULL DEFAULT NULL AFTER `AlternativeImage3Url`,\nADD `Size` VARCHAR(50) NULL DEFAULT NULL AFTER `MoreInfoFile`,\nADD `Colour` VARCHAR(50) NULL DEFAULT NULL AFTER `Size`,\nADD `PackQty` VARCHAR(10) NULL DEFAULT NULL AFTER `Weight`,\nADD `LeadTime` INT(3) NOT NULL DEFAULT '360' AFTER `PackQty`,\nADD `SupplierCode` VARCHAR(30) NULL DEFAULT NULL AFTER `LeadTime`,\nADD `OuterQuantity` INT(3) NULL DEFAULT NULL AFTER `SupplierCode`,\nADD `Category` VARCHAR(30) NULL DEFAULT NULL AFTER `OuterQuantity`,\nADD `SubCategory` VARCHAR(30) NOT NULL DEFAULT 'Components' AFTER `Category`,\nADD `Keywords` VARCHAR(1000) NULL DEFAULT NULL AFTER `Category`,\nADD `TechnicalSpec` LONGTEXT NULL DEFAULT NULL AFTER `Keywords`,\nADD `TechnicalSpecLabel` LONGTEXT NULL DEFAULT NULL AFTER `Keywords`;"
+      },
+      "id": "01444136-bcc2-4a9d-a9d1-d25900a090a1",
+      "name": "Add Columns",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        1020,
+        940
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "height": 448.0275229357794,
+        "width": 1440.6422018348626
+      },
+      "id": "b02b64b5-db26-4422-ac75-af359501db41",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        340,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "DROP TABLE `Upload-Hope`"
+      },
+      "id": "1d840ffc-088d-476e-9f8e-dff90aa34c61",
+      "name": "MySQL",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        820,
+        340
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "CREATE TABLE `Upload-Hope` AS SELECT * FROM `Template-Hope`;"
+      },
+      "id": "8342209d-ee32-4abc-9033-5f5986e3d20d",
+      "name": "MySQL1",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        1020,
+        340
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "command": "mysqlimport --user='root' --password='L0chr!nPl@ce' \\\n--fields-terminated-by=',' --lines-terminated-by='\\n' \\\n--replace --low-priority --fields-enclosed-by='\"' \\\n --fields-escaped-by='#' --ignore-lines='1' --verbose --force --local \\\nodooData '/home/luke/feeds/Upload-Hope.csv'",
+        "cwd": "/home/luke/feeds/"
+      },
+      "id": "6b88bf32-aea5-488c-a1e9-cff69da37dd0",
+      "name": "SSH1",
+      "type": "n8n-nodes-base.ssh",
+      "typeVersion": 1,
+      "position": [
+        1260,
+        340
+      ],
+      "credentials": {
+        "sshPassword": {
+          "id": "12",
+          "name": "Node3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE `Upload-Hope` SET `Price` = `Price` / 1.2;",
+        "options": {}
+      },
+      "id": "8bb27393-c067-4853-b9e2-b292da463e7f",
+      "name": "Ex VAT RRP",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 2.1,
+      "position": [
+        840,
+        540
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=UPDATE `Upload-Hope` SET `{{ $json.Field }}` = NULL WHERE `{{ $json.Field }}` = \"https://b2b.hopetech.com/\"",
+        "options": {}
+      },
+      "id": "abdf0260-04b3-477b-8112-b9524e547359",
+      "name": "Clear blank images",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 2.1,
+      "position": [
+        1260,
+        540
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SHOW COLUMNS FROM `Upload-Hope` WHERE `Field` LIKE \"Image%\";",
+        "options": {}
+      },
+      "id": "597b5072-64a0-4249-b08c-8200c944dbbf",
+      "name": "MySQL2",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 2.1,
+      "position": [
+        1060,
+        540
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE `Upload-Hope` SET `Weight(g)` = `Weight(g)` / 1000;",
+        "options": {}
+      },
+      "id": "7e3af21e-7745-4af3-979c-b886a09e55c8",
+      "name": "Normalise Weight",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 2.1,
+      "position": [
+        840,
+        740
+      ],
+      "executeOnce": true,
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE `Upload-Hope` SET `StyleCode` = CONCAT_WS(\"-\",\"HOPE\",`Code`)",
+        "options": {}
+      },
+      "id": "95cd9b46-7e0a-4ade-b4c3-1787b28282c0",
+      "name": "Remove Variant Grouping",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 2.1,
+      "position": [
+        1060,
+        740
+      ],
+      "executeOnce": true,
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "id": "siOv68LvUdVRWklZ",
+      "createdAt": "2023-07-30T14:17:43.423Z",
+      "updatedAt": "2023-07-30T14:17:43.423Z",
+      "name": "MySQL - to Update"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2023-07-30T14:20:01.000Z",
+  "versionId": "a1469baf-e72a-42a4-963a-0a55e75012ce"
+}
