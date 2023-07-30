@@ -1,0 +1,809 @@
+{
+  "active": false,
+  "connections": {
+    "When Called By Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Merge2",
+            "type": "main",
+            "index": 1
+          },
+          {
+            "node": "Postgres",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Category Sync": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Size Sync": {
+      "main": [
+        [
+          {
+            "node": "Code2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Brand Sync": {
+      "main": [
+        [
+          {
+            "node": "Code4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Brand Write": {
+      "main": [
+        [
+          {
+            "node": "Code5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Colour Sync": {
+      "main": [
+        [
+          {
+            "node": "Code6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Template Creation": {
+      "main": [
+        [
+          {
+            "node": "Code8",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Variant Write": {
+      "main": [
+        [
+          {
+            "node": "Code3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Template Creation1": {
+      "main": [
+        [
+          {
+            "node": "Variant Sync / Tidy Up",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge2": {
+      "main": [
+        [
+          {
+            "node": "Data Update: Brompton: Prep",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Globals": {
+      "main": [
+        [
+          {
+            "node": "Merge2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Product Import": {
+      "main": [
+        [
+          {
+            "node": "Category Sync",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Colour Write": {
+      "main": [
+        [
+          {
+            "node": "Code7",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Attribute Write": {
+      "main": [
+        [
+          {
+            "node": "Template Creation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Size Sync",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code1": {
+      "main": [
+        [
+          {
+            "node": "Product Import",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code2": {
+      "main": [
+        [
+          {
+            "node": "Variant Write",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code3": {
+      "main": [
+        [
+          {
+            "node": "Brand Sync",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code4": {
+      "main": [
+        [
+          {
+            "node": "Brand Write",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code5": {
+      "main": [
+        [
+          {
+            "node": "Colour Sync",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code6": {
+      "main": [
+        [
+          {
+            "node": "Colour Write",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code7": {
+      "main": [
+        [
+          {
+            "node": "Attribute Write",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code8": {
+      "main": [
+        [
+          {
+            "node": "Template Creation1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code9": {
+      "main": [
+        [
+          {
+            "node": "Data Update: GENERIC: Make Transit Tables",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres": {
+      "main": [
+        [
+          {
+            "node": "Globals",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Data Update: Brompton: Prep": {
+      "main": [
+        [
+          {
+            "node": "Code9",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-07-30T14:57:09.651Z",
+  "id": "p83DeZnwdyPNtkVE",
+  "name": "Data Update: Brompton",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "106702c1-6998-44b9-8195-5b13b73979b9",
+      "name": "When Called By Another Workflow",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        680,
+        900
+      ]
+    },
+    {
+      "parameters": {
+        "workflowId": "77"
+      },
+      "id": "0689cd0f-81a9-490d-839d-41aa20e853a8",
+      "name": "Category Sync",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [
+        2740,
+        660
+      ],
+      "executeOnce": true,
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "workflowId": "62"
+      },
+      "id": "3e9f6699-c814-4a2f-995f-42b4c783c1d9",
+      "name": "Size Sync",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [
+        2860,
+        860
+      ],
+      "executeOnce": true,
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "workflowId": "64"
+      },
+      "id": "2866772a-3ce9-46d6-9bea-e6fa50099603",
+      "name": "Brand Sync",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [
+        3200,
+        860
+      ],
+      "executeOnce": true,
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "workflowId": "65"
+      },
+      "id": "49bc6a0c-33b4-425f-8b0b-f89458a55651",
+      "name": "Brand Write",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [
+        3380,
+        660
+      ]
+    },
+    {
+      "parameters": {
+        "workflowId": "66"
+      },
+      "id": "d97f571e-ae24-48a0-a623-adace6e36d00",
+      "name": "Colour Sync",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [
+        3520,
+        860
+      ],
+      "alwaysOutputData": true,
+      "executeOnce": true
+    },
+    {
+      "parameters": {},
+      "id": "76a2e1b4-127e-49d5-9bc8-ca699be60940",
+      "name": "Template Creation",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        4040,
+        760
+      ]
+    },
+    {
+      "parameters": {
+        "workflowId": "69"
+      },
+      "id": "ae464315-872e-4fd7-94d9-a7b96e048a65",
+      "name": "Template Creation1",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [
+        4320,
+        760
+      ],
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "workflowId": "63"
+      },
+      "id": "7a96fd3b-50e5-47d0-bc6f-baf313ee0b74",
+      "name": "Variant Write",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [
+        3060,
+        660
+      ],
+      "alwaysOutputData": true,
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "workflowId": "51"
+      },
+      "id": "14c8942e-ad10-4644-b134-b0a89a32705f",
+      "name": "Variant Sync / Tidy Up",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [
+        4480,
+        760
+      ],
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "product.tag",
+        "operation": "getAll",
+        "returnAll": true,
+        "options": {
+          "fieldsList": [
+            "id",
+            "name"
+          ]
+        },
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "name",
+              "value": "Zyro"
+            }
+          ]
+        }
+      },
+      "id": "81cdc59a-10f6-4589-a283-26f5ffcbeddd",
+      "name": "Odoo3",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        680,
+        1660
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "5",
+          "name": "Odoo: BTX"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "chooseBranch",
+        "output": "input2"
+      },
+      "id": "04a58b02-f236-4027-bb17-2e1766f83ad1",
+      "name": "Merge2",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2,
+      "position": [
+        1200,
+        960
+      ]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "Globals",
+              "value": "={{  JSON.parse($json[\"Globals\"])[0]  }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "65067cdc-ce4a-4ae0-9fe0-87c904fc52d5",
+      "name": "Globals",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        1200,
+        760
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Progress\n",
+        "height": 1459.622641509435,
+        "width": 1561.207547169811
+      },
+      "id": "266937b6-8d9b-48ec-be28-085df6e9bb78",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        540,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "content": "##Progress: Create",
+        "height": 320.17725067385476,
+        "width": 705.3541778975705
+      },
+      "id": "a6ddda1e-9c3f-4b17-8ae7-aa1b6f29d18d",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2180,
+        646.4211320754716
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "1f738555-79f0-4798-907a-c58627a1cfce",
+      "name": "Product Import",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        2580,
+        740
+      ]
+    },
+    {
+      "parameters": {
+        "workflowId": "67"
+      },
+      "id": "14ced223-c060-4484-b617-ba599cf43133",
+      "name": "Colour Write",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [
+        3700,
+        660
+      ]
+    },
+    {
+      "parameters": {
+        "workflowId": "68"
+      },
+      "id": "17a1b991-0550-4ea5-83da-93ec1d09a4af",
+      "name": "Attribute Write",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [
+        3840,
+        860
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "return $('Globals').first()"
+      },
+      "id": "25a6ea26-0043-4d9e-a8a8-2db9ecb82d7e",
+      "name": "Code",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        2740,
+        860
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "return $('Globals').first()"
+      },
+      "id": "e54b4847-91fe-4180-b222-d0d413e8f1b0",
+      "name": "Code1",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        2440,
+        740
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "return $('Globals').first()"
+      },
+      "id": "40eba2d1-a89d-4a93-8261-a2495926d147",
+      "name": "Code2",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        2920,
+        660
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "return $('Globals').first()"
+      },
+      "id": "c12c8ae8-a5cd-4032-b365-a528b6dcbd63",
+      "name": "Code3",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        3060,
+        860
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "return $('Globals').first()"
+      },
+      "id": "20b5a32a-0ea9-4c2f-83c9-3602a149544a",
+      "name": "Code4",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        3240,
+        660
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "return $('Globals').first()"
+      },
+      "id": "d537830c-2bdf-43b6-be96-b5c06debee17",
+      "name": "Code5",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        3380,
+        860
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "return $('Globals').first()"
+      },
+      "id": "3645a854-3d22-4665-bc7a-d49f3358b4bb",
+      "name": "Code6",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        3560,
+        660
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "return $('Globals').first()"
+      },
+      "id": "86ee5d23-6df7-44da-a9dc-a7306f785882",
+      "name": "Code7",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        3700,
+        860
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "return $('Globals').first()"
+      },
+      "id": "632613f2-0175-4ef5-bec6-5e912a19a52a",
+      "name": "Code8",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        4180,
+        760
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "res.partner",
+        "operation": "getAll",
+        "returnAll": true,
+        "options": {
+          "fieldsList": [
+            "id",
+            "name"
+          ]
+        },
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "name",
+              "operator": "like",
+              "value": "Zyro"
+            }
+          ]
+        }
+      },
+      "id": "a9146431-3b60-46e8-a8dd-5edced12c9bb",
+      "name": "Odoo4",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        980,
+        1660
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "5",
+          "name": "Odoo: BTX"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "return $('Globals').first()"
+      },
+      "id": "0d1ad60f-78a8-4e52-a3b7-98250c462b14",
+      "name": "Code9",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        1420,
+        1200
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT * FROM odoodata.map_supplierinfo WHERE Name = 'Brompton';",
+        "options": {}
+      },
+      "id": "d3faa0b2-7c11-43ae-aded-0aebe13ed8fe",
+      "name": "Postgres",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.2,
+      "position": [
+        920,
+        520
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "9Jz67Tm0faeykq6p",
+          "name": "odoodata"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "workflowId": "ickMvwWPWp74exVK"
+      },
+      "id": "8e7e6488-385c-4112-bf7f-5c46f9ab75f1",
+      "name": "Data Update: GENERIC: Make Transit Tables",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [
+        1580,
+        1200
+      ],
+      "alwaysOutputData": true,
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "workflowId": "2kih6XkABbelLfhl"
+      },
+      "id": "56488d2c-adac-471f-8c2e-392d9c9c06c0",
+      "name": "Data Update: Brompton: Prep",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [
+        1420,
+        960
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "id": "WFPdknuSW7g3910b",
+      "createdAt": "2023-07-30T15:00:31.411Z",
+      "updatedAt": "2023-07-30T15:00:31.411Z",
+      "name": "Brompton"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2023-07-30T15:09:36.000Z",
+  "versionId": "0c51b8ae-3820-4ae2-97a1-68aaf1119ae0"
+}
