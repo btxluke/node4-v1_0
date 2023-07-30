@@ -104,7 +104,7 @@
       "main": [
         [
           {
-            "node": "Execute Workflow",
+            "node": "Data Update: Process Alter Statements",
             "type": "main",
             "index": 0
           }
@@ -389,7 +389,7 @@
         "workflowId": "2mliuDMlTssD3kUq"
       },
       "id": "4002bd3c-9bee-480a-ad52-b3de6c0ae2c6",
-      "name": "Execute Workflow",
+      "name": "Data Update: Process Alter Statements",
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1,
       "position": [
@@ -418,6 +418,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-07-30T10:54:56.000Z",
-  "versionId": "a28c650b-ff55-4012-ae9d-dcf26ffde314"
+  "updatedAt": "2023-07-30T11:02:02.000Z",
+  "versionId": "6473981f-5b36-4d94-bef5-b2090078c7db"
 }
