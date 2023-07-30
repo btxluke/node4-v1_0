@@ -1,0 +1,423 @@
+{
+  "active": false,
+  "connections": {
+    "Execute Workflow Trigger": {
+      "main": [
+        [
+          {
+            "node": "Postgres",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SSH1": {
+      "main": [
+        [
+          {
+            "node": "Postgres2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres": {
+      "main": [
+        [
+          {
+            "node": "Postgres1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres1": {
+      "main": [
+        [
+          {
+            "node": "SSH1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres2": {
+      "main": [
+        [
+          {
+            "node": "Postgres3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres3": {
+      "main": [
+        [
+          {
+            "node": "Postgres4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres4": {
+      "main": [
+        [
+          {
+            "node": "Postgres5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres5": {
+      "main": [
+        [
+          {
+            "node": "Postgres6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres6": {
+      "main": [
+        [
+          {
+            "node": "Postgres9",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set": {
+      "main": [
+        [
+          {
+            "node": "Execute Workflow",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres9": {
+      "main": [
+        [
+          {
+            "node": "Postgres10",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres10": {
+      "main": [
+        [
+          {
+            "node": "Set",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-07-30T10:44:25.484Z",
+  "id": "eDhSzuVhnolE3rwa",
+  "name": "Data Update: Silverfish: Prep",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "9a03a28c-3fd4-429a-aca0-583b0644801d",
+      "name": "Execute Workflow Trigger",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        520,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "command": "psql -d odooData -c \"\\\\COPY upload_silverfish FROM /home/luke/feeds/Upload-Silverfish.csv DELIMITER ',' CSV HEADER;\"",
+        "cwd": "/home/luke/feeds/"
+      },
+      "id": "ba4b6e00-2b98-493e-80b9-b79792b64dee",
+      "name": "SSH1",
+      "type": "n8n-nodes-base.ssh",
+      "typeVersion": 1,
+      "position": [
+        1320,
+        420
+      ],
+      "credentials": {
+        "sshPassword": {
+          "id": "XjhjaSmzbkvtSZ0m",
+          "name": "SSH Password account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "DROP TABLE upload_silverfish;",
+        "options": {}
+      },
+      "id": "bbf7f3dc-b5d9-49da-b94e-fe7b459c7f43",
+      "name": "Postgres",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.2,
+      "position": [
+        880,
+        420
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "9Jz67Tm0faeykq6p",
+          "name": "odoodata"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "CREATE TABLE odoodata.upload_silverfish AS SELECT * FROM template_silverfish;",
+        "options": {}
+      },
+      "id": "0d95ebf4-183a-41f4-b3aa-255ab8f334d1",
+      "name": "Postgres1",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.2,
+      "position": [
+        1080,
+        420
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "9Jz67Tm0faeykq6p",
+          "name": "odoodata"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "DELETE FROM upload_silverfish WHERE \"Unit Cost\" = 'N/A';",
+        "options": {}
+      },
+      "id": "8e457142-af90-46c2-b12c-00a685612b9d",
+      "name": "Postgres2",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.2,
+      "position": [
+        880,
+        820
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "9Jz67Tm0faeykq6p",
+          "name": "odoodata"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE upload_silverfish \nSET \"Stock Count\" = 1 \nWHERE\n\"Stock Count\"::NUMERIC > 0;\n  ",
+        "options": {}
+      },
+      "id": "2b01ad5b-2ef1-478b-b9a4-81168ca3720d",
+      "name": "Postgres3",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.2,
+      "position": [
+        1100,
+        820
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "9Jz67Tm0faeykq6p",
+          "name": "odoodata"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE upload_silverfish \nSET \"Stock Count\" = 0 \nWHERE\n\"Stock Count\"::NUMERIC < 0;\n  ",
+        "options": {}
+      },
+      "id": "73ec8bd7-fe93-45ae-929a-a8be0b083020",
+      "name": "Postgres4",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.2,
+      "position": [
+        1320,
+        820
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "9Jz67Tm0faeykq6p",
+          "name": "odoodata"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "DELETE FROM upload_silverfish WHERE \"Unit Cost\" = 'N/A';",
+        "options": {}
+      },
+      "id": "f5cbe7a4-4170-4c06-bd3f-f383d884862a",
+      "name": "Postgres5",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.2,
+      "position": [
+        880,
+        1020
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "9Jz67Tm0faeykq6p",
+          "name": "odoodata"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "DELETE FROM upload_silverfish WHERE \"Unit MSRP\" = 'N/A';",
+        "options": {}
+      },
+      "id": "1f328ffa-3d0b-4c05-b3f7-ad1dfb2407ea",
+      "name": "Postgres6",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.2,
+      "position": [
+        1100,
+        1020
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "9Jz67Tm0faeykq6p",
+          "name": "odoodata"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "alterStatements",
+              "value": "RENAME COLUMN \"Vendor SKU\" TO \"ProductCode\", ALTER COLUMN \"ProductCode\" TYPE CHAR(40), RENAME COLUMN \"Product Name\" TO \"ProductName\", ALTER COLUMN \"ProductName\" TYPE CHAR(235), RENAME COLUMN \"UPC/EAN\" TO \"Ean\", ALTER COLUMN \"Ean\" TYPE CHAR(22), RENAME COLUMN \"Unit MSRP\" TO \"Rrp\", ALTER COLUMN \"Rrp\" TYPE DECIMAL(7,2) USING \"Rrp\"::NUMERIC, RENAME COLUMN \"Pack Qty\" TO \"PackQty\", ALTER COLUMN \"PackQty\" TYPE CHAR(27), RENAME COLUMN \"Variant Grouping\" TO \"VariantGrouping\", ALTER COLUMN \"VariantGrouping\" TYPE CHAR(30), RENAME COLUMN \"Short Description\" TO \"ShortDescription\", ALTER COLUMN \"ShortDescription\" TYPE CHAR(222), RENAME COLUMN \"Long Description\" TO \"LongDescription\", ALTER COLUMN \"LongDescription\" TYPE TEXT, RENAME COLUMN \"Unit Cost\" TO \"YourPrice\", ALTER COLUMN \"YourPrice\" TYPE DECIMAL(7,2) USING \"YourPrice\"::NUMERIC, RENAME COLUMN \"Lead Time\" TO \"LeadTime\", ALTER COLUMN \"LeadTime\" TYPE SMALLINT USING \"LeadTime\"::NUMERIC, RENAME COLUMN \"Sub Category\" TO \"SubCategory\", ALTER COLUMN \"SubCategory\" TYPE CHAR(30), RENAME COLUMN \"image\" TO \"ImageUrl\", ALTER COLUMN \"ImageUrl\" TYPE CHAR(102), RENAME COLUMN \"Alternative Image 1\" TO \"AlternativeImage1Url\", ALTER COLUMN \"AlternativeImage1Url\" TYPE CHAR(102), RENAME COLUMN \"Alternative Image 2\" TO \"AlternativeImage2Url\", ALTER COLUMN \"AlternativeImage2Url\" TYPE CHAR(102), RENAME COLUMN \"Alternative Image 3\" TO \"AlternativeImage3Url\", ALTER COLUMN \"AlternativeImage3Url\" TYPE CHAR(102), RENAME COLUMN \"Stock Count\" TO \"StockCount\", ALTER COLUMN \"StockCount\" TYPE SMALLINT USING \"StockCount\"::NUMERIC, RENAME COLUMN \"Technical Spec\" TO \"TechnicalSpec\", ALTER COLUMN \"TechnicalSpec\" TYPE TEXT, ADD COLUMN \"TechnicalSpecLabel\" TEXT DEFAULT NULL, ALTER COLUMN \"vat\" TYPE SMALLINT USING \"vat\"::NUMERIC"
+            },
+            {
+              "name": "supplier",
+              "value": "Silverfish"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "c532ca21-baa9-4274-9bf6-b42f50565b0a",
+      "name": "Set",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [
+        880,
+        1220
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "DELETE FROM upload_silverfish WHERE \"Unit MSRP\" = '#N/A';",
+        "options": {}
+      },
+      "id": "14a4a0fd-dac0-4867-a536-9d334c63c9ee",
+      "name": "Postgres9",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.2,
+      "position": [
+        1320,
+        1020
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "9Jz67Tm0faeykq6p",
+          "name": "odoodata"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "DELETE FROM upload_silverfish WHERE \"Unit Cost\" = '#N/A';",
+        "options": {}
+      },
+      "id": "bf6b439d-ec8e-4b83-b95f-683082b95b60",
+      "name": "Postgres10",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.2,
+      "position": [
+        1500,
+        1020
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "9Jz67Tm0faeykq6p",
+          "name": "odoodata"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "workflowId": "2mliuDMlTssD3kUq"
+      },
+      "id": "4002bd3c-9bee-480a-ad52-b3de6c0ae2c6",
+      "name": "Execute Workflow",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [
+        1100,
+        1220
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "id": "NgXcDDqIPq9W8PqT",
+      "createdAt": "2023-07-30T10:50:20.897Z",
+      "updatedAt": "2023-07-30T10:50:20.897Z",
+      "name": "Postgresql"
+    },
+    {
+      "id": "Q6hSRhURJvwaJyXs",
+      "createdAt": "2023-07-30T10:52:22.581Z",
+      "updatedAt": "2023-07-30T10:52:22.581Z",
+      "name": "SSH"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2023-07-30T10:54:56.000Z",
+  "versionId": "a28c650b-ff55-4012-ae9d-dcf26ffde314"
+}
