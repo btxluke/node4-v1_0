@@ -1,0 +1,587 @@
+{
+  "active": false,
+  "connections": {
+    "Execute Workflow Trigger": {
+      "main": [
+        [
+          {
+            "node": "Add Vat1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add Vat": {
+      "main": [
+        [
+          {
+            "node": "Calculate Net RRP",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculate Net RRP": {
+      "main": [
+        [
+          {
+            "node": "Remove Double Headers",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Remove Double Headers": {
+      "main": [
+        [
+          {
+            "node": "Add Lead Time",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add Lead Time": {
+      "main": [
+        [
+          {
+            "node": "Conform Stock Count",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Conform Stock Count": {
+      "main": [
+        [
+          {
+            "node": "Title Case",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add Vat1": {
+      "main": [
+        [
+          {
+            "node": "Add Vat",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Title Case": {
+      "main": [
+        [
+          {
+            "node": "Recategorise",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Recategorise": {
+      "main": [
+        [
+          {
+            "node": "Replace Urls",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Replace Urls": {
+      "main": [
+        [
+          {
+            "node": "Replace Urls1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Rename Columns": {
+      "main": [
+        [
+          {
+            "node": "Add Columns",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Replace Urls1": {
+      "main": [
+        [
+          {
+            "node": "Replace Urls2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Concat-Product Model into Product Type": {
+      "main": [
+        [
+          {
+            "node": "Concat-Product Model into Product Type1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Replace Urls2": {
+      "main": [
+        [
+          {
+            "node": "Replace Urls3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Replace Urls3": {
+      "main": [
+        [
+          {
+            "node": "Replace Urls4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Concat-Product Model into Product Type1": {
+      "main": [
+        [
+          {
+            "node": "Rename Columns",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Replace Urls4": {
+      "main": [
+        [
+          {
+            "node": "Concat-Product Model into Product Type",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-07-30T14:22:58.241Z",
+  "id": "YhsstPTgEhDCQO7n",
+  "name": "Data Update: Ison: Prep",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "54eb31d6-76f3-4cc4-81af-caeab8a4268e",
+      "name": "Execute Workflow Trigger",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        700,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=ALTER TABLE `Upload-Ison` ADD Vat INT(2) AS (IF(VATCode=\"2\",20,0)) AFTER VatCode"
+      },
+      "id": "31965d0a-9680-48b5-af38-2e0af452be43",
+      "name": "Add Vat",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        1060,
+        420
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE `Upload-Ison` SET `Retail Price (£)` = `Retail Price (£)` / (1+(Vat/100));"
+      },
+      "id": "f6df3606-86f9-471a-9ef3-797c92ed1016",
+      "name": "Calculate Net RRP",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        1260,
+        420
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "DELETE FROM `Upload-Ison` WHERE IDPartnumber = \"IDPartnumber\""
+      },
+      "id": "ea16aea2-573f-429e-bdfa-7fa1dbea3185",
+      "name": "Remove Double Headers",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        1420,
+        420
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "ALTER TABLE `Upload-Zyro` ADD LeadTime INT(3) AS (DATEDIFF(STR_TO_DATE(StockDueIn, '%e/%m/%Y'),CURDATE()));"
+      },
+      "id": "3d0fd914-691a-417c-977b-60139635c6f0",
+      "name": "Add Lead Time",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        1060,
+        640
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=ALTER TABLE `Upload-Zyro` ADD StockCount INT(1) AS (IF(StockIndicator=\"IS\",1,0));"
+      },
+      "id": "e94e70d7-576e-4a3a-b8b1-864aa4ba0283",
+      "name": "Conform Stock Count",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        1260,
+        640
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=ALTER TABLE `Upload-Ison` CHANGE `VAT code` `VATCode` INT(1) NULL DEFAULT NULL;"
+      },
+      "id": "bfcebf8e-9cba-482e-9a4f-64ae9c6cc288",
+      "name": "Add Vat1",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        860,
+        420
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE `Upload-Ison` SET `Short Description` = CAP_FIRST(`Short Description`)"
+      },
+      "id": "6a38719d-0b32-4d75-b30a-1feccf6aed0c",
+      "name": "Title Case",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        1420,
+        640
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "##Progress up to here",
+        "height": 1093.4184429307234,
+        "width": 1360.8390580004511
+      },
+      "id": "b937b397-1cf0-4d14-9698-7d0c478f05a6",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        660,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE `Upload-Ison` SET `Product Category` = `Product Group` \nWHERE `Product Category` = \"Bikes-Complete\"\nOR `Product Category` = \"Accessories\"\nOR `Product Category` = \"Clothing\"\nOR `Product Group` = \"Forks - Suspension\"\nOR `Product Group` = \"Rear Shocks - Spares\"\nOR `Product Group` = \"Rear Shocks\"\nOR `Product Category` = \"Handlebars/Stems/Grips\"\nOR `Product Group` = \"Cassettes\"\nOR `Product Group` = \"Cassettes - Spares\"\nOR `Product Category` = \"Cranks/Chainrings\""
+      },
+      "id": "2d21c9ea-f244-4cdf-99ce-fe5736e16c81",
+      "name": "Recategorise",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        1060,
+        840
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE `Upload-Ison` SET `Specific Pic` = CONCAT(\"https://www.ison-distribution.com/image/complete/\",`Specific Pic`,\".jpg\");"
+      },
+      "id": "54fa167f-5074-489d-90dc-da01976373b1",
+      "name": "Replace Urls",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        1260,
+        840
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE `Upload-Ison` SET `Generic Pic` = CONCAT(\"https://www.ison-distribution.com/image/complete/\",`Generic Pic`,\".jpg\");"
+      },
+      "id": "db08b876-7f6e-472e-8cc4-fb175a1a44fc",
+      "name": "Replace Urls1",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        1440,
+        840
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "ALTER TABLE `Upload-Ison`\nCHANGE `IDPartnumber`  `ProductCode` VARCHAR(20),\nCHANGE `Product Category`  `SubCategory` VARCHAR(39),\nCHANGE `Product Brand`  `Brand` VARCHAR(23),\nCHANGE `Product Type`  `VariantGrouping` VARCHAR(100),\nCHANGE `Product Colour`  `Colour` VARCHAR(20),\nCHANGE `Product Size`  `Size` VARCHAR(20),\nCHANGE `Approx Weight`  `Weight` INT(5),\nCHANGE `Short Description`  `ShortDescription` VARCHAR(44),\nCHANGE `Unit`  `PackQty` VARCHAR(6),\nCHANGE `Web Description`  `LongDescription` LONGTEXT,\nCHANGE `Specific Pic`  `AlternativeImage1Url` VARCHAR(100),\nCHANGE `Generic Pic`  `ImageUrl` VARCHAR(100),\nCHANGE `Trade Price (£)`  `YourPrice` DECIMAL(10,2),\nCHANGE `Retail Price (£)`  `Rrp` DECIMAL(10,2),\nCHANGE `Barcode`  `Ean` VARCHAR(14);"
+      },
+      "id": "07f877a6-01b3-4985-adc3-5a6d261fdb05",
+      "name": "Rename Columns",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        1060,
+        1260
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "ALTER TABLE `Upload-Ison` \nADD `StockCount` INT(1) NULL DEFAULT NULL AFTER `Vat`, \nADD `AlternativeImage2Url` VARCHAR(80) NULL DEFAULT NULL AFTER `AlternativeImage1Url`, \nADD `AlternativeImage3Url` VARCHAR(80) NULL DEFAULT NULL AFTER `AlternativeImage2Url`,\nADD `LeadTime` INT(3) NULL DEFAULT NULL AFTER `PackQty`,\nADD `Keywords` VARCHAR(1000) NULL DEFAULT NULL AFTER `SubCategory`;"
+      },
+      "id": "27fd5130-a479-4f78-bd8f-7cf0efde1125",
+      "name": "Add Columns",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        1220,
+        1260
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "ALTER TABLE `Upload-Ison`\nADD COLUMN `ProductName` VARCHAR(200) AS (CONCAT_WS(\",\",`Product Model`,`Product Type`)) AFTER `Product Type`;"
+      },
+      "id": "d6ff44fb-5afe-476f-aaab-651f67e6cdd3",
+      "name": "Concat-Product Model into Product Type",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        1060,
+        1020
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "ALTER TABLE `Upload-Ison`\nADD COLUMN `ProductName` VARCHAR(200) AS (CONCAT_WS(\",\",`Product Model`,`Product Type`)) AFTER `Product Type`;"
+      },
+      "id": "2ec3b9a5-34ad-4b5a-8aae-b73f86453ee7",
+      "name": "Concat-Product Model into Product Type1",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        1260,
+        1020
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE `Upload-Ison` SET `Generic Pic` = NULL WHERE `Generic Pic` = \"https://www.ison-distribution.com/image/complete/.jpg\""
+      },
+      "id": "7dc504ed-688f-4e25-8212-d543132c1aac",
+      "name": "Replace Urls2",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        1620,
+        840
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE `Upload-Ison` SET `Specific Pic` = NULL WHERE `Specific Pic` = \"https://www.ison-distribution.com/image/complete/.jpg\""
+      },
+      "id": "83abd698-3501-45dc-b2c1-e3a452491115",
+      "name": "Replace Urls3",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        1760,
+        840
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE `Upload-Ison` SET `Generic Pic` = `Specific Pic`, `Specific Pic` = NULL WHERE `Generic Pic` IS NULL AND `Specific Pic` IS NOT NULL;"
+      },
+      "id": "a2bef67f-b949-4fd2-b0d3-9da53722a6cc",
+      "name": "Replace Urls4",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        1900,
+        840
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "2",
+          "name": "node3.biketrax.co.uk: odooData"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "id": "Wuxm8RRcXN7lzDDV",
+      "createdAt": "2023-07-30T14:21:19.337Z",
+      "updatedAt": "2023-07-30T14:21:19.337Z",
+      "name": "Ison"
+    },
+    {
+      "id": "siOv68LvUdVRWklZ",
+      "createdAt": "2023-07-30T14:17:43.423Z",
+      "updatedAt": "2023-07-30T14:17:43.423Z",
+      "name": "MySQL - to Update"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2023-07-30T14:23:08.000Z",
+  "versionId": "d1b2e0a1-8a11-41f9-8ac3-92385508f080"
+}
