@@ -12,22 +12,11 @@
         ]
       ]
     },
-    "Calculate Net RRP": {
-      "main": [
-        [
-          {
-            "node": "Add Columns",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Add Columns": {
       "main": [
         [
           {
-            "node": "Add Stock Count",
+            "node": "Postgres3",
             "type": "main",
             "index": 0
           }
@@ -93,7 +82,7 @@
       "main": [
         [
           {
-            "node": "IF",
+            "node": "firstFail",
             "type": "main",
             "index": 0
           }
@@ -196,13 +185,6 @@
             "type": "main",
             "index": 0
           }
-        ],
-        [
-          {
-            "node": "Calculate Net RRP",
-            "type": "main",
-            "index": 0
-          }
         ]
       ]
     },
@@ -294,7 +276,7 @@
       "main": [
         [
           {
-            "node": "Calculate Net RRP",
+            "node": "Postgres2",
             "type": "main",
             "index": 0
           }
@@ -307,6 +289,39 @@
         [
           {
             "node": "Spreadsheet File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "firstFail": {
+      "main": [
+        [
+          {
+            "node": "IF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres2": {
+      "main": [
+        [
+          {
+            "node": "Add Columns",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres3": {
+      "main": [
+        [
+          {
+            "node": "Add Stock Count",
             "type": "main",
             "index": 0
           }
@@ -325,29 +340,9 @@
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "typeVersion": 1,
       "position": [
-        1440,
+        1300,
         1140
       ]
-    },
-    {
-      "parameters": {
-        "operation": "executeQuery",
-        "query": "UPDATE `Upload-Madison` SET `RRP` = `RRP` / (1+(`Vat Rate`/100));"
-      },
-      "id": "a5d72c51-eefc-48d8-9870-52ebac6a7cea",
-      "name": "Calculate Net RRP",
-      "type": "n8n-nodes-base.mySql",
-      "typeVersion": 1,
-      "position": [
-        1920,
-        1580
-      ],
-      "credentials": {
-        "mySql": {
-          "id": "2",
-          "name": "node3.biketrax.co.uk: odooData"
-        }
-      }
     },
     {
       "parameters": {
@@ -359,7 +354,7 @@
       "type": "n8n-nodes-base.mySql",
       "typeVersion": 1,
       "position": [
-        2100,
+        2320,
         2180
       ],
       "credentials": {
@@ -379,7 +374,7 @@
       "type": "n8n-nodes-base.mySql",
       "typeVersion": 1,
       "position": [
-        2100,
+        1620,
         1580
       ],
       "credentials": {
@@ -387,7 +382,8 @@
           "id": "2",
           "name": "node3.biketrax.co.uk: odooData"
         }
-      }
+      },
+      "disabled": true
     },
     {
       "parameters": {
@@ -399,7 +395,7 @@
       "type": "n8n-nodes-base.mySql",
       "typeVersion": 1,
       "position": [
-        2260,
+        2480,
         1580
       ],
       "credentials": {
@@ -419,7 +415,7 @@
       "type": "n8n-nodes-base.mySql",
       "typeVersion": 1,
       "position": [
-        2100,
+        2320,
         1960
       ],
       "credentials": {
@@ -439,7 +435,7 @@
       "type": "n8n-nodes-base.mySql",
       "typeVersion": 1,
       "position": [
-        2260,
+        2480,
         1960
       ],
       "credentials": {
@@ -459,7 +455,7 @@
       "type": "n8n-nodes-base.mySql",
       "typeVersion": 1,
       "position": [
-        2400,
+        2620,
         1960
       ],
       "credentials": {
@@ -479,7 +475,7 @@
       "type": "n8n-nodes-base.mySql",
       "typeVersion": 1,
       "position": [
-        2540,
+        2760,
         1960
       ],
       "credentials": {
@@ -499,7 +495,7 @@
       "type": "n8n-nodes-base.ssh",
       "typeVersion": 1,
       "position": [
-        2240,
+        2100,
         1140
       ],
       "credentials": {
@@ -519,7 +515,7 @@
       "type": "n8n-nodes-base.ssh",
       "typeVersion": 1,
       "position": [
-        2060,
+        1920,
         1140
       ],
       "credentials": {
@@ -539,7 +535,7 @@
       "type": "n8n-nodes-base.mySql",
       "typeVersion": 1,
       "position": [
-        2100,
+        2320,
         1780
       ],
       "credentials": {
@@ -559,7 +555,7 @@
       "type": "n8n-nodes-base.mySql",
       "typeVersion": 1,
       "position": [
-        2280,
+        2500,
         1780
       ],
       "credentials": {
@@ -579,7 +575,7 @@
       "type": "n8n-nodes-base.mySql",
       "typeVersion": 1,
       "position": [
-        2460,
+        2680,
         1780
       ],
       "credentials": {
@@ -599,7 +595,7 @@
       "type": "n8n-nodes-base.mySql",
       "typeVersion": 1,
       "position": [
-        2640,
+        2860,
         1780
       ],
       "credentials": {
@@ -619,7 +615,7 @@
       "type": "n8n-nodes-base.mySql",
       "typeVersion": 1,
       "position": [
-        2840,
+        3060,
         1780
       ],
       "executeOnce": true,
@@ -641,7 +637,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.2,
       "position": [
-        1620,
+        1480,
         1140
       ],
       "credentials": {
@@ -662,7 +658,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.2,
       "position": [
-        1900,
+        1760,
         1140
       ],
       "credentials": {
@@ -688,19 +684,20 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 1,
       "position": [
-        2460,
+        2680,
         1140
       ]
     },
     {
       "parameters": {
-        "fromEmail": "catchall@biketrax.co.uk",
-        "toEmail": "peter.thain@biketrax.co.uk",
+        "fromEmail": "info@biketrax.co.uk",
+        "toEmail": "ithelpdesk@madison.co.uk",
         "subject": "Madison Feed Error",
-        "text": "=Item(s) from the latest Madison data feed have failed to parse. This is usually because of a break in CSV specifications or incorrect placement of standard delimiters (,) / enclosing marks (\")  .\n\nHere is an example code with faulty data, and the error it caused:\n\nProduct Code: {{ $('Code').first().json.failed_code }}\n\n{{ $('Code').first().json.stderr }}\n\nA full list of errors is attached as a TXT file. If you could correct the errors, then then the item(s) can be added to our database on the next run.\n\nMany thanks,\n\nBiketraxBot (Product Information Database)",
+        "text": "=Line(s) from the latest Madison data feed have failed to parse. This is usually because of a break in CSV specifications or incorrect placement of standard delimiters (,) / enclosing marks (\")  in your feed CSV.\n\nHere is an example product code with faulty data, and the error it caused:\n\nProduct Code: {{ $('Code').first().json.failed_code }}\n{{ $('Code').first().json.stderr }}\n\nA full list of errors is attached as a XLS file. If you could correct the errors for future exports, then then the item(s) can be added to our database on the next run.\n\nMany thanks,\n\nBiketraxBot (Product Information Database)",
         "options": {
           "attachments": "data",
-          "ccEmail": "luke@biketrax.co.uk"
+          "ccEmail": "luke@biketrax.co.uk",
+          "replyTo": "luke@biketrax.co.uk"
         }
       },
       "id": "f185ad85-2a27-4d1d-9ee4-bf1fd6c17bfb",
@@ -708,7 +705,7 @@
       "type": "n8n-nodes-base.emailSend",
       "typeVersion": 2,
       "position": [
-        4380,
+        4600,
         1220
       ],
       "executeOnce": true,
@@ -717,7 +714,8 @@
           "id": "enV6OrvNpARXtf1c",
           "name": "btxBot"
         }
-      }
+      },
+      "disabled": true
     },
     {
       "parameters": {
@@ -728,7 +726,7 @@
       "type": "n8n-nodes-base.ssh",
       "typeVersion": 1,
       "position": [
-        2660,
+        2880,
         1020
       ],
       "credentials": {
@@ -747,7 +745,7 @@
       "type": "n8n-nodes-base.ssh",
       "typeVersion": 1,
       "position": [
-        2920,
+        3140,
         1220
       ],
       "credentials": {
@@ -767,7 +765,7 @@
       "type": "n8n-nodes-base.ssh",
       "typeVersion": 1,
       "position": [
-        3120,
+        3340,
         1220
       ],
       "credentials": {
@@ -793,7 +791,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 1,
       "position": [
-        3500,
+        3720,
         1220
       ]
     },
@@ -819,20 +817,20 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 2,
       "position": [
-        3320,
+        3540,
         1220
       ]
     },
     {
       "parameters": {
-        "jsCode": "let results = [],\n  i = 0;\n\ndo {\n  try {\n    results = results.concat($(\"Set\").all(0, i));\n  } catch (error) {    \n    return results;\n  }\n  i++;\n} while (true);\n"
+        "jsCode": "let results = [],\n  i = 0;\n\ndo {\n  try {\n    results = results.concat($(\"Set\").all(0, i));\n  } catch (error) {\n        results = results.concat($(\"firstFail\").all()); \n    return results;\n  }\n  i++;\n} while (true);\n"
       },
       "id": "63a39695-d1ce-4904-b796-5e32c45411ca",
       "name": "Code",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        3700,
+        3920,
         1220
       ],
       "executeOnce": false
@@ -850,7 +848,7 @@
       "type": "n8n-nodes-base.spreadsheetFile",
       "typeVersion": 1,
       "position": [
-        4200,
+        4420,
         1220
       ],
       "executeOnce": false
@@ -871,9 +869,77 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 1,
       "position": [
-        3920,
+        4140,
         1220
       ]
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "failed_code",
+              "value": "={{$json.stderr.split(\"\\\"\")[2]}}"
+            },
+            {
+              "name": "stderr",
+              "value": "={{ $json.stderr }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "64ad2050-00ba-478f-9457-10be8185d62a",
+      "name": "firstFail",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [
+        2460,
+        1140
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE odoodata.upload_madison SET rrp = rrp::NUMERIC / (1+(\"Vat Rate\"::INTEGER/100));",
+        "options": {}
+      },
+      "id": "df8ecd5e-9bf2-40cc-89b2-dd41e8babcf4",
+      "name": "Postgres2",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.2,
+      "position": [
+        1480,
+        1580
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "9Jz67Tm0faeykq6p",
+          "name": "odoodata"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "ALTER TABLE upload_madison \nADD COLUMN stockcount INT NULL DEFAULT NULL;",
+        "options": {}
+      },
+      "id": "43ad1e42-0175-4f1c-bd7f-9a6ab1097abe",
+      "name": "Postgres3",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.2,
+      "position": [
+        1780,
+        1580
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "9Jz67Tm0faeykq6p",
+          "name": "odoodata"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -896,6 +962,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-07-30T19:20:27.000Z",
-  "versionId": "37f4a0a6-e9a7-4e10-aca6-b778c1d84da1"
+  "updatedAt": "2023-07-31T10:36:53.000Z",
+  "versionId": "0a9b5b1e-57c9-41a5-adeb-eb2ddcf1742d"
 }
