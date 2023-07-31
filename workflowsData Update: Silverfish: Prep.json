@@ -16,7 +16,7 @@
       "main": [
         [
           {
-            "node": "Postgres2",
+            "node": "firstFail",
             "type": "main",
             "index": 0
           }
@@ -132,6 +132,142 @@
           }
         ]
       ]
+    },
+    "IF": {
+      "main": [
+        [
+          {
+            "node": "SSH",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Postgres2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SSH3": {
+      "main": [
+        [
+          {
+            "node": "SSH4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SSH4": {
+      "main": [
+        [
+          {
+            "node": "Set1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF1": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "SSH",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "IF2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Spreadsheet File": {
+      "main": [
+        [
+          {
+            "node": "Send Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF2": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Spreadsheet File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "firstFail": {
+      "main": [
+        [
+          {
+            "node": "IF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SSH": {
+      "main": [
+        [
+          {
+            "node": "SSH3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set1": {
+      "main": [
+        [
+          {
+            "node": "IF1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Email": {
+      "main": [
+        [
+          {
+            "node": "Postgres2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2023-07-30T10:44:25.484Z",
@@ -165,7 +301,7 @@
       "credentials": {
         "sshPassword": {
           "id": "XjhjaSmzbkvtSZ0m",
-          "name": "SSH Password account"
+          "name": "Node3: postgres"
         }
       }
     },
@@ -396,6 +532,236 @@
         1100,
         1220
       ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.stderr }}",
+              "operation": "isNotEmpty"
+            }
+          ]
+        }
+      },
+      "id": "1713c1e8-45b7-45ee-87b6-8f0c904a7e33",
+      "name": "IF",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        1700,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "info@biketrax.co.uk",
+        "toEmail": "Shigeyoshi.Kunimaru@silverfish-uk.com",
+        "subject": "Madison Feed Error",
+        "text": "=Line(s) from the latest Silverfish data feed have failed to parse. This is usually because of a break in CSV specifications or incorrect placement of standard delimiters (,) / enclosing marks (\")  in your feed CSV.\n\nHere is an example product code with faulty data, and the error it caused:\n\nProduct Code: {{ $('Code').first().json.failed_code }}\n{{ $('Code').first().json.stderr }}\n\nA full list of errors is attached as a XLS file. If you could correct the errors for future exports, then then the item(s) can be added to our database on the next run.\n\nMany thanks,\n\nBiketraxBot (Product Information Database)",
+        "options": {
+          "attachments": "data",
+          "ccEmail": "luke@biketrax.co.uk",
+          "replyTo": "luke@biketrax.co.uk"
+        }
+      },
+      "id": "142c0ecf-c15c-4ffc-ac19-ce0699ff8d25",
+      "name": "Send Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [
+        3620,
+        500
+      ],
+      "executeOnce": true,
+      "credentials": {
+        "smtp": {
+          "id": "enV6OrvNpARXtf1c",
+          "name": "btxBot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "command": "={{\"sed '\"+$json.stdout+\"d'\"}} /home/luke/feeds/Upload-Silverfish{{ $runIndex == 0 ? \"\" : $runIndex }}.csv > /home/luke/feeds/Upload-Silverfish{{ $runIndex+1 }}.csv"
+      },
+      "id": "b1667823-0327-49e3-ba8f-a6fc1fb66b1a",
+      "name": "SSH3",
+      "type": "n8n-nodes-base.ssh",
+      "typeVersion": 1,
+      "position": [
+        2160,
+        500
+      ],
+      "credentials": {
+        "sshPassword": {
+          "id": "jW26ND48jT87UhK8",
+          "name": "Node3: Root"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "command": "=psql -d odooData -c \"\\\\COPY odoodata.upload_madison FROM /home/luke/feeds/Upload-Silverfish{{ $runIndex+1 }}.csv DELIMITER ',' CSV HEADER;\"",
+        "cwd": "/home/luke/feeds/"
+      },
+      "id": "5fb0b06b-ef8e-4db0-8e42-0bd72829de70",
+      "name": "SSH4",
+      "type": "n8n-nodes-base.ssh",
+      "typeVersion": 1,
+      "position": [
+        2360,
+        500
+      ],
+      "credentials": {
+        "sshPassword": {
+          "id": "XjhjaSmzbkvtSZ0m",
+          "name": "Node3: postgres"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.stderr }}",
+              "operation": "isEmpty"
+            }
+          ]
+        }
+      },
+      "id": "75d7e46c-b2b1-4aab-b842-d82f81c42029",
+      "name": "IF1",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        2740,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "let results = [],\n  i = 0;\n\ndo {\n  try {\n    results = results.concat($(\"Set1\").all(0, i));\n  } catch (error) {\n        results = results.concat($(\"firstFail\").all()); \n    return results;\n  }\n  i++;\n} while (true);\n"
+      },
+      "id": "95997d33-b45d-45af-a64a-b2f5f94047b8",
+      "name": "Code",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2940,
+        500
+      ],
+      "executeOnce": false
+    },
+    {
+      "parameters": {
+        "operation": "toFile",
+        "options": {
+          "fileName": "parsing_errors.xls",
+          "headerRow": true
+        }
+      },
+      "id": "7e28212d-3926-4ebb-8494-00950689ad2f",
+      "name": "Spreadsheet File",
+      "type": "n8n-nodes-base.spreadsheetFile",
+      "typeVersion": 1,
+      "position": [
+        3440,
+        500
+      ],
+      "executeOnce": false
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.failed_code }}",
+              "operation": "isEmpty"
+            }
+          ]
+        }
+      },
+      "id": "f8f3c4be-082e-4732-bf18-72d86a8028f5",
+      "name": "IF2",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        3160,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "failed_code",
+              "value": "={{$json.stderr.split(\"\\\"\")[2]}}"
+            },
+            {
+              "name": "stderr",
+              "value": "={{ $json.stderr }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "625a68dd-c644-426e-8c8f-48d5b0278189",
+      "name": "firstFail",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [
+        1480,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "command": "=grep -n {{ \"\\\"\"+$json.stderr.split(\"\\\"\")[2]+\"\\\"\" }}  /home/luke/feeds/Upload-Silverfish{{ $runIndex == 0 ? \"\" : $runIndex }}.csv | cut -f1 -d:"
+      },
+      "id": "3ea3aa08-ecea-411e-b35e-2ec55eeb1981",
+      "name": "SSH",
+      "type": "n8n-nodes-base.ssh",
+      "typeVersion": 1,
+      "position": [
+        1900,
+        300
+      ],
+      "credentials": {
+        "sshPassword": {
+          "id": "jW26ND48jT87UhK8",
+          "name": "Node3: Root"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "failed_code",
+              "value": "={{$json.stderr.split(\"\\\"\")[2]}}"
+            },
+            {
+              "name": "stderr",
+              "value": "={{ $json.stderr }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "e00d6cf1-2df3-46a3-a0b0-78d80c2ed301",
+      "name": "Set1",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [
+        2560,
+        500
+      ]
     }
   ],
   "pinData": {},
@@ -418,6 +784,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-07-30T11:02:02.000Z",
-  "versionId": "6473981f-5b36-4d94-bef5-b2090078c7db"
+  "updatedAt": "2023-07-31T13:48:16.000Z",
+  "versionId": "f40ccdc8-b913-40e7-bb54-a9826aa688e9"
 }
