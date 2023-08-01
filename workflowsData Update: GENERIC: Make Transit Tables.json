@@ -914,7 +914,7 @@
     {
       "parameters": {
         "operation": "executeQuery",
-        "query": "INSERT INTO {{\"feed_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}} \n(\"productcode\",\n\"ean\",\n\"productname\",\n\"yourprice\",\n\"rrp\",\n\"vat\",\n\"stockcount\",\n\"shortdescription\",\n\"longdescription\",\n\"imageurl\",\n\"alternativeimage1url\",\n\"alternativeimage2url\",\n\"alternativeimage3url\",\n\"size\",\n\"colour\",\n\"brand\",\n\"weight\",\n\"packqty\",\n\"leadtime\",\n\"variantgrouping\",\n\"subcategory\",\n\"keywords\",\n\"technicalspec\",\n\"technicalspeclabel\"\n)\nSELECT \n{{\"upload_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.\"productcode\",\n{{\"upload_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.\"ean\",\n{{\"upload_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.\"productname\",\n{{\"upload_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.\"yourprice\",\n{{\"upload_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.\"rrp\",\n{{\"upload_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.\"vat\",\n{{\"upload_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.\"stockcount\",\n{{\"upload_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.\"shortdescription\",\n{{\"upload_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.\"longdescription\",\n{{\"upload_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.\"imageurl\",\n{{\"upload_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.\"alternativeimage1url\",\n{{\"upload_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.\"alternativeimage2url\",\n{{\"upload_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.\"alternativeimage3url\",\n{{\"upload_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.\"size\",\n{{\"upload_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.\"colour\",\n{{\"upload_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.\"brand\",\n{{\"upload_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.\"weight\",\n{{\"upload_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.\"packqty\",\n{{\"upload_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.\"leadtime\",\n{{\"upload_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.\"variantgrouping\",\n{{\"upload_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.\"subcategory\",\n{{\"upload_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.\"keywords\",\n{{\"upload_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.\"technicalspec\",\n{{\"upload_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}}.\"technicalspeclabel\"\nFROM {{\"upload_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}} WHERE \"ean\" IS NOT NULL ON CONFLICT DO NOTHING;",
+        "query": "INSERT INTO {{\"odoodata.feed_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}} \n(\"productcode\",\n\"ean\",\n\"productname\",\n\"yourprice\",\n\"rrp\",\n\"vat\",\n\"stockcount\",\n\"shortdescription\",\n\"longdescription\",\n\"imageurl\",\n\"alternativeimage1url\",\n\"alternativeimage2url\",\n\"alternativeimage3url\",\n\"size\",\n\"colour\",\n\"brand\",\n\"weight\",\n\"packqty\",\n\"leadtime\",\n\"variantgrouping\",\n\"subcategory\",\n\"keywords\",\n\"technicalspec\",\n\"technicalspeclabel\"\n)\nSELECT \nb.\"productcode\",\nb.\"ean\",\nb.\"productname\",\nb.\"yourprice\",\nb.\"rrp\",\nb.\"vat\",\nb.\"stockcount\",\nb.\"shortdescription\",\nb.\"longdescription\",\nb.\"imageurl\",\nb.\"alternativeimage1url\",\nb.\"alternativeimage2url\",\nb.\"alternativeimage3url\",\nb.\"size\",\nb.\"colour\",\nb.\"brand\",\nb.\"weight\",\nb.\"packqty\",\nb.\"leadtime\",\nb.\"variantgrouping\",\nb.\"subcategory\",\nb.\"keywords\",\nb.\"technicalspec\",\nb.\"technicalspeclabel\"\nFROM {{\"upload_\"+$(\"Execute Workflow Trigger\").first().json.name.toLowerCase()}} b WHERE \"ean\" IS NOT NULL ON CONFLICT DO NOTHING;",
         "options": {
           "queryReplacement": ""
         }
@@ -1211,8 +1211,8 @@
     "Execute Workflow Trigger": [
       {
         "json": {
-          "name": "Silverfish",
-          "globals": "[{\"SupplierName\": \"Silverfish\",\"PartnerId\": 61,\"ProductTagId\": 10,\"LeadTimeAddition\":5,\"Webhook\":\"https://node4.biketrax.co.uk/webhook/d6637f7a-97f9-4f2d-96bd-a493b0112995\"}]"
+          "name": "Madison",
+          "globals": "[{\"SupplierName\": \"Madison\",\"PartnerId\": 47,\"ProductTagId\": 8,\"LeadTimeAddition\":3,\"Webhook\":\"https://node4.biketrax.co.uk/webhook/8e681709-59dd-45f0-9403-d2e72945ebd0\"}]"
         }
       }
     ]
@@ -1236,6 +1236,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-07-30T11:32:07.000Z",
-  "versionId": "da183fe9-17d9-4bbc-835e-f8982e7ca556"
+  "updatedAt": "2023-08-01T10:35:22.000Z",
+  "versionId": "02c711af-8321-4572-a7db-931bbeeec826"
 }
