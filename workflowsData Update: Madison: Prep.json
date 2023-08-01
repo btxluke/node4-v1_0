@@ -100,7 +100,7 @@
       "main": [
         [
           {
-            "node": "Set",
+            "node": "IF3",
             "type": "main",
             "index": 0
           }
@@ -171,10 +171,16 @@
     },
     "IF2": {
       "main": [
-        [],
         [
           {
             "node": "Spreadsheet File",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Postgres2",
             "type": "main",
             "index": 0
           }
@@ -339,6 +345,35 @@
           }
         ]
       ]
+    },
+    "IF3": {
+      "main": [
+        [
+          {
+            "node": "SSH5",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Set",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SSH5": {
+      "main": [
+        [
+          {
+            "node": "Set",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2023-07-30T14:51:32.935Z",
@@ -484,7 +519,7 @@
         "fromEmail": "info@biketrax.co.uk",
         "toEmail": "ithelpdesk@madison.co.uk",
         "subject": "Madison Feed Error",
-        "text": "=Line(s) from the latest Madison data feed have failed to parse. This is usually because of a break in CSV specifications or incorrect placement of standard delimiters (,) / enclosing marks (\")  in your feed CSV.\n\nHere is an example product code with faulty data, and the error it caused:\n\nProduct Code: {{ $('Code').first().json.failed_code }}\n{{ $('Code').first().json.stderr }}\n\nA full list of errors is attached as a XLS file. If you could correct the errors for future exports, then then the item(s) can be added to our database on the next run.\n\nMany thanks,\n\nBiketraxBot (Product Information Database)",
+        "text": "=Line(s) from the latest Madison data feed have failed to parse. This is usually because of a break in CSV specifications or incorrect placement of standard delimiters (,) / enclosing marks (\")  in your feed CSV.\n\nHere is an example product code with faulty data, and the error it caused:\n\nProduct Code: {{ $('Code').first().json.failed_code }}\n{{ $('Code').first().json.stderr }}\n\nA full list of errors is attached as a XLS file. If you could correct the errors for future exports, then then the item(s) can be added to our database on the next run. Our data routines run daily, but this email will be sent a maximum of once a week, if you would prefer to recieve it more frequently (or as soon as errors emerge), please email luke@biketrax.co.uk.\n\nMany thanks,\n\nBiketraxBot (Product Information Database)",
         "options": {
           "attachments": "data",
           "ccEmail": "luke@biketrax.co.uk",
@@ -496,7 +531,7 @@
       "type": "n8n-nodes-base.emailSend",
       "typeVersion": 2,
       "position": [
-        4600,
+        4760,
         1220
       ],
       "executeOnce": true,
@@ -535,8 +570,8 @@
       "type": "n8n-nodes-base.ssh",
       "typeVersion": 1,
       "position": [
-        3140,
-        1220
+        3100,
+        1020
       ],
       "credentials": {
         "sshPassword": {
@@ -555,8 +590,8 @@
       "type": "n8n-nodes-base.ssh",
       "typeVersion": 1,
       "position": [
-        3340,
-        1220
+        3300,
+        1020
       ],
       "credentials": {
         "sshPassword": {
@@ -581,8 +616,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 1,
       "position": [
-        3720,
-        1220
+        3680,
+        760
       ]
     },
     {
@@ -592,11 +627,11 @@
           "string": [
             {
               "name": "failed_code",
-              "value": "={{$json.stderr.split(\"\\\"\")[2]}}"
+              "value": "={{$('SSH4').item.json.stderr.split(\"\\\"\")[2]}}"
             },
             {
               "name": "stderr",
-              "value": "={{ $json.stderr }}"
+              "value": "={{ $('SSH4').item.json.stderr }}"
             }
           ]
         },
@@ -607,8 +642,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 2,
       "position": [
-        3540,
-        1220
+        3500,
+        1020
       ]
     },
     {
@@ -638,7 +673,7 @@
       "type": "n8n-nodes-base.spreadsheetFile",
       "typeVersion": 1,
       "position": [
-        4420,
+        4580,
         1220
       ],
       "executeOnce": false
@@ -646,10 +681,11 @@
     {
       "parameters": {
         "conditions": {
-          "string": [
+          "number": [
             {
-              "value1": "={{ $json.failed_code }}",
-              "operation": "isEmpty"
+              "value1": "={{ $today.weekday }}",
+              "operation": "equal",
+              "value2": 1
             }
           ]
         }
@@ -958,11 +994,54 @@
         1820,
         1880
       ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{ $runIndex }}",
+              "operation": "larger"
+            }
+          ]
+        }
+      },
+      "id": "683c12bb-680b-4d5f-9872-9e6fd94ce7b4",
+      "name": "IF3",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        3100,
+        1240
+      ]
+    },
+    {
+      "parameters": {
+        "command": "=rm /home/luke/feeds/Upload-Madison{{ $runIndex }}.csv",
+        "cwd": "/home/luke/feeds/"
+      },
+      "id": "240d34ba-381e-4775-a752-cf1f339660ea",
+      "name": "SSH5",
+      "type": "n8n-nodes-base.ssh",
+      "typeVersion": 1,
+      "position": [
+        3300,
+        1240
+      ],
+      "credentials": {
+        "sshPassword": {
+          "id": "jW26ND48jT87UhK8",
+          "name": "Node3: Root"
+        }
+      }
     }
   ],
   "pinData": {},
   "settings": {
-    "executionOrder": "v1"
+    "executionOrder": "v1",
+    "saveDataSuccessExecution": "none",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner"
   },
   "staticData": null,
   "tags": [
@@ -980,6 +1059,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-07-31T17:10:44.000Z",
-  "versionId": "e5835a3d-ae50-40fe-bfae-7d7be3234ec8"
+  "updatedAt": "2023-08-01T09:01:36.000Z",
+  "versionId": "e7637fa3-2bc5-4e09-a884-fe43cdd88b4d"
 }
