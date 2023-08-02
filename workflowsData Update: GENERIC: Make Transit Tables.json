@@ -505,7 +505,7 @@
             },
             {
               "fieldName": "out_of_stock_message",
-              "fieldValue": "=On Order - expected availability in {{ $json[\"StockCount\"] == 1 ? $('Execute Workflow Trigger').first().json.Globals.LeadTimeAddition : $json.LeadTime > 0 ? $json.LeadTime + $('Execute Workflow Trigger').first().json.Globals.LeadTimeAddition  : 365 + $('Execute Workflow Trigger').first().json.Globals.LeadTimeAddition }} Days."
+              "fieldValue": "=On Order - expected availability in {{ $json[\"stockcount\"] == 1 ? $('Globals').first().json.globals.LeadTimeAddition : $json.leadtime > 0 ? $json.leadtime + $('Globals').first().json.globals.LeadTimeAddition  : 365 + $('Globals').first().json.globals.LeadTimeAddition }} Days."
             }
           ]
         }
@@ -1236,6 +1236,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-08-01T10:35:22.000Z",
-  "versionId": "02c711af-8321-4572-a7db-931bbeeec826"
+  "updatedAt": "2023-08-02T15:02:05.000Z",
+  "versionId": "8a6f1fa9-cdaf-4e5a-9c48-63532dcab42c"
 }
