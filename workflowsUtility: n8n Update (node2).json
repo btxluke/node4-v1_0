@@ -1,0 +1,80 @@
+{
+  "active": false,
+  "connections": {
+    "Noon - Daily": {
+      "main": [
+        [
+          {
+            "node": "GitHub",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-08-08T13:24:35.373Z",
+  "id": "jtpthK0DsoIXrMde",
+  "name": "Utility: n8n Update (node2)",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 12
+            }
+          ]
+        }
+      },
+      "id": "5407d107-dcc7-415c-814a-5b97bfba7f1a",
+      "name": "Noon - Daily",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        820,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "resource": "repository",
+        "operation": "get",
+        "owner": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "repository": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        }
+      },
+      "id": "aa2c2bc7-4a37-4f37-97f2-377332b35a84",
+      "name": "GitHub",
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        360
+      ],
+      "credentials": {
+        "githubOAuth2Api": {
+          "id": "RY2GXssG3ep6VuMA",
+          "name": "GitHub (btxLuke)"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2023-08-08T14:43:04.000Z",
+  "versionId": "52607581-42de-44d2-a752-0e80d68d6008"
+}
