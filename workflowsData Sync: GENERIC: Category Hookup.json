@@ -119,30 +119,30 @@
       ]
     }
   },
-  "createdAt": "2023-07-30T15:46:05.176Z",
-  "id": "ekCg97zgRpRfG6li",
+  "createdAt": "2023-08-08T15:44:05.051Z",
+  "id": "De0sYMCGwgIhgv8I",
   "name": "Data Sync: GENERIC: Category Hookup",
   "nodes": [
     {
       "parameters": {},
-      "id": "2fe16aa4-dfb6-4241-9109-0e5cc2d9106c",
+      "id": "1a7c1351-d7ba-4ca8-8b07-da260fb325b6",
       "name": "When Called By Another Workflow",
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "typeVersion": 1,
       "position": [
-        1160,
-        380
+        560,
+        320
       ]
     },
     {
       "parameters": {},
-      "id": "923b7f75-f291-49a3-a61c-f3b0dc72a91a",
+      "id": "72524de3-c847-4c9a-b5e9-d91ebdb3f410",
       "name": "Retrieve Category Ids",
       "type": "n8n-nodes-base.noOp",
       "typeVersion": 1,
       "position": [
-        1380,
-        380
+        780,
+        320
       ]
     },
     {
@@ -157,13 +157,13 @@
         },
         "options": {}
       },
-      "id": "23e6cca4-a2be-4d4a-9e00-80d8ee169c6e",
+      "id": "21d45012-f5bf-4110-8906-5a2fa6ee887b",
       "name": "Set",
       "type": "n8n-nodes-base.set",
       "typeVersion": 1,
       "position": [
-        1780,
-        380
+        1180,
+        320
       ]
     },
     {
@@ -172,13 +172,13 @@
         "include": "allOtherFields",
         "options": {}
       },
-      "id": "9f28b523-36e2-4250-968a-0e9e216aa8c2",
+      "id": "a1c167a0-67ea-4b8e-b2d7-9d68a38e8a28",
       "name": "Item Lists",
       "type": "n8n-nodes-base.itemLists",
       "typeVersion": 1,
       "position": [
-        2140,
-        380
+        1540,
+        320
       ]
     },
     {
@@ -205,24 +205,24 @@
         },
         "additionalOptions": {}
       },
-      "id": "5a9bfc3e-335a-4535-a856-3cd78cfb6add",
+      "id": "de10a4ec-692f-465f-b8ac-26d174adc477",
       "name": "Rename Keys",
       "type": "n8n-nodes-base.renameKeys",
       "typeVersion": 1,
       "position": [
-        1960,
-        380
+        1360,
+        320
       ]
     },
     {
       "parameters": {},
-      "id": "e9413fd6-a684-4f9b-a208-926d6b2ae146",
+      "id": "8a4458be-6a6d-404d-aeb1-1840883014f5",
       "name": "Notify Unlinked categories",
       "type": "n8n-nodes-base.noOp",
       "typeVersion": 1,
       "position": [
-        1340,
-        780
+        740,
+        720
       ]
     },
     {
@@ -233,19 +233,19 @@
         "text": "=Affected Product Codes:\n\n{{JSON.stringify($json.stringify, null, 2)}}",
         "options": {}
       },
-      "id": "3c8421f8-05d3-4778-b498-250baa148c6d",
+      "id": "a9015888-fa2b-4e98-9233-d90c69e47ae7",
       "name": "Send Email",
       "type": "n8n-nodes-base.emailSend",
       "typeVersion": 1,
       "position": [
-        2540,
-        780
+        1940,
+        720
       ],
       "executeOnce": true,
       "credentials": {
         "smtp": {
-          "id": "3",
-          "name": "SMTP productfeeds"
+          "id": "xOWEzMfuqVVoWrw0",
+          "name": "productfeeds@biketrax.co.uk"
         }
       }
     },
@@ -260,24 +260,24 @@
           ]
         }
       },
-      "id": "2d5f79c0-a469-482d-b0bb-4b292f70aa49",
+      "id": "3e0d7a87-ada6-4fc8-944d-42377734f6d5",
       "name": "IF",
       "type": "n8n-nodes-base.if",
       "typeVersion": 1,
       "position": [
-        2320,
-        780
+        1720,
+        720
       ]
     },
     {
       "parameters": {},
-      "id": "cc8abad9-6a99-45a9-bce8-211a4755b775",
+      "id": "794a7fc8-eb56-42eb-a847-45071465836f",
       "name": "NoOp",
       "type": "n8n-nodes-base.noOp",
       "typeVersion": 1,
       "position": [
-        2320,
-        1020
+        1720,
+        960
       ]
     },
     {
@@ -286,18 +286,18 @@
         "query": "SELECT prodid,ecomid,posid,{{ $(\"When Called By Another Workflow\").first().json[\"name\"].toLowerCase()+\"alias\" }} AS alias FROM odoodata.map_categorylisting WHERE {{ $(\"When Called By Another Workflow\").first().json[\"name\"].toLowerCase()+\"Alias\" }} IS NOT NULL",
         "options": {}
       },
-      "id": "de5d2b01-1f21-4a6b-9817-7f249414da7f",
+      "id": "2911151c-101b-437a-8661-0b8ab46ea931",
       "name": "Postgres",
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.2,
       "position": [
-        1600,
-        380
+        1000,
+        320
       ],
       "credentials": {
         "postgres": {
-          "id": "8WhTUhxcTPP1zlNv",
-          "name": "btxPIM"
+          "id": "dqel3RyoT6NsGiSw",
+          "name": "odooData"
         }
       }
     },
@@ -307,18 +307,18 @@
         "query": "UPDATE {{\"datatransit.transit_\" + $(\"When Called By Another Workflow\").first().json[\"name\"].toLowerCase()}} SET\n  categ_id = {{ $json.categ_id }},\n  public_categ_ids = {{ $json.public_categ_ids }},\n  pos_categ_id = {{ $json.pos_categ_id }}\nWHERE subcategory = {{ \"'\"+$json.subcategory+\"'\" }}",
         "options": {}
       },
-      "id": "e02c82bd-0679-499e-9374-5925ee4a1447",
+      "id": "560c304f-2cb6-4100-a2b2-9607b115f57b",
       "name": "Postgres1",
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.2,
       "position": [
-        2360,
-        380
+        1760,
+        320
       ],
       "credentials": {
         "postgres": {
-          "id": "8WhTUhxcTPP1zlNv",
-          "name": "btxPIM"
+          "id": "dqel3RyoT6NsGiSw",
+          "name": "odooData"
         }
       }
     },
@@ -328,18 +328,18 @@
         "query": "SELECT productcode,subcategory FROM {{\"datatransit.transit_\"+$('When Called By Another Workflow').first().json.name.toLowerCase()}} WHERE categ_id = NULL;",
         "options": {}
       },
-      "id": "986d03d1-276b-413e-b600-c7bbc5402ce3",
+      "id": "079cd002-118f-4dd8-b878-fa098566f2a4",
       "name": "Postgres2",
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.2,
       "position": [
-        1520,
-        780
+        920,
+        720
       ],
       "credentials": {
         "postgres": {
-          "id": "8WhTUhxcTPP1zlNv",
-          "name": "btxPIM"
+          "id": "dqel3RyoT6NsGiSw",
+          "name": "odooData"
         }
       }
     }
@@ -358,8 +358,15 @@
     "executionOrder": "v1"
   },
   "staticData": null,
-  "tags": [],
+  "tags": [
+    {
+      "id": "4S5wvtegUIvgvqYs",
+      "createdAt": "2023-08-08T15:46:20.698Z",
+      "updatedAt": "2023-08-08T15:46:20.698Z",
+      "name": "PostgreSQL"
+    }
+  ],
   "triggerCount": 0,
-  "updatedAt": "2023-07-30T16:11:54.000Z",
-  "versionId": "3bd7da7b-a55e-4b3b-a2d3-d44a6cb8dbfc"
+  "updatedAt": "2023-08-08T15:49:11.000Z",
+  "versionId": "8b9f4607-0a1c-40d7-86a8-d50e211a47f6"
 }
