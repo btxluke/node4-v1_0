@@ -35,19 +35,19 @@
       ]
     }
   },
-  "createdAt": "2023-07-30T15:01:20.845Z",
-  "id": "2kih6XkABbelLfhl",
+  "createdAt": "2023-08-08T15:51:51.838Z",
+  "id": "V8KQ3JysR5RdK1Ps",
   "name": "Data Update: Brompton: Prep",
   "nodes": [
     {
       "parameters": {},
-      "id": "05d18a12-b09d-42c4-ab00-a5c2c3b84e68",
+      "id": "505698db-0595-4f42-b966-802e4f2d61cd",
       "name": "Execute Workflow Trigger",
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "typeVersion": 1,
       "position": [
-        740,
-        520
+        660,
+        560
       ]
     },
     {
@@ -55,13 +55,13 @@
         "operation": "executeQuery",
         "query": "=ALTER TABLE `Upload-Brompton` ADD Vat INT(2) AS (ROUND(((`MSRP incld. 20% VAT, in GBP` - `MSRP excluding. 20% VAT, in GBP`)/`MSRP excluding. 20% VAT, in GBP)*100))"
       },
-      "id": "f248928d-cf77-4099-a0d1-00845f91a5c3",
+      "id": "9b16a5f9-c42d-4d0d-a379-066a55afcf24",
       "name": "Add Vat",
       "type": "n8n-nodes-base.mySql",
       "typeVersion": 1,
       "position": [
-        920,
-        520
+        840,
+        560
       ],
       "credentials": {
         "mySql": {
@@ -76,13 +76,13 @@
         "height": 516.3062566959222,
         "width": 738.7153363490088
       },
-      "id": "ba933c09-aea4-4848-abd8-5af0c636fbb3",
+      "id": "5cd7bd9c-f96a-4d69-84d3-bda38e97fbbe",
       "name": "Sticky Note",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        700,
-        420
+        620,
+        460
       ]
     },
     {
@@ -90,13 +90,13 @@
         "operation": "executeQuery",
         "query": "ALTER TABLE `Upload-Brompton`\nCHANGE `Item Code`  `ProductCode` VARCHAR(20),\nCHANGE `Item Description`  `ProductName` VARCHAR(235),\nCHANGE `Category`  `SubCategory` VARCHAR(39),\nCHANGE `Trade Price in, GBP Exc. QSD where applicable`  `YourPrice` DECIMAL(10,2),\nCHANGE `MSRP excluding. 20% VAT, in GBP`  `Rrp` DECIMAL(10,2),\nCHANGE `Barcode`  `Ean` VARCHAR(14);"
       },
-      "id": "d5d13939-9454-4ed2-8ef6-13295a92311f",
+      "id": "d4b86370-0bc2-4ec1-9405-09aa3567ddf1",
       "name": "Rename Columns",
       "type": "n8n-nodes-base.mySql",
       "typeVersion": 1,
       "position": [
-        900,
-        760
+        820,
+        800
       ],
       "credentials": {
         "mySql": {
@@ -110,13 +110,13 @@
         "operation": "executeQuery",
         "query": "ALTER TABLE `Upload-Brompton` \nADD `StockCount` INT(1) NULL DEFAULT NULL AFTER `Vat`, \nADD `ShortDescription` VARCHAR(222) NULL DEFAULT NULL AFTER `StockCount`,\nADD `LongDescription` VARCHAR(16725) AS (\"Official Brompton Spare</br></br>Please Note: Brompton do not provide us with stock availability information, please contact us to confirm your required item is available before placing an order, when in store availability is not indicated.\") AFTER `StockCount`,\nADD `ImageUrl` VARCHAR(80) NULL DEFAULT NULL AFTER `LongDescription`,\nADD `AlternativeImage1Url` VARCHAR(80) NULL DEFAULT NULL AFTER `ImageUrl`,\nADD `AlternativeImage2Url` VARCHAR(80) NULL DEFAULT NULL AFTER `AlternativeImage1Url`, \nADD `AlternativeImage3Url` VARCHAR(80) NULL DEFAULT NULL AFTER `AlternativeImage2Url`,\nADD `Size` VARCHAR(20) NULL DEFAULT NULL AFTER `AlternativeImage3Url`,\nADD `Colour` VARCHAR(20) NULL DEFAULT NULL AFTER `Size`,\nADD `Brand` VARCHAR(20) AS (\"Brompton\") AFTER `Colour`,\nADD `Weight` VARCHAR(20) NULL DEFAULT NULL AFTER `Brand`,\nADD `PackQty` VARCHAR(27) NULL DEFAULT NULL AFTER `Weight`,\nADD `LeadTime` INT(3) NULL DEFAULT NULL AFTER `PackQty`,\nADD `VariantGrouping` VARCHAR(22) AS (`ProductCode`) AFTER `LeadTime`,\nADD `Keywords` VARCHAR(1000) NULL DEFAULT NULL AFTER `SubCategory`;"
       },
-      "id": "3f29f1f4-af09-49da-a91a-2058935b48cc",
+      "id": "5f618202-6a8f-41bf-a880-cd96306bdd15",
       "name": "Add Columns",
       "type": "n8n-nodes-base.mySql",
       "typeVersion": 1,
       "position": [
-        1060,
-        760
+        980,
+        800
       ],
       "credentials": {
         "mySql": {
@@ -133,19 +133,13 @@
   "staticData": null,
   "tags": [
     {
-      "id": "WFPdknuSW7g3910b",
-      "createdAt": "2023-07-30T15:00:31.411Z",
-      "updatedAt": "2023-07-30T15:00:31.411Z",
-      "name": "Brompton"
-    },
-    {
-      "id": "siOv68LvUdVRWklZ",
-      "createdAt": "2023-07-30T14:17:43.423Z",
-      "updatedAt": "2023-07-30T14:17:43.423Z",
-      "name": "MySQL - to Update"
+      "id": "NcuD1mGXd6tJAK4Q",
+      "createdAt": "2023-08-08T15:52:23.401Z",
+      "updatedAt": "2023-08-08T15:52:23.401Z",
+      "name": "mysql (to deprecate)"
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-07-30T15:02:05.000Z",
-  "versionId": "ff2d6242-e543-478c-9e3d-a70f01092012"
+  "updatedAt": "2023-08-08T15:52:24.000Z",
+  "versionId": "07ae3ffc-5507-4980-a693-a17e43ed04d1"
 }
