@@ -364,32 +364,32 @@
       ]
     }
   },
-  "createdAt": "2023-07-30T14:49:25.787Z",
-  "id": "csVLnMK2CwrjkF5U",
+  "createdAt": "2023-08-10T09:17:56.996Z",
+  "id": "9GCkbS6dkAE9cgU8",
   "name": "Data Update: Madison",
   "nodes": [
     {
       "parameters": {},
-      "id": "2bce8071-b0bb-4b3e-a798-95e168bb2457",
+      "id": "d7c0be2b-2632-4e56-b6f6-cbf979b8fab2",
       "name": "When Called By Another Workflow",
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "typeVersion": 1,
       "position": [
-        -760,
-        1160
+        840,
+        760
       ]
     },
     {
       "parameters": {
         "workflowId": "40"
       },
-      "id": "02b2c97c-dd23-4d8c-b77c-ec6425c440fa",
+      "id": "46ef810b-a73c-4b24-b549-31d2aab09976",
       "name": "Extra Info Label Sync",
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1,
       "position": [
-        2320,
-        1140
+        3920,
+        740
       ],
       "alwaysOutputData": true,
       "executeOnce": true
@@ -398,13 +398,13 @@
       "parameters": {
         "workflowId": "41"
       },
-      "id": "1376335d-fdca-48c2-8634-b066ea49c0cf",
+      "id": "b4321799-e2dd-40d6-b868-9486c1e85dbb",
       "name": "Extra Info Label Write",
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1,
       "position": [
-        2500,
-        1140
+        4100,
+        740
       ],
       "alwaysOutputData": true,
       "executeOnce": true
@@ -413,13 +413,13 @@
       "parameters": {
         "workflowId": "42"
       },
-      "id": "9bc098e0-621f-46ea-9f1c-511f6376b31f",
+      "id": "7c569e75-2e45-4db1-a15e-e0ba8b659ee6",
       "name": "Extra Info Sync",
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1,
       "position": [
-        2660,
-        1140
+        4260,
+        740
       ],
       "alwaysOutputData": true,
       "executeOnce": true
@@ -428,13 +428,13 @@
       "parameters": {
         "workflowId": "48"
       },
-      "id": "25780329-911d-447a-bbc4-3790ead955a9",
+      "id": "1c075803-76de-4953-8f69-5d1c4ee9e274",
       "name": "Extra Info Write",
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1,
       "position": [
-        2820,
-        1140
+        4420,
+        740
       ],
       "alwaysOutputData": true,
       "executeOnce": true
@@ -460,13 +460,13 @@
           ]
         }
       },
-      "id": "3dc10002-d95b-4b87-9584-e6c9fe9111f8",
+      "id": "2878eb44-5085-4e76-9e6c-d5d81ed5ba5c",
       "name": "Odoo3",
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        -380,
-        1720
+        1220,
+        1320
       ],
       "credentials": {
         "odooApi": {
@@ -480,13 +480,13 @@
         "mode": "chooseBranch",
         "output": "input2"
       },
-      "id": "bb5834c7-6c6a-483d-9f01-bcfa891b401c",
+      "id": "8b8b8e21-0204-4f8c-98ad-7fbc4c0bf586",
       "name": "Merge2",
       "type": "n8n-nodes-base.merge",
       "typeVersion": 2,
       "position": [
-        -240,
-        1160
+        1360,
+        760
       ]
     },
     {
@@ -505,13 +505,13 @@
         },
         "options": {}
       },
-      "id": "52919d7f-fb5c-4392-b842-ae361bffcef1",
+      "id": "f250857b-fdf3-4860-8c36-977139098063",
       "name": "Globals",
       "type": "n8n-nodes-base.set",
       "typeVersion": 1,
       "position": [
-        -300,
-        960
+        1300,
+        560
       ]
     },
     {
@@ -520,13 +520,13 @@
         "responseMode": "lastNode",
         "options": {}
       },
-      "id": "c1febc46-52c5-4e38-b42b-4c1948471e92",
+      "id": "e58fc38b-399d-4726-907e-d0eff46bc5ca",
       "name": "Webhook",
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 1,
       "position": [
-        -760,
-        960
+        840,
+        560
       ],
       "webhookId": "8e681709-59dd-45f0-9403-d2e72945ebd0",
       "disabled": true
@@ -537,89 +537,89 @@
         "height": 1459.622641509435,
         "width": 1561.207547169811
       },
-      "id": "4eb06352-300d-45cb-adf0-bf229f861657",
+      "id": "37199024-012d-407c-9265-cf7da6e6c69d",
       "name": "Sticky Note",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -1000,
-        700
+        600,
+        300
       ]
     },
     {
       "parameters": {
         "jsCode": "return $('Globals').first()"
       },
-      "id": "fe9e1d85-4ea4-49b5-a491-7a9fdef51e49",
+      "id": "86d7c4f6-8496-4e1e-9af2-0a359ba5ca8c",
       "name": "Code9",
       "type": "n8n-nodes-base.code",
       "typeVersion": 1,
       "position": [
-        0,
-        1400
+        1600,
+        1000
       ]
     },
     {
       "parameters": {},
-      "id": "75bb924a-dcb3-459b-862e-c5451419d775",
+      "id": "821f45b5-de91-41ec-8ea4-c7ac84ae5f98",
       "name": "Product Import",
       "type": "n8n-nodes-base.noOp",
       "typeVersion": 1,
       "position": [
-        985,
-        1194
+        2585,
+        794
       ]
     },
     {
       "parameters": {
         "workflowId": "67"
       },
-      "id": "c5bd3112-de35-4a84-b8ce-663ad018751e",
+      "id": "95d25f4d-c906-47ad-843c-059e3db42e6d",
       "name": "Colour Write",
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1,
       "position": [
-        2105,
-        1114
+        3705,
+        714
       ]
     },
     {
       "parameters": {
         "workflowId": "68"
       },
-      "id": "edeb812c-dd95-4d2b-9866-1ec70d77d67a",
+      "id": "1846ed98-f6c8-4314-aa36-85afa42347bb",
       "name": "Attribute Write",
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1,
       "position": [
-        2240,
-        1320
+        3840,
+        920
       ]
     },
     {
       "parameters": {
         "jsCode": "return $('Globals').first()"
       },
-      "id": "de016548-17dd-4f01-a263-5e5c501104c2",
+      "id": "3eaa8a53-aab9-4b86-8260-d4c28d9600c7",
       "name": "Code11",
       "type": "n8n-nodes-base.code",
       "typeVersion": 1,
       "position": [
-        705,
-        1194
+        2305,
+        794
       ]
     },
     {
       "parameters": {
         "workflowId": "110"
       },
-      "id": "c7a21341-73f8-4cdf-ad19-636205a06c0d",
+      "id": "dcbf192c-76c7-4e24-9f0f-909018a92f89",
       "name": "Index Write",
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1,
       "position": [
-        3020,
-        1780
+        4620,
+        1380
       ],
       "executeOnce": true
     },
@@ -627,13 +627,13 @@
       "parameters": {
         "workflowId": "77"
       },
-      "id": "8a0f358e-f270-4908-9956-68e0a934910c",
+      "id": "63e778c8-8c2e-4c43-b5b9-e39eb5ac05db",
       "name": "Category Sync1",
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1,
       "position": [
-        1145,
-        1114
+        2745,
+        714
       ],
       "executeOnce": true,
       "alwaysOutputData": true
@@ -642,13 +642,13 @@
       "parameters": {
         "workflowId": "62"
       },
-      "id": "89e7ff1c-a7fd-4021-99f8-811f37660c69",
+      "id": "ec952c93-1308-47e9-beaf-5e11ad75db1b",
       "name": "Size Sync1",
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1,
       "position": [
-        1265,
-        1314
+        2865,
+        914
       ],
       "executeOnce": true,
       "alwaysOutputData": true
@@ -657,13 +657,13 @@
       "parameters": {
         "workflowId": "64"
       },
-      "id": "eddc439f-48c5-4f3a-a3cc-dd5d665b1603",
+      "id": "4cee496b-4e25-4286-b3bb-2f4d7a9e6a12",
       "name": "Brand Sync1",
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1,
       "position": [
-        1605,
-        1314
+        3205,
+        914
       ],
       "executeOnce": true,
       "alwaysOutputData": true
@@ -672,52 +672,52 @@
       "parameters": {
         "workflowId": "65"
       },
-      "id": "f667d0e2-8d96-4b93-953c-11bac3638c00",
+      "id": "7ca5726e-971f-4d68-8ced-63d3add1eb4c",
       "name": "Brand Write1",
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1,
       "position": [
-        1785,
-        1114
+        3385,
+        714
       ]
     },
     {
       "parameters": {
         "workflowId": "66"
       },
-      "id": "72f296d4-b7c5-48a3-8389-f993bee903b5",
+      "id": "8c63ad22-3d4d-4a77-9b9e-e01f54f9213a",
       "name": "Colour Sync1",
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1,
       "position": [
-        1925,
-        1314
+        3525,
+        914
       ],
       "alwaysOutputData": true,
       "executeOnce": true
     },
     {
       "parameters": {},
-      "id": "7a0ddf47-5cf2-4492-bc44-a31058b6b198",
+      "id": "b1e10deb-1603-4955-9b8b-633fedf9353a",
       "name": "Template Creation2",
       "type": "n8n-nodes-base.noOp",
       "typeVersion": 1,
       "position": [
-        2960,
-        1140
+        4560,
+        740
       ]
     },
     {
       "parameters": {
         "workflowId": "69"
       },
-      "id": "1a1b0474-5f86-472f-9e18-0fe2fa032ad1",
+      "id": "555ce01c-3e2e-4b4b-8b6b-b20a260c4423",
       "name": "Template Creation3",
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1,
       "position": [
-        3280,
-        1140
+        4880,
+        740
       ],
       "executeOnce": true
     },
@@ -725,13 +725,13 @@
       "parameters": {
         "workflowId": "63"
       },
-      "id": "ceb974ff-b9d1-4b6f-904a-fd27afb52883",
+      "id": "5cfe547d-ac12-403a-bcd6-95d3d85e1a25",
       "name": "Variant Write1",
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1,
       "position": [
-        1465,
-        1114
+        3065,
+        714
       ],
       "alwaysOutputData": true,
       "executeOnce": true
@@ -742,130 +742,130 @@
         "height": 320.17725067385476,
         "width": 269.92986899015517
       },
-      "id": "83ad9252-677c-4a41-b58f-564abe2651a6",
+      "id": "3c664f3b-13f8-4e04-aec1-4e71edc87fa5",
       "name": "Sticky Note2",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        660,
-        1120
+        2260,
+        720
       ]
     },
     {
       "parameters": {
         "jsCode": "return $('Globals').first()"
       },
-      "id": "cecdaf76-96f6-44aa-8044-fad5fdd9139f",
+      "id": "5c252c4e-82a8-4acd-96dc-aed1eeaa9a0c",
       "name": "Code12",
       "type": "n8n-nodes-base.code",
       "typeVersion": 1,
       "position": [
-        1325,
-        1114
+        2925,
+        714
       ]
     },
     {
       "parameters": {
         "jsCode": "return $('Globals').first()"
       },
-      "id": "61ef151b-e5ef-46fe-8096-ec5e482de717",
+      "id": "8778176e-ad22-4143-962f-06d4879a861a",
       "name": "Code13",
       "type": "n8n-nodes-base.code",
       "typeVersion": 1,
       "position": [
-        1465,
-        1314
+        3065,
+        914
       ]
     },
     {
       "parameters": {
         "jsCode": "return $('Globals').first()"
       },
-      "id": "50df3fa3-1889-459c-b9e7-6be09c58c5e6",
+      "id": "8d1e3c59-98b9-4351-85e4-2bb1ccaecf58",
       "name": "Code14",
       "type": "n8n-nodes-base.code",
       "typeVersion": 1,
       "position": [
-        1645,
-        1114
+        3245,
+        714
       ]
     },
     {
       "parameters": {
         "jsCode": "return $('Globals').first()"
       },
-      "id": "ffc9a9f4-4071-4a58-87a7-72e09ff38d4b",
+      "id": "d58ef1a1-e947-4ca8-8e27-99ad7282051c",
       "name": "Code15",
       "type": "n8n-nodes-base.code",
       "typeVersion": 1,
       "position": [
-        1785,
-        1314
+        3385,
+        914
       ]
     },
     {
       "parameters": {
         "jsCode": "return $('Globals').first()"
       },
-      "id": "7e9c9eeb-767d-49af-b354-4a64750bb6b3",
+      "id": "9adc20b7-4f9a-4c91-be6b-5effd22b3db2",
       "name": "Code16",
       "type": "n8n-nodes-base.code",
       "typeVersion": 1,
       "position": [
-        1965,
-        1114
+        3565,
+        714
       ]
     },
     {
       "parameters": {
         "jsCode": "return $('Globals').first()"
       },
-      "id": "c5e9a0ab-cff3-4acf-a1cf-09423d502d37",
+      "id": "9f633f2d-0f1a-4c24-a1eb-fb0bce1d1613",
       "name": "Code17",
       "type": "n8n-nodes-base.code",
       "typeVersion": 1,
       "position": [
-        2105,
-        1314
+        3705,
+        914
       ]
     },
     {
       "parameters": {
         "jsCode": "return $('Globals').first()"
       },
-      "id": "52047ed9-1207-4428-a2d8-0cf4073951cc",
+      "id": "f45778a1-8c0b-445b-949b-eac28a3462c9",
       "name": "Code18",
       "type": "n8n-nodes-base.code",
       "typeVersion": 1,
       "position": [
-        2880,
-        1780
+        4480,
+        1380
       ]
     },
     {
       "parameters": {
         "jsCode": "return $('Globals').first()"
       },
-      "id": "b85a895f-5921-4dce-87ac-2c6803e7d642",
+      "id": "1b653113-8c7b-4d02-a53f-5d10c2a54b17",
       "name": "Code19",
       "type": "n8n-nodes-base.code",
       "typeVersion": 1,
       "position": [
-        1145,
-        1314
+        2745,
+        914
       ]
     },
     {
       "parameters": {
         "jsCode": "return $('Globals').first()"
       },
-      "id": "4c8269d5-98aa-466f-86ca-0502f9fa1191",
+      "id": "6ea79f7d-40ac-4424-a085-fd1ea03ec3ef",
       "name": "Code20",
       "type": "n8n-nodes-base.code",
       "typeVersion": 1,
       "position": [
-        3140,
-        1140
+        4740,
+        740
       ]
     },
     {
@@ -874,47 +874,47 @@
         "query": "SELECT * FROM odoodata.map_supplierinfo WHERE Name = 'Madison';",
         "options": {}
       },
-      "id": "4fbdb6cf-c7a5-4b8d-affd-f5a58ab6bbcc",
+      "id": "a1d3c0a8-61a0-46bd-8815-451d293403fc",
       "name": "Postgres",
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.2,
       "position": [
-        -500,
-        740
+        1100,
+        340
       ],
       "credentials": {
         "postgres": {
-          "id": "9Jz67Tm0faeykq6p",
-          "name": "odoodata"
+          "id": "dqel3RyoT6NsGiSw",
+          "name": "odooData"
         }
       }
     },
     {
       "parameters": {
-        "workflowId": "ickMvwWPWp74exVK"
+        "workflowId": "w7Iviilx7BBDzFFQ"
       },
-      "id": "584cd53c-ba48-4ebb-8967-e11ab2680c79",
+      "id": "0c8e65bc-e11b-4e3b-8dec-381c38ad604d",
       "name": "Data Update: GENERIC: Make Transit Tables",
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1,
       "position": [
-        160,
-        1400
+        1760,
+        1000
       ],
       "alwaysOutputData": true,
       "executeOnce": true
     },
     {
       "parameters": {
-        "workflowId": "Zu2Wr3TPnxgRis0T"
+        "workflowId": "pUmiiXlXRzZsrfdD"
       },
-      "id": "f9e5c79e-f152-4b2e-a397-757de4bb1608",
+      "id": "f3fe6048-b4fa-42d1-8718-570f17603b86",
       "name": "Data Update: Madison: Prep",
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1,
       "position": [
-        0,
-        1160
+        1600,
+        760
       ]
     }
   ],
@@ -934,21 +934,30 @@
     ]
   },
   "settings": {
-    "executionOrder": "v1",
-    "saveDataSuccessExecution": "none",
-    "saveManualExecutions": true,
-    "callerPolicy": "workflowsFromSameOwner"
+    "executionOrder": "v1"
   },
   "staticData": null,
   "tags": [
     {
-      "id": "KilfDEeZiGHrZNoM",
-      "createdAt": "2023-07-30T14:49:29.931Z",
-      "updatedAt": "2023-07-30T14:49:29.931Z",
-      "name": "Madison"
+      "id": "4S5wvtegUIvgvqYs",
+      "createdAt": "2023-08-08T15:46:20.698Z",
+      "updatedAt": "2023-08-08T15:46:20.698Z",
+      "name": "PostgreSQL"
+    },
+    {
+      "id": "Vuerdt8JErJ7XwoD",
+      "createdAt": "2023-08-08T15:51:26.157Z",
+      "updatedAt": "2023-08-08T15:51:26.157Z",
+      "name": "code"
+    },
+    {
+      "id": "evqsbisrBK9HqVQU",
+      "createdAt": "2023-08-08T15:51:11.963Z",
+      "updatedAt": "2023-08-08T15:51:11.963Z",
+      "name": "Merge"
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-08-02T13:50:59.000Z",
-  "versionId": "7fa49792-94b9-4c02-8c3f-1036f71f7b8c"
+  "updatedAt": "2023-08-12T09:12:54.000Z",
+  "versionId": "37e67fde-65a7-478e-a9b2-6007cc2424c3"
 }
