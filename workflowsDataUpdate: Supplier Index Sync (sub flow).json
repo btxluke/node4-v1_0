@@ -1,0 +1,285 @@
+{
+  "active": false,
+  "connections": {
+    "Execute Workflow Trigger": {
+      "main": [
+        [
+          {
+            "node": "Postgres",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-08-12T10:32:04.395Z",
+  "id": "A3plXyotqr0Mfb30",
+  "name": "DataUpdate: Supplier Index Sync (sub flow)",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "ac920767-fc83-4601-ac7b-925228c22310",
+      "name": "Execute Workflow Trigger",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        820,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "schema": {
+          "__rl": true,
+          "value": "datatransit",
+          "mode": "list",
+          "cachedResultName": "datatransit"
+        },
+        "table": {
+          "__rl": true,
+          "value": "={{ \"index_\"+$json.supplier }}",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $json.id }}",
+            "default_code": "={{ $json.default_code }}",
+            "barcode": "={{ $json.barcode }}",
+            "product_tag_ids": "={{ $json.product_tag_ids.join() }}",
+            "product_tmpl_id": "={{ $json.product_tmpl_id[0] }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": true,
+              "defaultMatch": true,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "default_code",
+              "displayName": "default_code",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "barcode",
+              "displayName": "barcode",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "product_tag_ids",
+              "displayName": "product_tag_ids",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "product_tmpl_id",
+              "displayName": "product_tmpl_id",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "d27aa483-36a5-4a8d-b0fc-950f3515f6ae",
+      "name": "Postgres",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.2,
+      "position": [
+        1040,
+        360
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "ayAxbLgcy5Lpqy5D",
+          "name": "datatransit"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "Execute Workflow Trigger": [
+      {
+        "json": {
+          "id": 10044,
+          "default_code": "000 9121",
+          "barcode": "4524667127482 ",
+          "product_tag_ids": [
+            8
+          ],
+          "product_tmpl_id": [
+            6075,
+            "[000 9121] 3/16 inch Ball Bearings"
+          ],
+          "supplier": "madison"
+        }
+      },
+      {
+        "json": {
+          "id": 10045,
+          "default_code": "000 9127",
+          "barcode": "4524667145325 ",
+          "product_tag_ids": [
+            8
+          ],
+          "product_tmpl_id": [
+            6076,
+            "[000 9127] 3/16 inch Stainless Steel Ball Bearings"
+          ],
+          "supplier": "madison"
+        }
+      },
+      {
+        "json": {
+          "id": 10046,
+          "default_code": "000 9131",
+          "barcode": "4524667145332 ",
+          "product_tag_ids": [
+            8
+          ],
+          "product_tmpl_id": [
+            6077,
+            "[000 9131] 1/4 inch Ball Bearings"
+          ],
+          "supplier": "madison"
+        }
+      },
+      {
+        "json": {
+          "id": 10047,
+          "default_code": "000 9137",
+          "barcode": "4524667145349 ",
+          "product_tag_ids": [
+            8
+          ],
+          "product_tmpl_id": [
+            6078,
+            "[000 9137] 1/4 inch stainless steel ball bearings"
+          ],
+          "supplier": "madison"
+        }
+      },
+      {
+        "json": {
+          "id": 10048,
+          "default_code": "012 3478-5",
+          "barcode": "4524667145400 ",
+          "product_tag_ids": [
+            8
+          ],
+          "product_tmpl_id": [
+            6079,
+            "[012 3478-5] WH-R500-A-F spoke 278 mm"
+          ],
+          "supplier": "madison"
+        }
+      },
+      {
+        "json": {
+          "id": 10049,
+          "default_code": "012 3486-5",
+          "barcode": "4524667145417 ",
+          "product_tag_ids": [
+            8
+          ],
+          "product_tmpl_id": [
+            6080,
+            "[012 3486-5] WH-R500-A-R bladed spoke - 286 mm"
+          ],
+          "supplier": "madison"
+        }
+      },
+      {
+        "json": {
+          "id": 10050,
+          "default_code": "012 3Z78-5",
+          "barcode": "4524667145462 ",
+          "product_tag_ids": [
+            8
+          ],
+          "product_tmpl_id": [
+            6081,
+            "[012 3Z78-5] WH-R500 front spoke 278 mm"
+          ],
+          "supplier": "madison"
+        }
+      },
+      {
+        "json": {
+          "id": 10051,
+          "default_code": "012 3Z86-5",
+          "barcode": "4524667145486 ",
+          "product_tag_ids": [
+            8
+          ],
+          "product_tmpl_id": [
+            6082,
+            "[012 3Z86-5] WH-R500 rear spoke 286 mm drive side"
+          ],
+          "supplier": "madison"
+        }
+      },
+      {
+        "json": {
+          "id": 10052,
+          "default_code": "012 A604-7",
+          "barcode": "4524667944164 ",
+          "product_tag_ids": [
+            8
+          ],
+          "product_tmpl_id": [
+            6083,
+            "[012 A604-7] WH-RS10 spoke 304 mm black"
+          ],
+          "supplier": "madison"
+        }
+      },
+      {
+        "json": {
+          "id": 10053,
+          "default_code": "012 AB84-5",
+          "barcode": "4524667229544 ",
+          "product_tag_ids": [
+            8
+          ],
+          "product_tmpl_id": [
+            6084,
+            "[012 AB84-5] WH-RS20 spoke black 284 mm"
+          ],
+          "supplier": "madison"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2023-08-12T10:47:24.000Z",
+  "versionId": "69a6659e-adf0-493c-ab32-8ba8a3554e60"
+}
