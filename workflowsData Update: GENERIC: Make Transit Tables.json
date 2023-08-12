@@ -885,8 +885,8 @@
       ],
       "credentials": {
         "postgres": {
-          "id": "9Jz67Tm0faeykq6p",
-          "name": "odoodata"
+          "id": "dqel3RyoT6NsGiSw",
+          "name": "odooData"
         }
       }
     },
@@ -906,8 +906,8 @@
       ],
       "credentials": {
         "postgres": {
-          "id": "9Jz67Tm0faeykq6p",
-          "name": "odoodata"
+          "id": "dqel3RyoT6NsGiSw",
+          "name": "odooData"
         }
       }
     },
@@ -929,8 +929,8 @@
       ],
       "credentials": {
         "postgres": {
-          "id": "9Jz67Tm0faeykq6p",
-          "name": "odoodata"
+          "id": "dqel3RyoT6NsGiSw",
+          "name": "odooData"
         }
       }
     },
@@ -950,8 +950,8 @@
       ],
       "credentials": {
         "postgres": {
-          "id": "9Jz67Tm0faeykq6p",
-          "name": "odoodata"
+          "id": "dqel3RyoT6NsGiSw",
+          "name": "odooData"
         }
       }
     },
@@ -971,8 +971,8 @@
       ],
       "credentials": {
         "postgres": {
-          "id": "9Jz67Tm0faeykq6p",
-          "name": "odoodata"
+          "id": "dqel3RyoT6NsGiSw",
+          "name": "odooData"
         }
       }
     },
@@ -992,8 +992,8 @@
       ],
       "credentials": {
         "postgres": {
-          "id": "8WhTUhxcTPP1zlNv",
-          "name": "btxPIM"
+          "id": "ayAxbLgcy5Lpqy5D",
+          "name": "datatransit"
         }
       }
     },
@@ -1013,8 +1013,8 @@
       ],
       "credentials": {
         "postgres": {
-          "id": "8WhTUhxcTPP1zlNv",
-          "name": "btxPIM"
+          "id": "ayAxbLgcy5Lpqy5D",
+          "name": "datatransit"
         }
       }
     },
@@ -1034,8 +1034,8 @@
       ],
       "credentials": {
         "postgres": {
-          "id": "8WhTUhxcTPP1zlNv",
-          "name": "btxPIM"
+          "id": "ayAxbLgcy5Lpqy5D",
+          "name": "datatransit"
         }
       }
     },
@@ -1055,8 +1055,8 @@
       ],
       "credentials": {
         "postgres": {
-          "id": "8WhTUhxcTPP1zlNv",
-          "name": "btxPIM"
+          "id": "ayAxbLgcy5Lpqy5D",
+          "name": "datatransit"
         }
       }
     },
@@ -1076,8 +1076,8 @@
       ],
       "credentials": {
         "postgres": {
-          "id": "8WhTUhxcTPP1zlNv",
-          "name": "btxPIM"
+          "id": "ayAxbLgcy5Lpqy5D",
+          "name": "datatransit"
         }
       }
     },
@@ -1097,8 +1097,8 @@
       ],
       "credentials": {
         "postgres": {
-          "id": "8WhTUhxcTPP1zlNv",
-          "name": "btxPIM"
+          "id": "ayAxbLgcy5Lpqy5D",
+          "name": "datatransit"
         }
       }
     },
@@ -1154,7 +1154,7 @@
     },
     {
       "parameters": {
-        "workflowId": "PvBNWOGEX6Tul1IC"
+        "workflowId": "2j04k1KgdEFjYUVy"
       },
       "id": "c45494a1-7da5-4030-93c8-278da2b612e3",
       "name": "Remove delisted items",
@@ -1224,6 +1224,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-08-12T09:05:41.000Z",
-  "versionId": "afaeec75-319e-41fe-b5a9-8951b6b023eb"
+  "updatedAt": "2023-08-12T10:16:20.000Z",
+  "versionId": "ef7050fe-59a1-4b4e-8e36-2d5bf324b799"
 }
