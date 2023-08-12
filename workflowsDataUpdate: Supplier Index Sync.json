@@ -1,0 +1,268 @@
+{
+  "active": false,
+  "connections": {
+    "Execute Workflow Trigger": {
+      "main": [
+        [
+          {
+            "node": "Globals",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Globals": {
+      "main": [
+        [
+          {
+            "node": "Postgres",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Odoo": {
+      "main": [
+        [
+          {
+            "node": "Set",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split In Batches": {
+      "main": [
+        [
+          {
+            "node": "Execute Workflow",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Operation, do nothing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Workflow": {
+      "main": [
+        [
+          {
+            "node": "Split In Batches",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres": {
+      "main": [
+        [
+          {
+            "node": "Odoo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set": {
+      "main": [
+        [
+          {
+            "node": "Split In Batches",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-08-12T10:16:36.959Z",
+  "id": "bnPQxg9HQ0hjn4VZ",
+  "name": "DataUpdate: Supplier Index Sync",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "88fd37e0-5db2-47e3-91df-372629997bf5",
+      "name": "Execute Workflow Trigger",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        660,
+        740
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "product.product",
+        "operation": "getAll",
+        "options": {
+          "fieldsList": [
+            "id",
+            "default_code",
+            "barcode",
+            "product_tag_ids",
+            "product_tmpl_id"
+          ]
+        },
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "product_tag_ids",
+              "operator": "in",
+              "value": "={{ Number($('Globals').first().json.globals[0].ProductTagId) }}"
+            }
+          ]
+        }
+      },
+      "id": "45572ecd-3b89-443b-8dd1-6156414e913c",
+      "name": "Odoo",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        1380,
+        740
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "2ttPRWxNWqAWB6fY",
+          "name": "Odoo account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "name",
+              "value": "={{ $json.name }}"
+            },
+            {
+              "name": "globals",
+              "value": "={{ JSON.parse($json.globals) }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "101fa3aa-2277-42c7-a986-e4fcea29365d",
+      "name": "Globals",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [
+        880,
+        740
+      ]
+    },
+    {
+      "parameters": {
+        "workflowId": "A3plXyotqr0Mfb30"
+      },
+      "id": "62ab30fb-2c4a-42ff-948a-1db468021812",
+      "name": "Execute Workflow",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [
+        2360,
+        740
+      ]
+    },
+    {
+      "parameters": {
+        "batchSize": 3000,
+        "options": {}
+      },
+      "id": "04d19a01-eaaf-4f9f-bbe4-335d6f633558",
+      "name": "Split In Batches",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 2,
+      "position": [
+        2000,
+        740
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "17fd3392-9f37-451f-8e03-d2a901dfdbb1",
+      "name": "No Operation, do nothing",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        2000,
+        980
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "TRUNCATE {{ \"datatransit.index_\"+$('Globals').first().json.globals[0].SupplierName.toLowerCase() }};",
+        "options": {}
+      },
+      "id": "20e6cc99-2185-4ec5-8a4c-480241795cd9",
+      "name": "Postgres",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.2,
+      "position": [
+        1100,
+        740
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "ayAxbLgcy5Lpqy5D",
+          "name": "datatransit"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "supplier",
+              "value": "={{$('Globals').first().json.name.toLowerCase()}}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "b3b4b340-e679-490d-af40-79710269d7ad",
+      "name": "Set",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [
+        1600,
+        740
+      ]
+    }
+  ],
+  "pinData": {
+    "Execute Workflow Trigger": [
+      {
+        "json": {
+          "name": "Madison",
+          "globals": "[{\"SupplierName\": \"Madison\",\"PartnerId\": 47,\"ProductTagId\": 8,\"LeadTimeAddition\":3,\"Webhook\":\"https://node4.biketrax.co.uk/webhook/8e681709-59dd-45f0-9403-d2e72945ebd0\"}]"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2023-08-12T10:44:18.000Z",
+  "versionId": "f0f1b092-8581-4ef6-b26e-8cc7f001d347"
+}
