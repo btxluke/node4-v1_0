@@ -104,8 +104,8 @@
       ]
     }
   },
-  "createdAt": "2023-07-30T10:49:58.538Z",
-  "id": "2mliuDMlTssD3kUq",
+  "createdAt": "2023-08-10T13:01:15.525Z",
+  "id": "Vc6ZgR8vArPNZu09",
   "name": "Data Update: GENERIC: Process Alter Statements",
   "nodes": [
     {
@@ -116,18 +116,18 @@
           "queryBatching": "single"
         }
       },
-      "id": "3e3c7de9-e6e4-47f2-8d9a-fc4f562246d7",
+      "id": "a00e846a-2014-4ee5-b95f-520a1b0d6cba",
       "name": "Postgres7",
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.2,
       "position": [
-        1280,
-        460
+        1960,
+        320
       ],
       "credentials": {
         "postgres": {
-          "id": "9Jz67Tm0faeykq6p",
-          "name": "odoodata"
+          "id": "dqel3RyoT6NsGiSw",
+          "name": "odooData"
         }
       }
     },
@@ -143,13 +143,13 @@
         },
         "options": {}
       },
-      "id": "debba99b-7ff5-48d8-bd03-3ec623dd0747",
+      "id": "d03bc110-cfa1-40dc-84a6-bfecf4eaf374",
       "name": "Set1",
       "type": "n8n-nodes-base.set",
       "typeVersion": 2,
       "position": [
-        660,
-        460
+        1340,
+        320
       ]
     },
     {
@@ -157,35 +157,35 @@
         "batchSize": 1,
         "options": {}
       },
-      "id": "150d8fcc-e17c-4849-a1d2-1733668e2368",
+      "id": "49c5aea9-ebfa-42ec-bda6-19be422badf0",
       "name": "Split In Batches",
       "type": "n8n-nodes-base.splitInBatches",
       "typeVersion": 2,
       "position": [
-        1060,
-        460
+        1740,
+        320
       ]
     },
     {
       "parameters": {},
-      "id": "007add10-bf4e-4eb6-932e-07c1638215e7",
+      "id": "4ba6584c-d7d3-43f7-aaa6-c70d9e0e284f",
       "name": "Execute Workflow Trigger",
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "typeVersion": 1,
       "position": [
-        440,
-        460
+        1120,
+        320
       ]
     },
     {
       "parameters": {},
-      "id": "d893652b-acd9-496f-a7c5-b7d881f23b0a",
+      "id": "bb66ab87-2c77-4c02-946b-c1e7e6e37564",
       "name": "Postgreify all column names",
       "type": "n8n-nodes-base.noOp",
       "typeVersion": 1,
       "position": [
-        660,
-        700
+        1340,
+        560
       ],
       "executeOnce": true
     },
@@ -195,18 +195,18 @@
         "query": "SELECT column_name, data_type\nFROM information_schema.columns\nWHERE table_schema = 'odoodata' AND table_name = {{\"'upload_\"+ $(\"Execute Workflow Trigger\").first().json.supplier.toLowerCase()+\"'\"}};",
         "options": {}
       },
-      "id": "3dffc4b3-1b8c-4258-aeb2-5c340c1c8900",
+      "id": "3400d3ce-7830-47b6-bec7-87ca918c2e72",
       "name": "Postgres3",
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.2,
       "position": [
-        840,
-        700
+        1520,
+        560
       ],
       "credentials": {
         "postgres": {
-          "id": "9Jz67Tm0faeykq6p",
-          "name": "odoodata"
+          "id": "dqel3RyoT6NsGiSw",
+          "name": "odooData"
         }
       }
     },
@@ -218,18 +218,18 @@
           "queryBatching": "single"
         }
       },
-      "id": "e09f9e5f-b76e-4e92-9cc6-8a4be6e1d0a2",
+      "id": "e06ed251-f6d6-41cf-9470-b947ea87cdd8",
       "name": "Postgres4",
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.2,
       "position": [
-        1060,
-        920
+        1740,
+        780
       ],
       "credentials": {
         "postgres": {
-          "id": "9Jz67Tm0faeykq6p",
-          "name": "odoodata"
+          "id": "dqel3RyoT6NsGiSw",
+          "name": "odooData"
         }
       }
     },
@@ -244,24 +244,24 @@
           ]
         }
       },
-      "id": "419569d6-e5f3-47ab-9ac3-0568487cd815",
+      "id": "d8a9772c-6cb3-4a00-be75-a11db06827cd",
       "name": "IF",
       "type": "n8n-nodes-base.if",
       "typeVersion": 1,
       "position": [
-        1060,
-        700
+        1740,
+        560
       ]
     },
     {
       "parameters": {},
-      "id": "0bfb7b6e-0684-4259-b28a-766ef82a1d44",
+      "id": "5ad893fd-3421-4c70-b738-95189bfcd66a",
       "name": "No Operation, do nothing",
       "type": "n8n-nodes-base.noOp",
       "typeVersion": 1,
       "position": [
-        1280,
-        700
+        1960,
+        560
       ]
     },
     {
@@ -270,13 +270,13 @@
         "include": "allOtherFields",
         "options": {}
       },
-      "id": "c44aee15-9c74-44e3-bf7c-a818b50d0b35",
+      "id": "c5bc34b0-7a1f-45c4-ab72-90a3852af9b2",
       "name": "Item Lists",
       "type": "n8n-nodes-base.itemLists",
       "typeVersion": 2.2,
       "position": [
-        840,
-        460
+        1520,
+        320
       ]
     }
   ],
@@ -296,13 +296,37 @@
   "staticData": null,
   "tags": [
     {
-      "id": "NgXcDDqIPq9W8PqT",
-      "createdAt": "2023-07-30T10:50:20.897Z",
-      "updatedAt": "2023-07-30T10:50:20.897Z",
-      "name": "Postgresql"
+      "id": "4S5wvtegUIvgvqYs",
+      "createdAt": "2023-08-08T15:46:20.698Z",
+      "updatedAt": "2023-08-08T15:46:20.698Z",
+      "name": "PostgreSQL"
+    },
+    {
+      "id": "9sOXgdnAKkDHmBZQ",
+      "createdAt": "2023-08-10T13:01:44.729Z",
+      "updatedAt": "2023-08-10T13:01:44.729Z",
+      "name": "if"
+    },
+    {
+      "id": "bbI8zuoQ3XV0LUP0",
+      "createdAt": "2023-08-08T15:13:33.587Z",
+      "updatedAt": "2023-08-08T15:13:33.587Z",
+      "name": "set"
+    },
+    {
+      "id": "cEh6fwE32oIO00B5",
+      "createdAt": "2023-08-10T13:01:36.942Z",
+      "updatedAt": "2023-08-10T13:01:36.942Z",
+      "name": "split in batches"
+    },
+    {
+      "id": "zZDHTHLWDuph4zmi",
+      "createdAt": "2023-08-10T13:01:31.941Z",
+      "updatedAt": "2023-08-10T13:01:31.941Z",
+      "name": "item lists"
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-07-30T10:58:51.000Z",
-  "versionId": "7f7dfdb0-f146-4cbf-8f8d-e4d196b8c41d"
+  "updatedAt": "2023-08-10T13:02:21.000Z",
+  "versionId": "f71e10ec-b8fa-4438-a4b1-79cf6a74df5b"
 }
